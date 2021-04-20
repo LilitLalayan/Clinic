@@ -11,6 +11,13 @@ const useStyles = makeStyles({
   },
 });
 
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
+
 function Nav() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -20,32 +27,40 @@ function Nav() {
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper>
       <Tabs
         value={value}
         onChange={handleChange}
         indicatorColor="primary"
         textColor="inherit"
-        centered
+        variant="fullWidth"
       >
-        <Link to="/home">
-          <Tab label="Home" />
-        </Link>
-        <Link to="/about">
-          <Tab label="About" />
-        </Link>
-        <Link to="/services">
-          <Tab label="Services" />
-        </Link>
-        <Link to="/doctors">
-          <Tab label="Our Doctors" />
-        </Link>
-        <Link to="/contacts">
-          <Tab label="Contacts" />
-        </Link>
-        <Link to="/auth">
-          <Tab label="Sign In/Sign Up" />
-        </Link>
+        <Tab label={"Home"} {...a11yProps(0)} component={Link} to="/" />
+        <Tab label="About" {...a11yProps(1)} component={Link} to="/about" />
+        <Tab
+          label="Services"
+          {...a11yProps(2)}
+          component={Link}
+          to="/services"
+        />
+        <Tab
+          label="Our Doctors"
+          {...a11yProps(3)}
+          component={Link}
+          to="/doctors"
+        />
+        <Tab
+          label="Contacts"
+          {...a11yProps(4)}
+          component={Link}
+          to="/contacts"
+        />
+        <Tab
+          label="Sign In/Sign Up"
+          {...a11yProps(5)}
+          component={Link}
+          to="/auth"
+        />
       </Tabs>
     </Paper>
   );
