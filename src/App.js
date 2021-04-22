@@ -7,7 +7,12 @@ import Services from "./components/Services";
 import Doctors from "./components/Doctors";
 import Contacts from "./components/Contacts";
 import Auth from "./components/Auth";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
   return (
@@ -22,6 +27,7 @@ function App() {
           <Route path="/doctors" component={Doctors} />
           <Route path="/contacts" component={Contacts} />
           <Route path="/auth" component={Auth} />
+          <Redirect to="/" />
         </Switch>
       </div>
     </Router>
