@@ -1,0 +1,19 @@
+#form {
+  margin: 50%;
+  transform: translate(-25vh);
+  margin-top: 5vh;
+  width: 50vh;
+  background-color: rgb(215, 196, 230);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form .Btn {
+  margin-top: 2vh;
+}
