@@ -6,7 +6,8 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Doctors from "./components/Doctors";
 import Contacts from "./components/Contacts";
-import Auth from "./components/Auth";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,7 +27,8 @@ function App() {
           <Route path="/services" component={Services} />
           <Route path="/doctors" component={Doctors} />
           <Route path="/contacts" component={Contacts} />
-          <Route path="/auth" component={Auth} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/signin" component={SignIn} />
           <Redirect to="/" />
         </Switch>
       </div>
