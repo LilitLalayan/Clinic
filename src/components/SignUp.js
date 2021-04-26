@@ -50,6 +50,7 @@ function SignUp({
 
   const clearInputs = () => {
     dispatch({ type: CLEAR_INPUTS });
+    console.log("asd");
   };
 
   // const onAuthStateChanged = (user) => {
