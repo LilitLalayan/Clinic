@@ -4,13 +4,22 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Link } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "gray",
   },
-});
+  tabs: {
+    margin: "auto",
+  },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+    margin: "auto",
+  },
+}));
 
 function a11yProps(index) {
   return {
@@ -30,6 +39,7 @@ function Nav() {
   return (
     <AppBar position="static" className={classes.root}>
       <Tabs
+        className={classes.tabs}
         value={value}
         onChange={handleChange}
         indicatorColor="primary"
@@ -56,12 +66,9 @@ function Nav() {
           component={Link}
           to="/contacts"
         />
-        <Tab
-          label="Sign In/Sign Up"
-          {...a11yProps(5)}
-          component={Link}
-          to="/auth"
-        />
+        <Tab label="Sign In" {...a11yProps(5)} component={Link} to="/signin" />
+        <Tab label="Sign Up" {...a11yProps(6)} component={Link} to="/signup" />
+        <Tab label="Sign Out" {...a11yProps(7)} component={Link} to="/" />
       </Tabs>
     </AppBar>
   );
