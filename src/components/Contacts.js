@@ -41,15 +41,14 @@ function Contacts() {
         <Grid item lg={6} md={7} xs={12} className={classes.gridItem}>
           <Grid container>
             <Grid container>
-              <Grid item md={8} sm={8} xs={8}>
+              <Grid item xs={8}>
                 <ContactsWorkingHours />
               </Grid>
-              <Grid item md sm={4} xs={4}>
+              <Grid item md xs={4}>
                 <ContactsAddress />
               </Grid>
             </Grid>
-            <Grid container justify="center">
-              
+            <Grid container justify="center">              
             </Grid>
             <Grid container>
               <Grid item md sm={8} xs={10}>
@@ -58,8 +57,8 @@ function Contacts() {
             </Grid> 
           </Grid>
         </Grid>
-       
         <Grid item lg={6} md={5} xs={12}>
+
           <div className="contacts__map">
             < ContactsSimpleMap />
           </div>
