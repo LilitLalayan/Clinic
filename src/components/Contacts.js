@@ -10,10 +10,16 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
+  gridContainer: {
+    marginTop: "20px",
+    height: "80vh"
+  },
+  
   gridItem: {
     color: "#fff",
-    backgroundColor: "gray",
-    padding: "20px",
+    height: "100%",
+    backgroundColor: "#36ab35",
+    padding: "40px",
     borderTopLeftRadius: "10px",
     borderBottomLeftRadius: "10px",
     borderTopRightRadius: "10px",
@@ -29,6 +35,7 @@ const useStyles = makeStyles({
 function Contacts() {
   const classes = useStyles();
 
+<<<<<<< HEAD
   return (
     <div className="contacts">
       <Container fixed>
@@ -50,6 +57,26 @@ function Contacts() {
                 <Grid item md sm={8} xs={10}>
                   <ContactsPhones />
                 </Grid>
+=======
+  return (<div className="contacts">
+    <Container fixed >
+      <Grid container justify="center" className={classes.gridContainer}>
+        <Grid item lg={6} md={7} xs={12} className={classes.gridItem}>
+          <Grid container>
+            <Grid container>
+              <Grid item xs={8}>
+                <ContactsWorkingHours />
+              </Grid>
+              <Grid item md xs={4}>
+                <ContactsAddress />
+              </Grid>
+            </Grid>
+            <Grid container justify="center">              
+            </Grid>
+            <Grid container>
+              <Grid item md sm={8} xs={10}>
+                <ContactsPhones />
+>>>>>>> b5e19c41558e7317b51181947b5e89ac2bf9c661
               </Grid>
             </Grid>
           </Grid>
@@ -60,9 +87,22 @@ function Contacts() {
             </div>
           </Grid>
         </Grid>
+<<<<<<< HEAD
       </Container>
     </div>
   );
+=======
+        <Grid item lg={6} md={5} xs={12}>
+
+          <div className="contacts__map">
+            < ContactsSimpleMap />
+          </div>
+           
+        </Grid>
+      </Grid>
+    </Container>   
+  </div>);
+>>>>>>> b5e19c41558e7317b51181947b5e89ac2bf9c661
 }
 
 export default Contacts;
