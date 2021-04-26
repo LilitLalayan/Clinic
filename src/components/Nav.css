@@ -1,0 +1,20 @@
+.logo {
+    opacity: 1 !important;
+    color: #fff !important;
+    letter-spacing: 10px !important;
+}
+
+.tab {
+    opacity: 1 !important;
+    display: none !important;
+}
+
+@media screen and (min-width: 1200px) {
+    .tab {
+        display: inline-flex !important;
+    }
+}
+
+.my-display-inline-flex {
+    display: inline-flex !important;
+}

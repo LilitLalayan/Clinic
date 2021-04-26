@@ -24,7 +24,7 @@ class ContactsSimpleMap extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100%', width: '100%',borderRadius: "50px" }}>
+      <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBabXGDNHaGD1A-xNxkW-hxDVGXL2-PZf4" }}
           defaultCenter={this.props.center}
