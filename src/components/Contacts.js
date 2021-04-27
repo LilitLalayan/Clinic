@@ -12,8 +12,10 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   gridContainer: {
     marginTop: "20px",
+
     height: "80vh",
   },
+
 
   gridItem: {
     color: "#fff",
@@ -35,6 +37,7 @@ const useStyles = makeStyles({
 function Contacts() {
   const classes = useStyles();
 
+
   return (
     <div className="contacts">
       <Container fixed>
@@ -54,6 +57,7 @@ function Contacts() {
                 <Grid item md sm={8} xs={10}>
                   <ContactsPhones />
                 </Grid>
+
               </Grid>
             </Grid>
 
@@ -70,9 +74,18 @@ function Contacts() {
             </div>
           </Grid>
         </Grid>
-      </Container>
-    </div>
-  );
+
+        <Grid item lg={6} md={5} xs={12}>
+
+          <div className="contacts__map">
+            < ContactsSimpleMap />
+          </div>
+           
+        </Grid>
+      </Grid>
+    </Container>   
+  </div>);
+
 }
 
 export default Contacts;
