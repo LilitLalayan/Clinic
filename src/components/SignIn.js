@@ -7,10 +7,6 @@ import { connect } from "react-redux";
 import {
   EMAIL_CHANGE,
   PASSWORD_CHANGE,
-  EMAIL_ERROR,
-  PASSWORD_ERROR,
-  CLEAR_INPUTS,
-  SET_LOGGEDIN_USER,
   SIGNIN_SUCCESS,
   SIGNIN_ERROR,
 } from "../actions/actions";
@@ -47,60 +43,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn({
-  user,
-  email,
-  password,
-  emailError,
-  passwordError,
-  authError,
-  dispatch,
-}) {
+function SignIn({ email, password, authError, dispatch }) {
   const classes = useStyles();
 
-  const clearInputs = () => {
-    dispatch({ type: CLEAR_INPUTS });
-  };
-
-  const onAuthStateChanged = (user) => {
-    if (user) {
-      dispatch({
-        type: SET_LOGGEDIN_USER,
-        user,
-      });
-    }
-  };
-
-  useEffect(() => {
-    auth.onAuthStateChanged(onAuthStateChanged);
-  }, []);
-
-  const signIn = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Signed in
-        var user = userCredential.user;
-        // ...
-      })
+  const signIn = async (credentials) => {
+    await auth
+      .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
         dispatch({ type: SIGNIN_SUCCESS });
-        clearInputs();
       })
       .catch((err) => {
-        dispatch({ type: SIGNIN_ERROR, err });
+        dispatch({ type: SIGNIN_ERROR, payload: err.message });
       });
-  };
-
-  const signOut = () => {
-    auth.signOut();
-    console.log("out");
   };
 
   return (
     <>
       <h1 style={{ textAlign: "center", color: "gray" }}>Sign in</h1>
-      <button onClick={signOut}>Sign Out</button>
+
       <Card id="form">
         <form className="formControl" noValidate autoComplete="off">
           <TextField

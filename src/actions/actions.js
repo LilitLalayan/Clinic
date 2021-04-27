@@ -1,8 +1,8 @@
 export const NAME_CHANGE = "NAME_CHANGE";
 export const EMAIL_CHANGE = "EMAIL_CHANGE";
 export const PASSWORD_CHANGE = "PASSWORD_CHANGE";
-export const EMAIL_ERROR = "EMAIL_ERROR";
-export const PASSWORD_ERROR = "PASSWORD_ERROR";
+// export const EMAIL_ERROR = "EMAIL_ERROR";
+// export const PASSWORD_ERROR = "PASSWORD_ERROR";
 export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
 export const SIGNIN_ERROR = "SIGNIN_ERROR";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
