@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/Auth.css";
 import { auth, db } from "..";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +10,6 @@ import {
   PASSWORD_CHANGE,
   SIGNUP_ERROR,
   SIGNUP_SUCCESS,
-  CLEAR_INPUTS,
 } from "../actions/actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,61 +23,33 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgb(149, 136, 233)",
     width: "45vh",
     marginBottom: 20,
+    marginTop: 20,
   },
   input: {
     width: "45vh",
-    marginBottom: 20,
-  },
-  firstInput: {
-    width: "45vh",
     marginTop: 20,
-    marginBottom: 20,
   },
 }));
 
-function SignUp({
-  name,
-  user,
-  email,
-  password,
-  emailError,
-  passwordError,
-  authError,
-  dispatch,
-}) {
+function SignUp({ name, email, password, dispatch }) {
   const classes = useStyles();
 
-  const clearInputs = () => {
-    dispatch({ type: CLEAR_INPUTS });
-    console.log("asd");
-  };
-
-  // const onAuthStateChanged = (user) => {
-  //   if (user) {
-  //     clearInputs();
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(onAuthStateChanged);
-  // }, []);
-
-  const signUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
+  const signUp = async (user) => {
+    await auth
+      .createUserWithEmailAndPassword(user.email, user.password)
       .then((resp) => {
         db.collection("users").doc(resp.user.uid).set({
           fullName: user.name,
           Email: user.email,
           Password: user.password,
         });
+        console.log(user);
       })
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
-        clearInputs();
       })
       .catch((err) => {
-        dispatch({ type: SIGNUP_ERROR, err });
+        dispatch({ type: SIGNUP_ERROR, payload: err.message });
       });
   };
 
@@ -90,7 +61,7 @@ function SignUp({
           <TextField
             autoComplete="off"
             required
-            className={classes.firstInput}
+            className={classes.input}
             type="text"
             label="Full Name"
             variant="filled"
@@ -101,6 +72,7 @@ function SignUp({
                 type: NAME_CHANGE,
                 payload: e.target.value,
               });
+              console.log(name);
             }}
           />
           <br />
@@ -158,11 +130,8 @@ function SignUp({
 const mapStateToProps = (state) => ({
   email: state.email,
   password: state.password,
-  user: state.user,
   name: state.name,
   emailError: state.emailError,
   passwordError: state.passwordError,
-  hasAccount: state.hasAccount,
-  authError: state.authError,
 });
 export default connect(mapStateToProps)(SignUp);

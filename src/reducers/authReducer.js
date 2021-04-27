@@ -1,13 +1,4 @@
-const initialState = {
-  name: "",
-  user: "",
-  email: "",
-  password: "",
-  emailError: "",
-  passwordError: "",
-  authError: null,
-  loggedInUser: null,
-};
+import { initialState } from "./initialState";
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,16 +17,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         password: action.payload,
       };
-    case "EMAIL_ERROR":
-      return {
-        ...state,
-        emailError: "Invalid Email",
-      };
-    case "PASSWORD_ERROR":
-      return {
-        ...state,
-        passwordError: "Weak Password",
-      };
+
     case "SIGNUP_SUCCESS":
       return {
         ...state,
@@ -44,7 +26,7 @@ const authReducer = (state = initialState, action) => {
     case "SIGNUP_ERROR":
       return {
         ...state,
-        authError: action.err.message,
+        authError: action.payload,
       };
     case "SIGNIN_SUCCESS":
       return {
@@ -54,7 +36,7 @@ const authReducer = (state = initialState, action) => {
     case "SIGNIN_ERROR":
       return {
         ...state,
-        authError: action.err.message,
+        authError: action.payload,
       };
 
     case "CLEAR_INPUTS":

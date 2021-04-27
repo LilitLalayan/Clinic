@@ -12,9 +12,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   gridContainer: {
     marginTop: "20px",
-    height: "80vh"
+    height: "80vh",
   },
-  
+
   gridItem: {
     color: "#fff",
     height: "100%",
@@ -35,74 +35,44 @@ const useStyles = makeStyles({
 function Contacts() {
   const classes = useStyles();
 
-<<<<<<< HEAD
   return (
     <div className="contacts">
       <Container fixed>
-        <h2 className="contacts__title">Contacts</h2>
-        <Grid container justify="center" className="grid-item">
-          <Grid item md={4} xs={12} className={classes.gridItem}>
+        <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item lg={6} md={7} xs={12} className={classes.gridItem}>
             <Grid container>
-              <Grid container justify="center">
-                <Grid item md sm={8} xs={10}>
+              <Grid container>
+                <Grid item xs={8}>
                   <ContactsWorkingHours />
                 </Grid>
-              </Grid>
-              <Grid container justify="center">
-                <Grid item md sm={8} xs={10}>
+                <Grid item md xs={4}>
                   <ContactsAddress />
                 </Grid>
               </Grid>
-              <Grid container justify="center">
+              <Grid container justify="center"></Grid>
+              <Grid container>
                 <Grid item md sm={8} xs={10}>
                   <ContactsPhones />
                 </Grid>
-=======
-  return (<div className="contacts">
-    <Container fixed >
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item lg={6} md={7} xs={12} className={classes.gridItem}>
-          <Grid container>
-            <Grid container>
-              <Grid item xs={8}>
-                <ContactsWorkingHours />
-              </Grid>
-              <Grid item md xs={4}>
-                <ContactsAddress />
               </Grid>
             </Grid>
-            <Grid container justify="center">              
-            </Grid>
-            <Grid container>
-              <Grid item md sm={8} xs={10}>
-                <ContactsPhones />
->>>>>>> b5e19c41558e7317b51181947b5e89ac2bf9c661
-              </Grid>
+
+            <Grid item md={6} xs={12}>
+              <div className="contacts__map">
+                <ContactsSimpleMap />
+              </div>
             </Grid>
           </Grid>
 
-          <Grid item md={6} xs={12}>
+          <Grid item lg={6} md={5} xs={12}>
             <div className="contacts__map">
               <ContactsSimpleMap />
             </div>
           </Grid>
         </Grid>
-<<<<<<< HEAD
       </Container>
     </div>
   );
-=======
-        <Grid item lg={6} md={5} xs={12}>
-
-          <div className="contacts__map">
-            < ContactsSimpleMap />
-          </div>
-           
-        </Grid>
-      </Grid>
-    </Container>   
-  </div>);
->>>>>>> b5e19c41558e7317b51181947b5e89ac2bf9c661
 }
 
 export default Contacts;

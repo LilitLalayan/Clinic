@@ -4,7 +4,12 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Link } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
+import { auth } from "..";
+
+const signOut = () => {
+  auth.signOut();
+  console.log("out");
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,7 +73,13 @@ function Nav() {
         />
         <Tab label="Sign In" {...a11yProps(5)} component={Link} to="/signin" />
         <Tab label="Sign Up" {...a11yProps(6)} component={Link} to="/signup" />
-        <Tab label="Sign Out" {...a11yProps(7)} component={Link} to="/" />
+        <Tab
+          label="Sign Out"
+          {...a11yProps(7)}
+          component={Link}
+          to="/"
+          onClick={signOut}
+        />
       </Tabs>
     </AppBar>
   );
