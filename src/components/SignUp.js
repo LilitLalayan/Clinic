@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
 function SignUp({ name, email, password, dispatch }) {
   const classes = useStyles();
 
-  const signUp = async (user) => {
-    await auth
+  const signUp =  (user) => {
+     auth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((resp) => {
         db.collection("users").doc(resp.user.uid).set({
