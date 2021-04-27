@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
 function SignIn({ email, password, authError, dispatch }) {
   const classes = useStyles();
 
-  const signIn = async (credentials) => {
-    await auth
+  const signIn = (credentials) => {
+     auth
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
         dispatch({ type: SIGNIN_SUCCESS });
