@@ -1,3 +1,4 @@
+
 import React from 'react'
 import './Nav.css'
 import Navbar from './Navbar'
@@ -8,6 +9,7 @@ import HamburgerIcon from '@material-ui/icons/Menu';
 import {useState} from 'react';
 import {Link} from "react-router-dom"
 // paleturquoise
+
 
 function Nav() {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -23,6 +25,7 @@ function Nav() {
                 </Link>
                 
                 <Navbar />
+
 
                 <Link to="/signin" className="nav__login">
                     Sign In
@@ -41,6 +44,7 @@ function Nav() {
             </nav>
                 
     )
+
 }
 
 export default Nav
