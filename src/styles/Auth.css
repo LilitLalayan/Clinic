@@ -7,3 +7,14 @@
   justify-content: center;
   box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
 }
+
+.signout {
+  width: 10vh;
+  height: 5vh;
+  background-color: white;
+  color: black;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  display: none;
+}

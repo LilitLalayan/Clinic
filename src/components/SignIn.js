@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/Auth.css";
 import { auth } from "..";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   firstInput: {
-    marginTop: 20,
+    // marginTop: 20,
     marginBottom: 20,
     width: "45vh",
   },
@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
 function SignIn({ email, password, authError, dispatch }) {
   const classes = useStyles();
 
-  const signIn = async (credentials) => {
-    await auth
+  const signIn = (credentials) => {
+    auth
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
         dispatch({ type: SIGNIN_SUCCESS });
@@ -59,10 +59,16 @@ function SignIn({ email, password, authError, dispatch }) {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", color: "gray" }}>Sign in</h1>
-
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <img
+          src="http://localhost:3000/images/smile.jpg"
+          alt="logo"
+          width="100"
+        />
+      </div>
       <Card id="form">
         <form className="formControl" noValidate autoComplete="off">
+          <h1 style={{ color: "gray" }}>Sign in</h1>
           <TextField
             autoComplete="off"
             className={classes.firstInput}
@@ -115,7 +121,14 @@ function SignIn({ email, password, authError, dispatch }) {
             }}
           >
             <span className={classes.span}> Not Registered?</span>
-            <span className={classes.signUp}>Sign Up</span>
+            <span className={classes.signUp}>
+              <a
+                style={{ textDecoration: "none", color: "rgb(149, 136, 233)" }}
+                href="http://localhost:3000/signup"
+              >
+                Sign Up
+              </a>
+            </span>
           </div>
         </form>
       </Card>
@@ -127,7 +140,6 @@ const mapStateToProps = (state) => ({
   password: state.password,
   emailError: state.emailError,
   passwordError: state.passwordError,
-  hasAccount: state.hasAccount,
   authError: state.authError,
 });
 export default connect(mapStateToProps)(SignIn);

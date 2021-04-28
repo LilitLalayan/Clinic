@@ -1,23 +1,32 @@
 import React from "react";
+import "../styles/Auth.css";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Link } from "react-router-dom";
 import { auth } from "..";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const signOut = () => {
   auth.signOut();
   console.log("out");
+  const signout = document.querySelector(".signout");
+  const icon = document.querySelector(".icon");
+  icon.style.display = "none";
+  signout.style.display = "none";
 };
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "gray",
+    display: "flex",
+    width: "100%",
   },
   tabs: {
     margin: "auto",
+    width: "90%",
   },
   small: {
     width: theme.spacing(3),
@@ -31,6 +40,15 @@ function a11yProps(index) {
     id: `full-width-tab-${index}`,
     "aria-controls": `full-width-tabpanel-${index}`,
   };
+}
+
+function visible() {
+  const signout = document.querySelector(".signout");
+  if (signout.style.display === "none") {
+    signout.style.display = "block";
+  } else {
+    signout.style.display = "none";
+  }
 }
 
 function Nav() {
@@ -72,15 +90,16 @@ function Nav() {
           to="/contacts"
         />
         <Tab label="Sign In" {...a11yProps(5)} component={Link} to="/signin" />
-        <Tab label="Sign Up" {...a11yProps(6)} component={Link} to="/signup" />
-        <Tab
-          label="Sign Out"
-          {...a11yProps(7)}
-          component={Link}
-          to="/"
-          onClick={signOut}
-        />
       </Tabs>
+      <AccountCircleIcon
+        className="icon"
+        style={{ cursor: "pointer" }}
+        fontSize="large"
+        onClick={visible}
+      />
+      <div className="signout" onClick={signOut}>
+        Log out
+      </div>
     </AppBar>
   );
 }

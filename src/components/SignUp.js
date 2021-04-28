@@ -4,6 +4,7 @@ import { auth, db } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
 import { connect } from "react-redux";
+import CopyrightIcon from "@material-ui/icons/Copyright";
 import {
   NAME_CHANGE,
   EMAIL_CHANGE,
@@ -29,13 +30,16 @@ const useStyles = makeStyles((theme) => ({
     width: "45vh",
     marginTop: 20,
   },
+  firstInput: {
+    width: "45vh",
+  },
 }));
 
 function SignUp({ name, email, password, dispatch }) {
   const classes = useStyles();
 
-  const signUp = async (user) => {
-    await auth
+  const signUp = (user) => {
+    auth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((resp) => {
         db.collection("users").doc(resp.user.uid).set({
@@ -55,13 +59,20 @@ function SignUp({ name, email, password, dispatch }) {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", color: "gray" }}>Sign up</h1>
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <img
+          src="http://localhost:3000/images/smile.jpg"
+          alt="logo"
+          width="100"
+        />
+      </div>
       <Card id="form">
         <form className="form" noValidate autoComplete="off">
+          <h1 style={{ color: "gray" }}>Sign up</h1>
           <TextField
             autoComplete="off"
             required
-            className={classes.input}
+            className={classes.firstInput}
             type="text"
             label="Full Name"
             variant="filled"
@@ -124,6 +135,9 @@ function SignUp({ name, email, password, dispatch }) {
           </div>
         </form>
       </Card>
+      <div>
+        <CopyrightIcon />
+      </div>
     </>
   );
 }
