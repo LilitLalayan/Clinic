@@ -137,6 +137,7 @@ function SignUp({ name, email, password, dispatch }) {
       </Card>
       <div>
         <CopyrightIcon />
+        2021
       </div>
     </>
   );
