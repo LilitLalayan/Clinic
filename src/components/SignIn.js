@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import "../styles/Auth.css";
 import { auth } from "..";
@@ -37,10 +38,11 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     marginLeft: 65,
     fontWeight: "bold",
-  },
+},
   span: {
     fontSize: 12,
   },
+
 }));
 
 function SignIn({ email, password, authError, dispatch }) {
@@ -131,3 +133,4 @@ const mapStateToProps = (state) => ({
   authError: state.authError,
 });
 export default connect(mapStateToProps)(SignIn);
+
