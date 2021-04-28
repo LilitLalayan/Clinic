@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Auth() {
+function SignIn() {
   const classes = useStyles();
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
@@ -219,4 +219,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default SignIn;

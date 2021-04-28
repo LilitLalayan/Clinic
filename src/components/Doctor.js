@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Doctors() {
+function Doctor() {
     return (
         <div>
-            DOC|TORS
+            
         </div>
     )
 }
 
-export default Doctors
+export default Doctor

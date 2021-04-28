@@ -1,70 +1,46 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import { Link } from "react-router-dom";
-
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "gray",
-  },
-});
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
+import React from 'react'
+import './Nav.css'
+import Navbar from './Navbar'
+import LoginIcon from '@material-ui/icons/ExitToApp';
+import Container from '@material-ui/core/Container';
+import classNames from 'classnames';
+import HamburgerIcon from '@material-ui/icons/Menu';
+import {useState} from 'react';
+import {Link} from "react-router-dom"
+// paleturquoise
 
 function Nav() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+    const [isNavOpen, setIsNavOpen] = useState(false);
+    const [navSwitcher, setNavSwitcher] = useState("closed-nav");
+    const [left, setLeft] = useState("");
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
-  return (
-    <AppBar position="static" className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="inherit"
-        variant="fullWidth"
-      >
-        <Tab label={"Home"} {...a11yProps(0)} component={Link} to="/" />
-        <Tab label="About" {...a11yProps(1)} component={Link} to="/about" />
-        <Tab
-          label="Services"
-          {...a11yProps(2)}
-          component={Link}
-          to="/services"
-        />
-        <Tab
-          label="Our Doctors"
-          {...a11yProps(3)}
-          component={Link}
-          to="/doctors"
-        />
-        <Tab
-          label="Contacts"
-          {...a11yProps(4)}
-          component={Link}
-          to="/contacts"
-        />
-        <Tab
-          label="Sign In/Sign Up"
-          {...a11yProps(5)}
-          component={Link}
-          to="/auth"
-        />
-      </Tabs>
-    </AppBar>
-  );
+    return (
+        
+            <nav  className={classNames("nav", "custom-box-shadow-thin", navSwitcher)}>
+                <Link to="/home" className="nav__brand">
+                    Smile Clinics
+                </Link>
+                
+                <Navbar />
+
+                <Link to="/signin" className="nav__login">
+                    Sign In
+                </Link>
+                
+                
+                <a href="#"
+                   className={classNames("nav__hamburger-menu", )} 
+                   onClick={(event) => {
+                    // setDisplayNone("custom-display-none");
+                    isNavOpen ? setNavSwitcher("closed-nav") : setNavSwitcher("opened-nav");
+                    setIsNavOpen(!isNavOpen);
+                }}>
+                    <HamburgerIcon />
+                </a>
+            </nav>
+                
+    )
 }
 
-export default Nav;
+export default Nav

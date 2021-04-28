@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase";
+import { getStorage, ref } from "firebase/storage";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRwXHjyzcXJv-Y8m-2WawHlnmUsSkI2T8",
@@ -13,7 +15,6 @@ const firebaseConfig = {
   messagingSenderId: "474374983626",
   appId: "1:474374983626:web:472e38330486d40dff0933",
 };
-
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
 export const auth = firebase.auth();
