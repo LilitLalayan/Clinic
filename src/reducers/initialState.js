@@ -4,6 +4,6 @@ export const initialState = {
   password: "",
   emailError: "",
   passwordError: "",
-  authError: "",
+  authError: null,
   loggedInUser: null,
 };

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -13,7 +12,7 @@ import { storage } from "..";
 
 const useStyles = makeStyles({
   root: {
-    boxShadow: "2px 2px 20px	paleturquoise	",
+    boxShadow: "2px 2px 20px	#73605B	",
   },
   media: {
     height: 175,
@@ -72,4 +71,3 @@ function Doctor({ doctor, index }) {
 }
 
 export default Doctor;
-

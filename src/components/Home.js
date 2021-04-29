@@ -1,40 +1,34 @@
 import React from "react";
-import "./Home.css"
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+import "./Home.css";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 import "@fontsource/roboto";
-import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
-import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
+import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import LocalMallIcon from "@material-ui/icons/LocalMall";
+import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 import ImageSlider from "./ImageSlider";
-// import smileIcon from '@material-ui/icons/EmojiEmotionsSharp';
-
-
-
-
-
-
+import { waitForElementToBeRemoved } from "@testing-library/dom";
 
 function Home() {
-
   return (
     <div className="home" style={{ marginTop: 5 }}>
-      
       <div className="hero">
         <Container fixed>
-          <img className="hero__logo"
+          <img
+            className="hero__logo"
             src="http://localhost:3000/images/smile.jpg"
             alt="smile"
             width="150"
           />
-          {/* <h1 className="hero__title">
-            <span className="hero__title--green">Smile </span>
-             Clinics
-          </h1> */}
+
           <h2 className="hero__subtitle">We care about our patients</h2>
-          <img src="http://localhost:3000/images/clinics-inside.jpg" alt="Smile Clinics" className="hero__img"/>
-        </Container>    
+          <img
+            src="http://localhost:3000/images/office-4.jpg"
+            alt="Smile Clinics"
+            className="hero__img"
+          />
+        </Container>
       </div>
 
       <div className="advantages">
@@ -42,47 +36,51 @@ function Home() {
         <Grid container>
           <Grid item lg sm={6} xs={12}>
             <div className="advantages__item">
-              <LocalMallIcon/>
+              <LocalMallIcon />
               <p className="advantages__text">
                 Working with insurance packages
-
               </p>
             </div>
           </Grid>
 
           <Grid item lg sm={6} xs={12}>
             <div className="advantages__item">
-              <ImportantDevicesIcon/>
-              <p className="advantages__text">
-                Innovative technologies
-              </p> 
+              <ImportantDevicesIcon />
+              <p className="advantages__text">Innovative technologies</p>
             </div>
           </Grid>
 
           <Grid item lg sm={6} xs={12}>
             <div className="advantages__item">
-              <VerifiedUserIcon/>
+              <VerifiedUserIcon />
               <p className="advantages__text">
                 Guaranteed successful treatment
-              </p> 
+              </p>
             </div>
           </Grid>
 
           <Grid item lg sm={6} xs={12}>
             <div className="advantages__item">
-              <LocalHospitalIcon/>
-                <p className="advantages__text">
-                  Certified doctors
-                </p> 
+              <LocalHospitalIcon />
+              <p className="advantages__text">Certified doctors</p>
             </div>
           </Grid>
         </Grid>
       </div>
 
       <Container fixed>
-        <h2 className="image-slider__title">Patients Reviews</h2>
-        <ImageSlider/ >
+        <h2 className="image-slider__title">Patients reviews</h2>
+        <ImageSlider />
       </Container>
+
+      <div className="embed">
+        <embed
+          width="60%"
+          height="100%"
+          src="https://www.youtube.com/embed/pKF_doN3Tz8"
+        ></embed>
+      </div>
+      <div className="embed"></div>
     </div>
   );
 }
