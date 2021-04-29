@@ -1,17 +1,14 @@
 import  React, { useEffect, useState }  from 'react';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import firebase from "firebase";
-import {db} from "../index"
+import {storage} from ".."
+
+
 const useStyles = makeStyles((theme) => ({
     icon: {
       marginRight: theme.spacing(2),
@@ -46,10 +43,27 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const Service = ({service}) => {
+const Service = ({service, index}) => {
     const classes =useStyles();
     const [doctors, setDoctors] = useState([])
     console.log(doctors) 
+
+
+    const [url, setUrl] = useState("");
+
+    storage
+      .ref()
+      .child(`/servicesImg/ServiceImg${index}.jpg`)
+      .getDownloadURL()
+      .then((url) => {
+        // `url` is the download URL for 'images/stars.jpg'
+        setUrl(url);
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+  
+
 
 useEffect(async()=>{
 	if (service.doctors && service.doctors.length) {
@@ -70,12 +84,12 @@ useEffect(async()=>{
 
     return (
         <> 
-        
+     
     <Grid item key={service.id} xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}
-          image="https://source.unsplash.com/random"
+          image={url}
           title={service.name}
         />
         <CardContent className={classes.cardContent}>
@@ -87,13 +101,11 @@ useEffect(async()=>{
           </Typography>
           {doctors.map(d => <div>{d.name}</div>)}
         </CardContent>
-        <CardActions>
-          <Button size="small" color="primary">
-            View
-          </Button>
-          <Button size="small" color="primary">
-            Edit
-          </Button>
+        <CardActions >
+          <div >
+           Price: {service.price} 
+          </div>
+          
         </CardActions>
       </Card>
     </Grid>
