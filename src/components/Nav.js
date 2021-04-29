@@ -7,6 +7,8 @@ import classNames from "classnames";
 import HamburgerIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLogginUser } from "../reducers/selectors";
 
 const signOut = () => {
   auth.signOut();
@@ -27,11 +29,13 @@ function visible() {
 }
 
 function Nav() {
+  const loggedInUser = useSelector(selectLogginUser);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [navSwitcher, setNavSwitcher] = useState("closed-nav");
 
   return (
     <nav className={classNames("nav", "custom-box-shadow-thin", navSwitcher)}>
+      {loggedInUser ? loggedInUser.info.email : "chka"}
       <Link to="/home" className="nav__brand">
         Smile Clinics
       </Link>

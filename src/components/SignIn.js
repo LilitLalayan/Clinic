@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Auth.css";
 import { auth } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import CopyrightIcon from "@material-ui/icons/Copyright";
 import {
   EMAIL_CHANGE,
@@ -11,6 +11,7 @@ import {
   SIGNIN_SUCCESS,
   SIGNIN_ERROR,
 } from "../actions/actions";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -43,12 +44,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn({ email, password, authError, dispatch }) {
+function SignIn() {
+  const dispatch = useDispatch();
   const classes = useStyles();
-
-  const signIn = (credentials) => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const signIn = () => {
     auth
-      .signInWithEmailAndPassword(credentials.email, credentials.password)
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         dispatch({ type: SIGNIN_SUCCESS });
       })
@@ -77,10 +80,7 @@ function SignIn({ email, password, authError, dispatch }) {
             size="small"
             value={email}
             onChange={(e) => {
-              dispatch({
-                type: EMAIL_CHANGE,
-                payload: e.target.value,
-              });
+              setEmail(e.target.value);
             }}
           />
           <br />
@@ -93,10 +93,7 @@ function SignIn({ email, password, authError, dispatch }) {
             size="small"
             value={password}
             onChange={(e) => {
-              dispatch({
-                type: PASSWORD_CHANGE,
-                payload: e.target.value,
-              });
+              setPassword(e.target.value);
             }}
           />
           <br />
@@ -120,12 +117,7 @@ function SignIn({ email, password, authError, dispatch }) {
           >
             <span className={classes.span}> Not Registered?</span>
             <span className={classes.signUp}>
-              <a
-                style={{ textDecoration: "none", color: "#73605B" }}
-                href="http://localhost:3000/signup"
-              >
-                Sign Up
-              </a>
+              <Link to="/signup">Sign Up</Link>
             </span>
           </div>
         </form>
@@ -143,11 +135,5 @@ function SignIn({ email, password, authError, dispatch }) {
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  email: state.email,
-  password: state.password,
-  emailError: state.emailError,
-  passwordError: state.passwordError,
-  authError: state.authError,
-});
-export default connect(mapStateToProps)(SignIn);
+
+export default SignIn;
