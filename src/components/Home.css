@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap");
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Oxygen", sans-serif;
+  font-weight: 100;
+}
+
+.home {
+  font-family: "Roboto", sans-serif;
+  margin-top: 100px;
+}
+
+.hero {
+  margin-top: 30px;
+}
+
+.hero__logo {
+  margin-top: 200px;
+  text-align: center;
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.hero__title {
+  font-size: 50px;
+
+  text-align: center;
+}
+
+.hero__title--green {
+  color: rgb(98, 88, 160);
+}
+
+.hero__subtitle {
+  text-align: center;
+  margin-bottom: 50px;
+  color: #2d4362;
+  font-weight: bold;
+  letter-spacing: 1vh;
+}
+
+.hero__img {
+  margin-bottom: 100px;
+  width: 100%;
+}
+
+.advantages {
+  background-color: #73605b;
+  color: #fff;
+  padding: 40px 40px;
+  margin-bottom: 60px;
+}
+
+.advantages__title {
+  text-align: center;
+  margin: 0 0 40px;
+}
+
+.advantages__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.advantages__text {
+  font-size: 20px;
+}
+
+.image-slider {
+  margin-top: 60px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 100px;
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 80px 0;
+}
+
+.image-slider__title {
+  font-size: 28px;
+  text-align: center;
+  color: #2d4362;
+  font-weight: bold;
+  letter-spacing: 1vh;
+}
+
+.slide {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.slide__client-img {
+  width: 40%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.slide__client-review {
+  width: 40%;
+  line-height: 1.4;
+  font-size: 22px;
+}
+
+.image-slider__arrow-left,
+.image-slider__arrow-right {
+  position: absolute;
+  top: 50%;
+  font-size: 20px;
+  transform: translate(0 -50%);
+}
+
+.image-slider__arrow-left {
+  left: 5%;
+}
+
+.image-slider__arrow-right {
+  right: 5%;
+}
+
+.box-shadow {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.embed {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 70vh;
+  margin-bottom: 50px;
+  filter: drop-shadow(0px 5px 3px black);
+}
