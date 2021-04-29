@@ -2,8 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+
 import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase";
+
+
+import firebase from "firebase";
+
+import { createStore } from "redux";
+import rootReducer from "./reducers/rootReducer";
+import { Provider } from "react-redux";
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRwXHjyzcXJv-Y8m-2WawHlnmUsSkI2T8",
@@ -14,6 +28,8 @@ const firebaseConfig = {
   appId: "1:474374983626:web:472e38330486d40dff0933",
 };
 
+
+
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
 export const auth = firebase.auth();
@@ -21,12 +37,12 @@ export const storage = firebase.storage();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
+
   document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+

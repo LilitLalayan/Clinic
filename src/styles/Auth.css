@@ -1,0 +1,9 @@
+#form {
+  margin: 50%;
+  transform: translate(-30vh);
+  margin-top: 5vh;
+  width: 60vh;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
