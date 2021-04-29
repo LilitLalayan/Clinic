@@ -1,19 +1,13 @@
 import  React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import firebase from "firebase";
 import {db} from "../index"
 import Service from './Service';
-
 
 
 
@@ -86,22 +80,21 @@ const classes =useStyles();
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Typography component="h5" variant="h6" align="center" color="textPrimary" gutterBottom>
-              Smile Dantal Clinik
+          <Typography component="h5" variant="h6" align="center" color="textPrimary" gutterBottom>
+              Smile Dantal Clinic
             </Typography>
             <Typography variant="h4" align="center" color="textSecondary" paragraph>
-            Smile Dantal Clinik offers a full array of dental services to help you maintain healthy teeth.
+            Smile Dantal Clinic offers a full array of dental services to help you maintain healthy teeth.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
-                <Grid item>
+              <Grid item>
                   <Button variant="contained" color="primary">
-                    Заказать услугу
+                 Book now
                   </Button>
                 </Grid>
                 <Grid item>
-                  
-                </Grid>
+               </Grid>
               </Grid>
             </div>
           </Container>
@@ -109,9 +102,9 @@ const classes =useStyles();
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {services.map((service) => (
-        <Service service= {service} key ={service.uid}></Service>
-             
+            {services.map((service, index) => (
+        <Service service={service} index={index+1} key ={service.uid}></Service>
+
             ))}
           </Grid>
         </Container>
@@ -122,7 +115,8 @@ const classes =useStyles();
           Smile Dentale Clinic
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+        <iframe width="500" height="255" src="https://www.youtube.com/embed/eZDwzYhbIBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
         </Typography>
         <Copyright />
       </footer>
@@ -132,6 +126,3 @@ const classes =useStyles();
 }
 
 
-
-
-//export default Services;
