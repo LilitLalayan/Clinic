@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import firebase from "firebase";
+
 import { createStore } from "redux";
 import rootReducer from "./reducers/rootReducer";
 import { Provider } from "react-redux";
@@ -20,7 +21,6 @@ const firebaseConfig = {
   messagingSenderId: "474374983626",
   appId: "1:474374983626:web:472e38330486d40dff0933",
 };
-
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
 export const auth = firebase.auth();

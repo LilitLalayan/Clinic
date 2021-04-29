@@ -6,6 +6,7 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Doctors from "./components/Doctors";
 import Contacts from "./components/Contacts";
+
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import {
@@ -53,7 +54,9 @@ function App({ dispatch }) {
           <Route path="/services" component={Services} />
           <Route path="/doctors" component={Doctors} />
           <Route path="/contacts" component={Contacts} />
+
           <Route path="/signup" component={SignUp} />
+
           <Route path="/signin" component={SignIn} />
           <Redirect to="/" />
         </Switch>

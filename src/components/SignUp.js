@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Button: {
-    backgroundColor: "rgb(149, 136, 233)",
+    backgroundColor: "#D09683",
     width: "45vh",
     marginBottom: 20,
     marginTop: 20,
@@ -40,6 +40,7 @@ function SignUp({ name, email, password, dispatch }) {
 
   const signUp = (user) => {
     auth
+
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((resp) => {
         db.collection("users").doc(resp.user.uid).set({
@@ -75,7 +76,6 @@ function SignUp({ name, email, password, dispatch }) {
             className={classes.firstInput}
             type="text"
             label="Full Name"
-            variant="filled"
             size="small"
             value={name}
             onChange={(e) => {
@@ -94,7 +94,6 @@ function SignUp({ name, email, password, dispatch }) {
             className={classes.input}
             type="email"
             label="Email"
-            variant="filled"
             size="small"
             value={email}
             onChange={(e) => {
@@ -112,7 +111,6 @@ function SignUp({ name, email, password, dispatch }) {
             className={classes.input}
             type="password"
             label="Password"
-            variant="filled"
             size="small"
             value={password}
             onChange={(e) => {
@@ -135,9 +133,15 @@ function SignUp({ name, email, password, dispatch }) {
           </div>
         </form>
       </Card>
-      <div>
-        <CopyrightIcon />
-        2021
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CopyrightIcon fontSize="small" />
+        <span>2021</span>
       </div>
     </>
   );

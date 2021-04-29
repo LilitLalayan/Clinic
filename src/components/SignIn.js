@@ -4,6 +4,7 @@ import { auth } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
 import { connect } from "react-redux";
+import CopyrightIcon from "@material-ui/icons/Copyright";
 import {
   EMAIL_CHANGE,
   PASSWORD_CHANGE,
@@ -18,13 +19,12 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Button: {
-    backgroundColor: "rgb(149, 136, 233)",
+    backgroundColor: "#D09683",
     width: "45vh",
     marginBottom: 10,
   },
 
   firstInput: {
-    // marginTop: 20,
     marginBottom: 20,
     width: "45vh",
   },
@@ -74,7 +74,6 @@ function SignIn({ email, password, authError, dispatch }) {
             className={classes.firstInput}
             type="email"
             label="Email"
-            variant="filled"
             size="small"
             value={email}
             onChange={(e) => {
@@ -91,7 +90,6 @@ function SignIn({ email, password, authError, dispatch }) {
             autoComplete="off"
             type="password"
             label="Password"
-            variant="filled"
             size="small"
             value={password}
             onChange={(e) => {
@@ -123,7 +121,7 @@ function SignIn({ email, password, authError, dispatch }) {
             <span className={classes.span}> Not Registered?</span>
             <span className={classes.signUp}>
               <a
-                style={{ textDecoration: "none", color: "rgb(149, 136, 233)" }}
+                style={{ textDecoration: "none", color: "#73605B" }}
                 href="http://localhost:3000/signup"
               >
                 Sign Up
@@ -132,6 +130,16 @@ function SignIn({ email, password, authError, dispatch }) {
           </div>
         </form>
       </Card>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CopyrightIcon fontSize="small" />
+        <span>2021</span>
+      </div>
     </>
   );
 }
