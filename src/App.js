@@ -6,7 +6,6 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Doctors from "./components/Doctors";
 import Contacts from "./components/Contacts";
-
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import {
@@ -25,18 +24,16 @@ const clearInputs = ({ dispatch }) => {
 
 function App({ dispatch }) {
   const onAuthStateChanged = async (user) => {
-    const userData = user ? { Email: user.enail, uid: user.uid } : user;
+    const userData = user ? { Email: user.email, uid: user.uid } : user;
     if (userData) {
       const docRef = db.collection("users").doc(userData.uid);
       const doc = await docRef.get();
       userData.info = doc.data();
-      dispatch({
-        type: SET_LOGGEDIN_USER,
-        user: userData,
-      });
-
-      clearInputs();
     }
+    dispatch({
+      type: SET_LOGGEDIN_USER,
+      user: userData,
+    });
   };
 
   useEffect(() => {
@@ -54,9 +51,7 @@ function App({ dispatch }) {
           <Route path="/services" component={Services} />
           <Route path="/doctors" component={Doctors} />
           <Route path="/contacts" component={Contacts} />
-
           <Route path="/signup" component={SignUp} />
-
           <Route path="/signin" component={SignIn} />
           <Redirect to="/" />
         </Switch>

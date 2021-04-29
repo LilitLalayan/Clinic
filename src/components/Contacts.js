@@ -16,11 +16,10 @@ const useStyles = makeStyles({
     height: "80vh",
   },
 
-
   gridItem: {
     color: "#fff",
     height: "100%",
-    backgroundColor: "#36ab35",
+    backgroundColor: "#73605B",
     padding: "40px",
     borderTopLeftRadius: "10px",
     borderBottomLeftRadius: "10px",
@@ -36,7 +35,6 @@ const useStyles = makeStyles({
 
 function Contacts() {
   const classes = useStyles();
-
 
   return (
     <div className="contacts">
@@ -57,7 +55,6 @@ function Contacts() {
                 <Grid item md sm={8} xs={10}>
                   <ContactsPhones />
                 </Grid>
-
               </Grid>
             </Grid>
 
@@ -76,16 +73,13 @@ function Contacts() {
         </Grid>
 
         <Grid item lg={6} md={5} xs={12}>
-
           <div className="contacts__map">
-            < ContactsSimpleMap />
+            <ContactsSimpleMap />
           </div>
-           
         </Grid>
-      </Grid>
-    </Container>   
-  </div>);
-
+      </Container>
+    </div>
+  );
 }
 
 export default Contacts;
