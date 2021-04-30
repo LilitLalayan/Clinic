@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "..";
 import { Container, Grid } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import Doctor from "./Doctor";
 
 const useStyles = makeStyles({
@@ -43,6 +44,17 @@ export default function Doctors() {
   return (
     <div className={classes.asdd}>
       <Container className={classes.cardGrid}>
+        {/* <Typography
+          component="h4"
+          variant="h3"
+          style={{
+            margin: "10px 10px",
+            textAlign: "center",
+            fontFamily: "Arial, Helvetica, sans-serif",
+          }}
+        >
+          Our Doctors
+        </Typography> */}
         <Grid container spacing={4}>
           {allDocotors.map((doctor, index) => {
             return (

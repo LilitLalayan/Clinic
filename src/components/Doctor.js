@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Container, Grid } from "@material-ui/core";
 import { storage } from "..";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -61,9 +62,11 @@ function Doctor({ doctor, index }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            make an appointment
-          </Button>
+          <Link to="/booking" style={{ textDecoration: "none" }}>
+            <Button size="small" color="primary">
+              make an appointment
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </Grid>
