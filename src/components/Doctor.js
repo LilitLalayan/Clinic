@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    boxShadow: "2px 2px 20px	paleturquoise	",
+    boxShadow: "2px 2px 20px	#73605B	",
   },
   media: {
     height: 175,

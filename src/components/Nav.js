@@ -1,69 +1,77 @@
+import { auth } from "..";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import "./Nav.css";
+import Navbar from "./Navbar";
+import classNames from "classnames";
+import HamburgerIcon from "@material-ui/icons/Menu";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLogginUser } from "../reducers/selectors";
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "gray",
-  },
-});
+const signOut = () => {
+  auth.signOut();
+  console.log("out");
+  const signout = document.querySelector(".signout");
+  const icon = document.querySelector(".icon");
+  icon.style.display = "none";
+  signout.style.display = "none";
+};
 
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
+function visible() {
+  const signout = document.querySelector(".signout");
+  if (signout.style.display === "none") {
+    signout.style.display = "block";
+  } else {
+    signout.style.display = "none";
+  }
 }
 
 function Nav() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const loggedInUser = useSelector(selectLogginUser);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [navSwitcher, setNavSwitcher] = useState("closed-nav");
 
   return (
-    <AppBar position="static" className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="inherit"
-        variant="fullWidth"
+    <nav className={classNames("nav", "custom-box-shadow-thin", navSwitcher)}>
+      {loggedInUser ? loggedInUser.info.email : "chka"}
+      <Link to="/home" className="nav__brand">
+        Smile Clinics
+      </Link>
+
+      <Navbar />
+
+      <Link to="/signin" className="nav__login">
+        Sign In
+      </Link>
+      <div>
+        <AccountCircleIcon
+          className="icon"
+          style={{ cursor: "pointer" }}
+          fontSize="large"
+          color="inherit"
+          onClick={visible}
+        />
+
+        <div className="signout" onClick={signOut}>
+          Log out
+        </div>
+      </div>
+
+      <a
+        href="#"
+        className={classNames("nav__hamburger-menu")}
+        onClick={(event) => {
+          isNavOpen
+            ? setNavSwitcher("closed-nav")
+            : setNavSwitcher("opened-nav");
+          setIsNavOpen(!isNavOpen);
+        }}
       >
-        <Tab label={"Home"} {...a11yProps(0)} component={Link} to="/" />
-        <Tab label="About" {...a11yProps(1)} component={Link} to="/about" />
-        <Tab
-          label="Services"
-          {...a11yProps(2)}
-          component={Link}
-          to="/services"
-        />
-        <Tab
-          label="Our Doctors"
-          {...a11yProps(3)}
-          component={Link}
-          to="/doctors"
-        />
-        <Tab
-          label="Contacts"
-          {...a11yProps(4)}
-          component={Link}
-          to="/contacts"
-        />
-        <Tab
-          label="Sign In/Sign Up"
-          {...a11yProps(5)}
-          component={Link}
-          to="/auth"
-        />
-      </Tabs>
-    </AppBar>
+        <HamburgerIcon />
+      </a>
+    </nav>
   );
 }
 
