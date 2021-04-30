@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
-import Meronq from '../about/meronq.jpg';
+import Teame from '../about/Teame.jpg';
 
 const useStyles = makeStyles({
   root: {
@@ -31,13 +31,14 @@ export default function ImgMediaCard() {
           component="img"
          
           height="140"
-          img src={Meronq} width="550" height="350" alt="meronq" 
+          img src={Teame} width="550" height="350" alt="teame" 
           title="Smile teame"
         />
       </CardActionArea>
      
     </Card>
   );
+
 }
 
 

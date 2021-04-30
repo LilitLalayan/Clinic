@@ -15,6 +15,7 @@ function Footer() {
               <li>(+374)-77-56-77</li>
           </ul>
       </div>
+      
       </div>
       <div className="footer-bottom">
           <p className="text-xs-center">
