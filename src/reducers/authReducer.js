@@ -1,23 +1,7 @@
 import { initialState } from "./initialState";
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState.auth, action) => {
   switch (action.type) {
-    case "NAME_CHANGE":
-      return {
-        ...state,
-        name: action.payload,
-      };
-    case "EMAIL_CHANGE":
-      return {
-        ...state,
-        email: action.payload,
-      };
-    case "PASSWORD_CHANGE":
-      return {
-        ...state,
-        password: action.payload,
-      };
-
     case "SIGNUP_SUCCESS":
       return {
         ...state,
@@ -39,13 +23,6 @@ const authReducer = (state = initialState, action) => {
         authError: action.payload,
       };
 
-    case "CLEAR_INPUTS":
-      return {
-        ...state,
-        name: "",
-        email: "",
-        password: "",
-      };
     case "SET_LOGGEDIN_USER":
       return {
         ...state,

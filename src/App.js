@@ -16,15 +16,13 @@ import {
 } from "react-router-dom";
 import { auth, db } from ".";
 import { CLEAR_INPUTS, SET_LOGGEDIN_USER } from "./actions/actions";
-import { connect } from "react-redux";
-
-const clearInputs = ({ dispatch }) => {
-  dispatch({ type: CLEAR_INPUTS });
-};
+import { connect, useSelector } from "react-redux";
+import { selectLogginUser } from "./reducers/selectors";
 
 function App({ dispatch }) {
+  const loggedInUser = useSelector(selectLogginUser);
   const onAuthStateChanged = async (user) => {
-    const userData = user ? { Email: user.email, uid: user.uid } : user;
+    const userData = user ? { email: user.email, uid: user.uid } : user;
     if (userData) {
       const docRef = db.collection("users").doc(userData.uid);
       const doc = await docRef.get();
@@ -44,17 +42,29 @@ function App({ dispatch }) {
     <Router>
       <div className="App">
         <Nav />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/Home" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/services" component={Services} />
-          <Route path="/doctors" component={Doctors} />
-          <Route path="/contacts" component={Contacts} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/signin" component={SignIn} />
-          <Redirect to="/" />
-        </Switch>
+        {loggedInUser ? (
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/Home" exact component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/services" component={Services} />
+            <Route path="/doctors" component={Doctors} />
+            <Route path="/contacts" component={Contacts} />
+            <Redirect to="/" />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/Home" exact component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/services" component={Services} />
+            <Route path="/doctors" component={Doctors} />
+            <Route path="/contacts" component={Contacts} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/signin" component={SignIn} />
+            <Redirect to="/" />
+          </Switch>
+        )}
       </div>
     </Router>
   );

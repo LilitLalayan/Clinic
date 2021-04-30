@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Auth.css";
 import { auth, db } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import CopyrightIcon from "@material-ui/icons/Copyright";
 import {
   NAME_CHANGE,
@@ -35,20 +35,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignUp({ name, email, password, dispatch }) {
+function SignUp() {
   const classes = useStyles();
-
-  const signUp = (user) => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const signUp = () => {
     auth
 
-      .createUserWithEmailAndPassword(user.email, user.password)
+      .createUserWithEmailAndPassword(email, password)
       .then((resp) => {
         db.collection("users").doc(resp.user.uid).set({
-          fullName: user.name,
-          Email: user.email,
-          Password: user.password,
+          fullName: name,
+          email: email,
         });
-        console.log(user);
       })
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
@@ -79,11 +80,7 @@ function SignUp({ name, email, password, dispatch }) {
             size="small"
             value={name}
             onChange={(e) => {
-              dispatch({
-                type: NAME_CHANGE,
-                payload: e.target.value,
-              });
-              console.log(name);
+              setName(e.target.value);
             }}
           />
           <br />
@@ -97,10 +94,7 @@ function SignUp({ name, email, password, dispatch }) {
             size="small"
             value={email}
             onChange={(e) => {
-              dispatch({
-                type: EMAIL_CHANGE,
-                payload: e.target.value,
-              });
+              setEmail(e.target.value);
             }}
           />
           <br />
@@ -114,10 +108,7 @@ function SignUp({ name, email, password, dispatch }) {
             size="small"
             value={password}
             onChange={(e) => {
-              dispatch({
-                type: PASSWORD_CHANGE,
-                payload: e.target.value,
-              });
+              setPassword(e.target.value);
             }}
           />
           <br />
@@ -146,11 +137,5 @@ function SignUp({ name, email, password, dispatch }) {
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  email: state.email,
-  password: state.password,
-  name: state.name,
-  emailError: state.emailError,
-  passwordError: state.passwordError,
-});
-export default connect(mapStateToProps)(SignUp);
+
+export default SignUp;
