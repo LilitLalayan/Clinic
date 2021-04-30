@@ -13,6 +13,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Booking from "./components/Booking";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/doctors" component={Doctors} />
           <Route path="/contacts" component={Contacts} />
           <Route path="/auth" component={Auth} />
+          <Route path="/booking" component={Booking} />
           <Redirect to="/" />
         </Switch>
       </div>
