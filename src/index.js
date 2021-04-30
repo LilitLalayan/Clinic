@@ -2,7 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+
+
+
+
+
+
+
+
 import firebase from "firebase";
+
 import { createStore } from "redux";
 import rootReducer from "./reducers/rootReducer";
 import { Provider } from "react-redux";

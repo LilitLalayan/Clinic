@@ -1,99 +1,58 @@
 import React from "react";
 import Aboutus from "./about/aboutus.jpg";
 import Figure from 'react-bootstrap/Figure';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import Footer from './about/footer';
-import Meronq from './about/meronq.jpg';
+import Card from './about/card';
+import Slider from './about/slider';
+
+
 
 const inlineStyle = {
-  right: '43.5%',
-  top: '10%',
+  right: '42%',
+  top: '18%',
   position: 'absolute',
   color: 'white',
   padding: '20px', 
 }
 
-const ButtonStyle1 = {
-  right: '8%',
-  top: '32%',
+const textStyle = {
+  right: '28%',
+  top: '40%',
   position: 'absolute',
-  color: 'white',
-  padding: '20px', 
+  padding: '50px', 
 }
-const ButtonStyle2 = {
-  right: '4%',
-  top: '32%',
-  position: 'absolute',
-  color: 'white',
-  padding: '20px', 
-}
-const ButtonStyle3 = {
-  right: '0%',
-  top: '32%',
-  position: 'absolute',
-  color: 'white',
-  padding: '20px', 
-}
-
 
 const styles= {
   color: 'blue',
 };
 
-
-
 function About() {
   return <div>
-      
       <div className="about">
-      <Card>
-        <div>
-      <Button href="#" style={ButtonStyle1}><img src="https://img.icons8.com/ios-filled/50/000000/facebook-circled--v1.png"/></Button> 
-     <Button href="#" style={ButtonStyle2}><img src="https://img.icons8.com/ios-filled/50/000000/apple-mail.png"/></Button> 
-      <Button href="#" style={ButtonStyle3}><img src="https://img.icons8.com/material/50/000000/twitter--v1.png"/></Button>
-      </div>
       <img src={Aboutus} width="1519" height="200" alt="aboutus" />
-    <Card.Body>
-      <Card.Text>
-     
-      <div  style={inlineStyle}><h1>ABOUT US</h1></div>
-      </Card.Text>
-    </Card.Body>
-  </Card>
-            <div style={{height: 500}}>
-         <Figure>
-           <center>
-         <h1>History</h1>  
-         <p><strong style={styles}>Smile Dental Clinic</strong> is an innovative medicine center, founded in 2015.</p>
-         <h3>Main goals:</h3>
-         <li>develop modern technologies and approaches field  dentistry and aesthetic medicine in Armenia</li>
+      <div  style={inlineStyle}><h1><strong>ABOUT US</strong></h1></div>
+      <Card />
+            <div style={{height: 1100}}>
+        <Figure style={textStyle}>
+         <h1><strong>History</strong></h1>  
+         <h4><strong style={styles}>Smile Dental Clinic</strong> is an innovative medicine center, founded in 2015.</h4>
+         <hr/>
+         <h5><strong>Main goals:</strong></h5>
+         <li>develop modern technologies and approaches field  dentistry and aesthetic medicine in Armenia,</li>
          <li>combine the a and medicine into philosophy to  meet the aesthetic requirements of our century</li>
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new  </p>
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new  </p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers in</p>
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new o</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers in</p>
-         <img src={Meronq} width="730" height="450" alt="meronq" />
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new on</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers ind</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers in,</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers ind</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers ind</p>
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new op</p>
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new op</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers in,</p>
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new op</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers ind</p>
-         <p>we pay great attention to cooperation with foreign specialists. This type of cooperation opens up new op</p>
-         <p>for over a century and providing multi-dentistry with the latest generation equipment. clinic offers in.</p>
-         </center>
-         </Figure>
-         <Footer />
-         </div>
-         </div>
-         
-  </div>;
+         <p>During the years of experience in the Armenian market, Smile Dental Clinic has reached a level that can satisfy even the most demanding patients from many European countries. </p>
+         <p>To date, we have had more than 15,000 patients from Armenia and around the world.</p>
+         <p>The reference Smile Dental Clinic offers individual treatment methods for each patient, providing high-level treatment that is equal to American and European standards.</p>
+         <p>In 2018, the range of services was enriched with jaw surgery. Despite the large list of plastic surgeries offered, which is constantly expanding according to the needs of our patients, we pay great attention to cooperation with foreign specialists. This type of cooperation opens new opportunities for the citizens and guests of our country.</p>
+         <p>Being a customer-oriented company, it is very important for us to provide a safe environment for every client visiting our clinic, perfect insight into the culture of human interaction and fair treatment with the provision of technical and professional qualifications.</p>
+        </Figure>
+      </div>
+    </div>
+        < Slider />
+        <Footer />
+  <div> 
+ </div> 
+</div>;
 }
 
 export default About;
