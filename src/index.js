@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import firebase from "firebase";
-import { getStorage, ref } from "firebase/storage";
+
 
 
 const firebaseConfig = {
@@ -17,6 +17,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
+export const {collection, addDoc} = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
 

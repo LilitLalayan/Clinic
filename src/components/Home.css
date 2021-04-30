@@ -7,7 +7,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .home {
     font-family: 'Roboto', sans-serif;
-    margin-top: 100px;
+    
 }
 
 .hero {
@@ -44,7 +44,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .advantages {
-    background-color: #36ab35;
+    background-color: #3895D3 ;
+    margin-top: 140px;
     color: #fff;
     padding: 40px 40px;
     margin-bottom: 60px;
@@ -67,16 +68,13 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .image-slider {
-    margin-top: 60px;
     position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 200px;
+    
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    padding: 80px 0;
-
 }
 
 .image-slider__title {
@@ -85,15 +83,15 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .slide {
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     
 }
 
 .slide__client-img {
-    width: 40%;
-    height: 400px;
+    width: 100%;
+    height: 500px;
     object-fit: cover;
 }
 
@@ -111,6 +109,10 @@ h1,h2,h3,h4,h5,h6 {
     transform: translate(0 -50%);
 }
 
+.home__clinic-img {
+    width: 100%;
+}
+
 .image-slider__arrow-left {
     left: 5%;
 }
@@ -121,4 +123,8 @@ h1,h2,h3,h4,h5,h6 {
 
 .box-shadow {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.home__clients-img {
+    width: 100%;
 }
