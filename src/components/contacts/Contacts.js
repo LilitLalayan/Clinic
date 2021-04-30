@@ -1,5 +1,5 @@
 import React from "react";
-import ContactsAddress from "../ContactsAddress";
+import ContactsAddress from "./ContactsAddress";
 import ContactsWorkingHours from "./ContactsWorkingHours";
 import ContactsSimpleMap from "./ContactsSimpleMap";
 import "@fontsource/roboto";

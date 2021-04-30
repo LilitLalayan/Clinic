@@ -7,15 +7,15 @@ import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
-import ImageSlider from "./ImageSlider";
+import ImageSlider from "./slider/ImageSlider";
 // import smileIcon from '@material-ui/icons/EmojiEmotionsSharp';
-import { MainSliderImages } from "./MainSliderImages";
+import { MainSliderImages } from "./slider/MainSliderImages";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Image from "@material-ui/core/";
-import "./Contacts.css";
+import "./contacts/Contacts.css";
 import ContactsSimpleMap from "./contacts/ContactsSimpleMap";
 
 function Home() {
