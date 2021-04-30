@@ -18,6 +18,7 @@ import { auth, db } from ".";
 import { CLEAR_INPUTS, SET_LOGGEDIN_USER } from "./actions/actions";
 import { connect, useSelector } from "react-redux";
 import { selectLogginUser } from "./reducers/selectors";
+import Booking from "./components/Booking";
 
 function App({ dispatch }) {
   const loggedInUser = useSelector(selectLogginUser);
@@ -62,6 +63,7 @@ function App({ dispatch }) {
             <Route path="/contacts" component={Contacts} />
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
+            <Route path="/booking" component={Booking} />
             <Redirect to="/" />
           </Switch>
         )}
