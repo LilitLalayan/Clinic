@@ -27,23 +27,27 @@ function Home() {
       <Paper
         elevation={10}
         style={{
-          width: "300px",
-          padding: "80px",
+          width: "250px",
+          padding: "60px 20px",
           position: "relative",
           left: "60%",
           marginTop: "-140px",
           zIndex: "1",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center"
         }}
       >
-        <Typography variant="h3">Plan Your</Typography>
+        <Typography variant="h5">Plan Your</Typography>
 
-        <Typography variant="h3">Visit Now</Typography>
+        <Typography variant="h5">Visit Now</Typography>
 
         <Button
           fullWidth
           variant="contained"
           color="primary"
-          style={{ background: "orange", marginTop: "40px" }}
+          style={{ background: "#73605B", marginTop: "40px" }}
         >
           Book Now
         </Button>

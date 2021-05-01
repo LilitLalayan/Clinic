@@ -21,6 +21,8 @@ function Nav() {
   const [navAnimation, setNavAnimation] = useState("");
   const [flexDirection, setFlexDirection] = useState("");
   const [paddingX, setPaddingX] = useState("");
+  const [marginBottom, setMarginBottom] = useState("");
+
   return (
     <nav
       className={classNames(
@@ -32,7 +34,10 @@ function Nav() {
         flexDirection
       )}
     >
-      <Link to="/home" className={classNames("nav__brand", brandFlexOrder)}>
+      <Link
+        to="/home"
+        className={classNames("nav__brand", brandFlexOrder, marginBottom)}
+      >
         Smile Clinics
       </Link>
 
@@ -70,6 +75,9 @@ function Nav() {
           isNavOpen
             ? setNavSwitcher("closed-nav")
             : setNavSwitcher("opened-nav");
+
+          setMarginBottom(marginBottom === "margin-bottom" ? "" : "margin-bottom");
+
           setIsNavOpen(!isNavOpen);
         }}
       >
