@@ -24,7 +24,7 @@ function Nav() {
   return (
     <nav
       className={classNames(
-        "nav",
+        "custom-nav",
         "custom-box-shadow-thin",
         paddingX,
         navAnimation,
