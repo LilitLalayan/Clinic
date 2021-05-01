@@ -1,62 +1,61 @@
 import React, { useState } from "react";
 import "../styles/Auth.css";
-import { auth } from "..";
+import { auth, db } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
 import { connect, useDispatch } from "react-redux";
 import CopyrightIcon from "@material-ui/icons/Copyright";
 import {
+  NAME_CHANGE,
   EMAIL_CHANGE,
   PASSWORD_CHANGE,
-  SIGNIN_SUCCESS,
-  SIGNIN_ERROR,
+  SIGNUP_ERROR,
+  SIGNUP_SUCCESS,
 } from "../actions/actions";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: "20vh",
     width: "45vh",
+    marginBottom: 20,
   },
 
   Button: {
     backgroundColor: "#D09683",
     width: "45vh",
-    marginBottom: 10,
-  },
-
-  firstInput: {
     marginBottom: 20,
-    width: "45vh",
+    marginTop: 20,
   },
   input: {
     width: "45vh",
-    marginBottom: 20,
+    marginTop: 20,
   },
-  signUp: {
-    color: "rgb(149, 136, 233)",
-    cursor: "pointer",
-    marginLeft: 65,
-    fontWeight: "bold",
-  },
-  span: {
-    fontSize: 12,
+  firstInput: {
+    width: "45vh",
   },
 }));
 
-function SignIn() {
-  const dispatch = useDispatch();
+function SignUp() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const signIn = () => {
+  const signUp = () => {
     auth
-      .signInWithEmailAndPassword(email, password)
+
+      .createUserWithEmailAndPassword(email, password)
+      .then((resp) => {
+        db.collection("users").doc(resp.user.uid).set({
+          fullName: name,
+          email: email,
+        });
+      })
       .then(() => {
-        dispatch({ type: SIGNIN_SUCCESS });
+        dispatch({ type: SIGNUP_SUCCESS });
       })
       .catch((err) => {
-        dispatch({ type: SIGNIN_ERROR, payload: err.message });
+        dispatch({ type: SIGNUP_ERROR, payload: err.message });
       });
   };
 
@@ -70,11 +69,26 @@ function SignIn() {
         />
       </div>
       <Card id="form">
-        <form className="formControl" noValidate autoComplete="off">
-          <h1 style={{ color: "gray" }}>Sign in</h1>
+        <form className="form" noValidate autoComplete="off">
+          <h1 style={{ color: "gray" }}>Sign up</h1>
           <TextField
             autoComplete="off"
+            required
             className={classes.firstInput}
+            type="text"
+            label="Full Name"
+            size="small"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <br />
+
+          <TextField
+            autoComplete="off"
+            required
+            className={classes.input}
             type="email"
             label="Email"
             size="small"
@@ -86,8 +100,9 @@ function SignIn() {
           <br />
 
           <TextField
-            className={classes.input}
             autoComplete="off"
+            required
+            className={classes.input}
             type="password"
             label="Password"
             size="small"
@@ -102,23 +117,10 @@ function SignIn() {
             <Button
               className={classes.Button}
               variant="outlined"
-              onClick={signIn}
+              onClick={signUp}
             >
-              Sign In
+              Sign Up
             </Button>
-          </div>
-          <div
-            style={{
-              width: "45vh",
-              marginBottom: 20,
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
-            <span className={classes.span}> Not Registered?</span>
-            <span className={classes.signUp}>
-              <Link to="/signup">Sign Up</Link>
-            </span>
           </div>
         </form>
       </Card>
@@ -136,4 +138,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;
