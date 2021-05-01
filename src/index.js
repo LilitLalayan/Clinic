@@ -12,6 +12,7 @@ import App from "./App";
 
 import firebase from "firebase";
 
+
 import { createStore } from "redux";
 import rootReducer from "./reducers/rootReducer";
 import { Provider } from "react-redux";
@@ -32,6 +33,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
+export const {collection, addDoc} = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
 

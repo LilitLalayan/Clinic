@@ -1,9 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
-function Navbar() {
+import classNames from "classnames"
+function Navbar({displayFlex}) {
     return (
-        <ul className="navbar">
+        <ul className={classNames("custom-navbar", displayFlex)}>
             <li className="nav__item">
                 <Link to="/about" className="nav__link">
                     About

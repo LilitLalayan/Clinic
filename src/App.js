@@ -1,19 +1,23 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Nav from "./components/Nav";
+import Nav from "./components/nav/Nav";
 import Home from "./components/Home";
 import About from "./components/About";
 import Services from "./components/Services";
 import Doctors from "./components/Doctors";
-import Contacts from "./components/Contacts";
+import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
+
+import { Snackbar } from "@material-ui/core";
 import { auth, db } from ".";
 import { CLEAR_INPUTS, SET_LOGGEDIN_USER } from "./actions/actions";
 import { connect, useSelector } from "react-redux";
@@ -39,10 +43,19 @@ function App({ dispatch }) {
     auth.onAuthStateChanged(onAuthStateChanged);
   }, []);
 
+
   return (
     <Router>
       <div className="App">
         <Nav />
+
+        
+        {/* <Snackbar
+         open={RedaxStore.snackbar.message}
+         style={edaxStore.snackbar.severety} 
+         onClose={dispatch(resetSnackbarMessage)}
+         message="RedaxStore.snackbar.message"/> */}
+
         {loggedInUser ? (
           <Switch>
             <Route path="/" exact component={Home} />
@@ -67,6 +80,7 @@ function App({ dispatch }) {
             <Redirect to="/" />
           </Switch>
         )}
+
       </div>
     </Router>
   );

@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 export default function Doctors() {
   const classes = useStyles();
 
+
   const [allDocotors, setAllDoctors] = useState([]);
 
   console.log(allDocotors, 1);
