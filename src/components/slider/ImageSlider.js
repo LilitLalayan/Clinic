@@ -29,7 +29,7 @@ function ImageSlider() {
             
             
                 <div className="slide">
-                    <img src={MainSliderImages[index].photo} alt="dental" className="slide__client-img"/>
+                    <img src={MainSliderImages[index].photo} alt="dental" className="slide__dental-img"/>
                 </div>
             
             <a href="#" className="image-slider__arrow-right" onClick={(event) => {
