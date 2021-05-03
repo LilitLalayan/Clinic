@@ -1,22 +1,30 @@
 import React, { useState } from "react";
-import "../styles/Auth.css";
 import { auth } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import CopyrightIcon from "@material-ui/icons/Copyright";
-import {
-  EMAIL_CHANGE,
-  PASSWORD_CHANGE,
-  SIGNIN_SUCCESS,
-  SIGNIN_ERROR,
-} from "../actions/actions";
+import { SIGNIN_SUCCESS, SIGNIN_ERROR } from "../actions/actions";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: "20vh",
     width: "45vh",
+  },
+
+  signinForm: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  card: {
+    marginTop: "5vh",
+    marginBottom: "20px",
+    width: "60vh",
+    display: "flex",
+    justifyContent: "center",
+    boxShadow: "0 4px 12px rgb(0 0 0 / 15%)",
   },
 
   Button: {
@@ -34,10 +42,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
   },
   signUp: {
-    color: "rgb(149, 136, 233)",
-    cursor: "pointer",
-    marginLeft: 65,
+    color: "#73605b",
     fontWeight: "bold",
+    "&:hover": {
+      textDecoration: "none",
+      color: "#73605b",
+    },
   },
   span: {
     fontSize: 12,
@@ -49,7 +59,19 @@ function SignIn() {
   const classes = useStyles();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const signIn = () => {
+    if (!email) {
+      setEmailError("Please enter your email");
+    } else if (!email.includes("@")) {
+      setEmailError("Invalid email");
+    }
+    if (!password) {
+      setPasswordError("Please enter your password");
+    }
+
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -57,11 +79,31 @@ function SignIn() {
       })
       .catch((err) => {
         dispatch({ type: SIGNIN_ERROR, payload: err.message });
+        if (
+          err.message ===
+          "The password is invalid or the user does not have a password."
+        ) {
+          setPasswordError("Wrong password");
+        }
+        if (
+          err.message ===
+          "There is no user record corresponding to this identifier. The user may have been deleted."
+        ) {
+          setEmailError("User not found");
+        }
       });
   };
 
   return (
-    <>
+    <div
+      className={classes.signinForm}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          signIn();
+          console.log("hi");
+        }
+      }}
+    >
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <img
           src="http://localhost:3000/images/smile.jpg"
@@ -69,16 +111,18 @@ function SignIn() {
           width="100"
         />
       </div>
-      <Card id="form">
+      <Card className={classes.card}>
         <form className="formControl" noValidate autoComplete="off">
           <h1 style={{ color: "gray" }}>Sign in</h1>
           <TextField
-            autoComplete="off"
+            autoComplete="email"
             className={classes.firstInput}
-            type="email"
+            name="email"
             label="Email"
             size="small"
             value={email}
+            helperText={emailError}
+            error={emailError ? true : false}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -92,6 +136,8 @@ function SignIn() {
             label="Password"
             size="small"
             value={password}
+            helperText={passwordError}
+            error={passwordError ? true : false}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -115,9 +161,11 @@ function SignIn() {
               justifyContent: "space-around",
             }}
           >
-            <span className={classes.span}> Not Registered?</span>
-            <span className={classes.signUp}>
-              <Link to="/signup">Sign Up</Link>
+            <span className={classes.span}> Not registered?</span>
+            <span>
+              <Link to="/signup" className={classes.signUp}>
+                Sign up
+              </Link>
             </span>
           </div>
         </form>
@@ -130,9 +178,9 @@ function SignIn() {
         }}
       >
         <CopyrightIcon fontSize="small" />
-        <span>2021</span>
+        <span>{new Date().getFullYear()}</span>
       </div>
-    </>
+    </div>
   );
 }
 

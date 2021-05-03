@@ -1,17 +1,59 @@
 import React from "react";
 import "./Nav.css";
 import Navbar from "./Navbar";
-import LoginIcon from "@material-ui/icons/ExitToApp";
-import Container from "@material-ui/core/Container";
 import classNames from "classnames";
 import HamburgerIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { StarTwoTone } from "@material-ui/icons";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { useSelector } from "react-redux";
+import { auth } from "../..";
+import { selectLogginUser } from "../../reducers/selectors";
+import { makeStyles } from "@material-ui/core";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import EditIcon from "@material-ui/icons/Edit";
 
-// paleturquoise
+const useStyles = makeStyles((theme) => ({
+  appear: {
+    position: "absolute",
+    width: "27vh",
+    fontSize: "18px",
+    height: "23vh",
+    zIndex: "2",
+    backgroundColor: "gray",
+    color: "white",
+    borderRadius: "3px",
+    paddingTop: "5px",
+    textAlign: "center",
+    display: "block",
+    right: "5vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  disappear: {
+    display: "none",
+  },
+  icon: {
+    "&:hover": {
+      border: "2px solid gray",
+      borderRadius: "50%",
+    },
+  },
+  edit: {
+    color: "white",
+
+    "&:hover": {
+      textDecoration: "none",
+      color: "white",
+    },
+  },
+}));
 
 function Nav() {
+  const classes = useStyles();
+  const [isVisible, setIsVisible] = useState(false);
+  const loggedInUser = useSelector(selectLogginUser);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [navSwitcher, setNavSwitcher] = useState("closed-nav");
   const [displayFlex, setDisplayFlex] = useState("");
@@ -31,7 +73,8 @@ function Nav() {
         paddingX,
         navAnimation,
         navSwitcher,
-        flexDirection
+        flexDirection,
+        "icon"
       )}
     >
       <Link
@@ -43,9 +86,61 @@ function Nav() {
 
       <Navbar displayFlex={displayFlex} />
 
-      <Link to="/signin" className={classNames("nav__login", loginOrder)}>
-        Sign In
-      </Link>
+      {loggedInUser ? (
+        <div className={classNames("nav__login", loginOrder)}>
+          <AccountCircleIcon
+            className={classes.icon}
+            style={{ cursor: "pointer" }}
+            fontSize="large"
+            color="inherit"
+            onClick={() => setIsVisible(!isVisible)}
+          />
+
+          <div className={isVisible ? classes.appear : classes.disappear}>
+            {loggedInUser.info.fullName}
+            <span style={{ fontSize: "12px", marginBottom: "3px" }}>
+              {loggedInUser.email}
+            </span>
+            <Link to="/settings" className={classes.edit}>
+              <div>
+                <EditIcon />
+                <span style={{ fontSize: "12px" }}>edit</span>
+              </div>
+            </Link>
+            <hr
+              style={{
+                border: "1px solid white",
+                opacity: "0.5",
+                margin: 0,
+                marginTop: "15px",
+                width: "20vh",
+                margin: "auto",
+                marginBottom: "3px",
+              }}
+            />
+            <div>
+              <ExitToAppIcon fontSize="small" />
+              <span
+                style={{
+                  cursor: "pointer",
+                  marginLeft: "3px",
+                  fontSize: "13px",
+                }}
+                onClick={() => {
+                  auth.signOut();
+                  setIsVisible(false);
+                }}
+              >
+                Sign out
+              </span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Link to="/signin" className={classNames("nav__login", loginOrder)}>
+          Sign In
+        </Link>
+      )}
 
       <a
         href="#"
@@ -76,7 +171,9 @@ function Nav() {
             ? setNavSwitcher("closed-nav")
             : setNavSwitcher("opened-nav");
 
-          setMarginBottom(marginBottom === "margin-bottom" ? "" : "margin-bottom");
+          setMarginBottom(
+            marginBottom === "margin-bottom" ? "" : "margin-bottom"
+          );
 
           setIsNavOpen(!isNavOpen);
         }}
