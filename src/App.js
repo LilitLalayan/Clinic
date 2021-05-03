@@ -3,7 +3,7 @@ import "./App.css";
 import Nav from "./components/nav/Nav";
 import Home from "./components/Home";
 import About from "./components/About";
-import Services from "./components/Services";
+import Services from "./components/service/Services";
 import Doctors from "./components/Doctors";
 import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";

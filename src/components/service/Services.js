@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import {db} from "../index"
+import {Link} from 'react-router-dom';
+import {db} from "../../index"
 import Service from './Service';
 
 
@@ -79,6 +79,7 @@ const classes =useStyles();
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
+        
           <Container maxWidth="sm">
           <Typography component="h5" variant="h6" align="center" color="textPrimary" gutterBottom>
               Smile Dantal Clinic
@@ -89,9 +90,12 @@ const classes =useStyles();
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
               <Grid item>
-                  <Button variant="contained" color="primary">
+
+            <Link to="/booking" style={{ textDecoration: "none" }}>
+             <Button variant="contained" color="primary">
                  Book now
-                  </Button>
+             </Button>
+            </Link>
                 </Grid>
                 <Grid item>
                </Grid>
@@ -101,23 +105,25 @@ const classes =useStyles();
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={4}>
+          <Grid container spacing={3} justify="center">
             {services.map((service, index) => (
         <Service service={service} index={index+1} key ={service.uid}></Service>
-
-            ))}
+           ))}
           </Grid>
         </Container>
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Smile Dentale Clinic
+          OUR WORKS 
         </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-        <iframe width="500" height="255" src="https://www.youtube.com/embed/eZDwzYhbIBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            
-        </Typography>
+        <div>
+        <Typography variant="subtitle1" align="center" color="textSecondary" component="p" padding ="20">
+        <iframe width="400" height="300" src="https://www.youtube.com/embed/zzb2BbERUcE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="400" height="300" src="https://www.youtube.com/embed/eZDwzYhbIBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="400" height="300" src="https://www.youtube.com/embed/yXuiA_6q1eQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         
+        </Typography> </div>
         <Copyright />
       </footer>
       {/* End footer */}

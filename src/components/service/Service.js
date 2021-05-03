@@ -6,7 +6,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import {storage} from ".."
+import {storage} from "../.."
+import { CardActionArea } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(4),
     },
     cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
+      paddingTop: theme.spacing(12),
+      paddingBottom: theme.spacing(12),
     },
     card: {
       height: '100%',
@@ -84,32 +85,38 @@ useEffect(async()=>{
 
     return (
         <> 
+      
+    <Grid item key={service.id} xs={16} sm={9} md={4}>
      
-    <Grid item key={service.id} xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}
           image={url}
           title={service.name}
         />
-        <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent className={classes.cardContent} >
+          <CardActionArea >
+          <Typography gutterBottom variant="h5" component="h2" style = {{ textAlign: "center", backgroundColor: "#F5F5F5"}}>
           {service.name}
           </Typography>
           <Typography>
           {service.description}
           </Typography>
-          {doctors.map(d => <div>{d.name}</div>)}
+          <div style = {{ textAlign: "center", backgroundColor: "#F5F5F5"}}>
+          {doctors.map(d => <div>{d.name}</div>)} 
+          </div>
+          </CardActionArea>
         </CardContent>
-        <CardActions >
-          <div >
-           Price: {service.price} 
+        <CardActions style = {{ textAlign: "center", backgroundColor: "#F5F5F5"}}>
+          <div> 
+           PRICE: {service.price} dram
           </div>
           
         </CardActions>
       </Card>
+   
     </Grid>
-  
+   
  </>
     )
 }
