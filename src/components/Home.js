@@ -20,6 +20,7 @@ import ContactsSimpleMap from "./contacts/ContactsSimpleMap";
 
 function Home() {
   console.log(MainSliderImages, "lll");
+
   return (
     <div className="home">
       <ImageSlider mainSliderData={MainSliderImages} />
@@ -36,7 +37,7 @@ function Home() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <Typography variant="h5">Plan Your</Typography>
