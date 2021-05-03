@@ -107,7 +107,7 @@ useEffect(async()=>{
           </div>
           </CardActionArea>
         </CardContent>
-        <CardActions style = {{ textAlign: "center", backgroundColor: "#F5F5F5"}}>
+        <CardActions style = {{ textAlign: "center", backgroundColor: "#60BFE6"}}>
           <div> 
            PRICE: {service.price} dram
           </div>
