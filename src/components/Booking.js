@@ -64,6 +64,9 @@ export default function Booking() {
 
   console.log(bookingData);
 
+
+
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

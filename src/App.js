@@ -8,6 +8,7 @@ import Doctors from "./components/Doctors";
 import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import StomCard from "./components/store/StomCard";
 
 
 import {
@@ -64,6 +65,7 @@ function App({ dispatch }) {
             <Route path="/services" component={Services} />
             <Route path="/doctors" component={Doctors} />
             <Route path="/contacts" component={Contacts} />
+            <Route path="/stomCard" component={stomCard}/>
             <Redirect to="/" />
           </Switch>
         ) : (
@@ -77,6 +79,8 @@ function App({ dispatch }) {
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
             <Route path="/booking" component={Booking} />
+            <Route path="/stomCard" component={stomCard}/>
+
             <Redirect to="/" />
           </Switch>
         )}
