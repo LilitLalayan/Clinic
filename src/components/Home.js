@@ -126,11 +126,33 @@ function Home() {
   const classes = useStyles();
 
   console.log(MainSliderImages, "lll");
+
   return (
     <div className="home">
+
       <ImageSlider/>
 
-      
+
+
+      <Paper
+        elevation={10}
+        style={{
+          width: "250px",
+          padding: "60px 20px",
+          position: "relative",
+          left: "60%",
+          marginTop: "-140px",
+          zIndex: "1",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="h5">Plan Your</Typography>
+
+
+      </Paper>
 
       <Container fixed>
         <Grid container justify="center">
