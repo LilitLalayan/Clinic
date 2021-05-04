@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Button: {
-    backgroundColor: "#D09683",
+    backgroundColor: "#7DA3A1",
     width: "45vh",
     marginBottom: 10,
   },
@@ -42,11 +42,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
   },
   signUp: {
-    color: "#73605b",
+    color: "#7DA3A1",
     fontWeight: "bold",
     "&:hover": {
       textDecoration: "none",
-      color: "#73605b",
+      color: "#7DA3A1",
     },
   },
   span: {

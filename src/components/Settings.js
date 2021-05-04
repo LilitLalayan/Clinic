@@ -3,6 +3,8 @@ import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { auth } from "..";
 import firebase from "firebase";
+import { useDispatch } from "react-redux";
+import { CHANGE_EMAIL, SET_LOGGEDIN_USER } from "../actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   Button: {
     width: "20vh",
     height: "6vh",
-    backgroundColor: "#2D4362",
+    backgroundColor: "#7DA3A1",
     color: "white",
     [theme.breakpoints.down(800)]: {
       marginTop: "20px",
@@ -73,7 +75,8 @@ const useStyles = makeStyles((theme) => ({
     width: "20vh",
     display: "flex",
     justifyContent: "flex-end",
-    color: "#2D4362",
+    color: "#7DA3A1",
+    fontWeight: "bold",
     [theme.breakpoints.down(800)]: {
       justifyContent: "center",
     },
@@ -82,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Settings() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -103,6 +107,8 @@ function Settings() {
           .updateEmail(newEmail)
           .then(function () {
             alert("You have successfully changed your email");
+            // console.log(user);
+            // dispatch({ type: SET_LOGGEDIN_USER, user });
             setCurrentPassword2("");
             setNewEmail("");
           })
@@ -142,7 +148,7 @@ function Settings() {
           style={{
             letterSpacing: "5px",
             marginBottom: "20px",
-            color: "#73605b",
+            color: "gray",
           }}
         >
           Edit profile info

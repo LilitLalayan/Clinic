@@ -74,7 +74,6 @@ function App({ dispatch }) {
             <Route path="/contacts" component={Contacts} />
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
-
             <Redirect to="/" />
           </Switch>
         )}
