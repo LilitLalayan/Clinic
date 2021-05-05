@@ -9,7 +9,6 @@ import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -43,13 +42,11 @@ function App({ dispatch }) {
     auth.onAuthStateChanged(onAuthStateChanged);
   }, []);
 
-
   return (
     <Router>
       <div className="App">
         <Nav />
 
-        
         {/* <Snackbar
          open={RedaxStore.snackbar.message}
          style={edaxStore.snackbar.severety} 
@@ -80,7 +77,6 @@ function App({ dispatch }) {
             <Redirect to="/" />
           </Switch>
         )}
-
       </div>
     </Router>
   );

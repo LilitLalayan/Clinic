@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    boxShadow: "2px 2px 20px	#73605B	",
+    boxShadow: "2px 2px 20px		paleturquoise	",
   },
   media: {
     height: 175,
@@ -21,6 +21,7 @@ const useStyles = makeStyles({
   },
   gridItem: {
     margin: 50,
+    marginBottom: "100px",
     height: 300,
     maxWidth: 320,
   },
@@ -31,17 +32,31 @@ function Doctor({ doctor, index }) {
 
   const [url, setUrl] = useState("");
 
-  storage
-    .ref()
-    .child(`doctorImages/DocImg${index}.jpg`)
-    .getDownloadURL()
-    .then((url) => {
-      // `url` is the download URL for 'images/stars.jpg'
-      setUrl(url);
-    })
-    .catch((error) => {
-      // Handle any errors
-    });
+  useEffect(() => {
+    storage
+      .ref()
+      .child(`doctorImages/DocImg${index}.jpg`)
+      .getDownloadURL()
+      .then((url) => {
+        // `url` is the download URL
+        setUrl(url);
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+  }, []);
+
+  // storage
+  //   .ref()
+  //   .child(`doctorImages/DocImg${index}.jpg`)
+  //   .getDownloadURL()
+  //   .then((url) => {
+  //     // `url` is the download URL
+  //     setUrl(url);
+  //   })
+  //   .catch((error) => {
+  //     // Handle any errors
+  //   });
 
   return (
     <Grid className={classes.gridItem}>

@@ -10,6 +10,12 @@ import { useState } from "react";
 import { db } from "..";
 import Paper from "@material-ui/core/Paper";
 
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -29,9 +35,17 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
-export default function Booking() {
+export default function Booking({ doctor }) {
   const classes = useStyles();
 
   const [bookingData, setBookingData] = useState({
@@ -64,6 +78,13 @@ export default function Booking() {
 
   console.log(bookingData);
 
+  const [age, setAge] = React.useState(["Artak", "Vardan", "Valeri", "Davit"]);
+  // const arr = ["Artak", "Vardan", "Valeri", "Davit"];
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -74,55 +95,44 @@ export default function Booking() {
           </Typography>
           <br />
           <form className={classes.form} noValidate>
-            <Grid container spacing={6}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  // variant="filled"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                  onChange={onChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  // variant="filled"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                  onChange={onChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  // variant="filled"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange={onChange}
-                />
-              </Grid>
+            <br />
+            <Grid item xs={12}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Services</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>whitning</MenuItem>
+                  <MenuItem value={20}>cleaning</MenuItem>
+                  <MenuItem value={30}>therapy</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Services</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={40}>witing</MenuItem>
+                  <MenuItem value={50}>cleaning</MenuItem>
+                  <MenuItem value={60}>mibaning</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
             <br />
             <Grid item xs={12}>
               <TextField
-                id="datetimeLocal"
-                label="Choose Date"
-                type="datetime-local"
-                defaultValue="2021-04-29T19:30"
+                id="date"
+                label="Birthday"
+                type="date"
+                defaultValue="2017-05-24"
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
@@ -130,6 +140,22 @@ export default function Booking() {
                 onChange={onChange}
               />
             </Grid>
+            <Grid item xs={12}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Services</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>10:00 - 11:00</MenuItem>
+                  <MenuItem value={20}>cleaning</MenuItem>
+                  <MenuItem value={30}>mibaning</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <br />
             <Button
               type="submit"
               fullWidth
