@@ -15,7 +15,7 @@ import SignIn from "./components/SignIn";
 // import Brushes from "./components/shop/Brushes"
 // import Braces from "./components/shop/Braces"
 // import ToothPaste from "./components/shop/ToothPaste"
-// import ShopHome  from "./components/shop/ShopHome"
+import ShopHome  from "./components/shop/ShopHome"
 
 
 import Settings from "./components/Settings";
@@ -88,14 +88,14 @@ function App({ dispatch }) {
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
 
-            <Route path="/booking" component={Booking} />
-            {/* <Route path="/implants" component={Implants}></Route>
+            {/* <Route path="/booking" component={Booking} />
+            <Route path="/implants" component={Implants}></Route>
             <Route path="/toothbrushes" exact component={Brushes}></Route>
             <Route path="/toothpaste" exact component={ToothPaste}></Route>
             <Route path="/prostheses" component={Prostheses}></Route>
             <Route path="/braces" component={Braces}></Route>
-            <Route path="/inhalers" component={Inhalers}></Route>
-            <Route path="/shophome" component={ShopHome}></Route> */}
+            <Route path="/inhalers" component={Inhalers}></Route> */}
+            <Route path="/shophome" component={ShopHome}></Route>
 
 
             <Redirect to="/" />

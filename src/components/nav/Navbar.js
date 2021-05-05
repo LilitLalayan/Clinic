@@ -28,11 +28,11 @@ function Navbar({displayFlex}) {
                 </Link>  
             </li>
             
-            {/* <li  className="nav__item">
+            <li  className="nav__item">
                  <Link to="/shophome" className="nav__link">
                     Store
                 </Link>  
-            </li> */}
+            </li>
         </ul>
     )
 }
