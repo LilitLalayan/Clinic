@@ -1,17 +1,10 @@
 import React, { useState } from "react";
-import "../styles/Auth.css";
 import { auth, db } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import CopyrightIcon from "@material-ui/icons/Copyright";
-import {
-  NAME_CHANGE,
-  EMAIL_CHANGE,
-  PASSWORD_CHANGE,
-  SIGNUP_ERROR,
-  SIGNUP_SUCCESS,
-} from "../actions/actions";
+import { SIGNUP_ERROR, SIGNUP_SUCCESS } from "../actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,9 +12,22 @@ const useStyles = makeStyles((theme) => ({
     width: "45vh",
     marginBottom: 20,
   },
+  signinForm: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  card: {
+    marginTop: "5vh",
+    marginBottom: "20px",
+    width: "60vh",
+    display: "flex",
+    justifyContent: "center",
+    boxShadow: "0 4px 12px rgb(0 0 0 / 15%)",
+  },
 
   Button: {
-    backgroundColor: "#D09683",
+    backgroundColor: "#92AAC7",
     width: "45vh",
     marginBottom: 20,
     marginTop: 20,
@@ -41,7 +47,26 @@ function SignUp() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [nameError, setNameError] = useState("");
   const signUp = () => {
+    setNameError("");
+    setEmailError("");
+    setPasswordError("");
+    if (!name) {
+      setNameError("This field can't be blank");
+    }
+    if (!email) {
+      setEmailError("This field can't be blank");
+    } else if (!email.includes("@")) {
+      setEmailError("Invalid email");
+    }
+    if (!password) {
+      setPasswordError("This field can't be blank");
+    } else if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+    }
     auth
 
       .createUserWithEmailAndPassword(email, password)
@@ -60,7 +85,14 @@ function SignUp() {
   };
 
   return (
-    <>
+    <div
+      className={classes.signinForm}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          signUp();
+        }
+      }}
+    >
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <img
           src="http://localhost:3000/images/smile.jpg"
@@ -68,7 +100,7 @@ function SignUp() {
           width="100"
         />
       </div>
-      <Card id="form">
+      <Card className={classes.card}>
         <form className="form" noValidate autoComplete="off">
           <h1 style={{ color: "gray" }}>Sign up</h1>
           <TextField
@@ -79,6 +111,8 @@ function SignUp() {
             label="Full Name"
             size="small"
             value={name}
+            helperText={nameError}
+            error={nameError ? true : false}
             onChange={(e) => {
               setName(e.target.value);
             }}
@@ -86,13 +120,15 @@ function SignUp() {
           <br />
 
           <TextField
-            autoComplete="off"
+            autoComplete="email"
             required
             className={classes.input}
-            type="email"
+            name="email"
             label="Email"
             size="small"
             value={email}
+            helperText={emailError}
+            error={emailError ? true : false}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -107,6 +143,8 @@ function SignUp() {
             label="Password"
             size="small"
             value={password}
+            helperText={passwordError}
+            error={passwordError ? true : false}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -132,9 +170,9 @@ function SignUp() {
         }}
       >
         <CopyrightIcon fontSize="small" />
-        <span>2021</span>
+        <span>{new Date().getFullYear()}</span>
       </div>
-    </>
+    </div>
   );
 }
 
