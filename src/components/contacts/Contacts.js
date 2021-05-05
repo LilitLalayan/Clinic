@@ -15,8 +15,8 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
-import Alert from '@material-ui/lab/Alert';
-import MuiAlert from "@material-ui/lab/Alert"
+import Alert from "@material-ui/lab/Alert";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import {
   fade,
@@ -39,7 +39,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import { Icon } from "@material-ui/core";
 import classNames from "classnames";
 
-
 const useStyles = makeStyles((theme) => ({
   input: {
     borderColor: "green",
@@ -53,12 +52,11 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px 15px",
     borderRadius: "10px",
     outline: "none",
-    
   },
 
   submit: {
     width: "30%",
-    background: "#60BFE6"
+    background: "#60BFE6",
   },
 
   label: {
@@ -66,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     fontSize: "18px",
     fontWeight: "200",
-    margin: "0 auto"
+    margin: "0 auto",
   },
 
   success: {
@@ -74,11 +72,8 @@ const useStyles = makeStyles((theme) => ({
     outline: "1px solid green !important",
     "&:focus": {
       border: "1px solid green !important",
-      outline: "none"
-    }
-    
-
-     
+      outline: "none",
+    },
   },
 
   error: {
@@ -86,11 +81,9 @@ const useStyles = makeStyles((theme) => ({
     outline: "1px solid red !important",
     "&:focus": {
       border: "1px solid red !important",
-      outline: "none"
-    }
+      outline: "none",
+    },
   },
-
-  
 
   gridContainer: {
     marginTop: "20px",
@@ -101,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
 
   gridItem: {
@@ -139,18 +132,14 @@ const useStyles = makeStyles((theme) => ({
     background: "#60BFE6 !important",
     width: "70% !important",
     borderRadius: "10px !important",
-    color: "#fff !important"
+    color: "#fff !important",
   },
 
-  snackbar: {
-
-  },
+  snackbar: {},
 
   contactsInfo: {
-    marginTop: "60px !important"
-  }
-
-
+    marginTop: "60px !important",
+  },
 }));
 
 function Contacts() {
@@ -159,10 +148,9 @@ function Contacts() {
   const [openAlert, setOpenAlert] = useState(false);
   const [alrt, setAlrt] = useState({
     msg: "",
-    severity: ""
+    severity: "",
   });
 
- 
   const [validationState, setValidationState] = useState({
     firstName: "",
     lastName: "",
@@ -187,13 +175,12 @@ function Contacts() {
         .set(contactUsData);
       await setAlrt({
         msg: "Your message sent. We contact to you soon",
-        severity: "info"
+        severity: "info",
       });
-        
     } catch (e) {
       setAlrt({
         msg: "Sorry unable to sent. try later",
-        severity: "danger"
+        severity: "danger",
       });
     } finally {
       setOpenAlert(true);
@@ -219,12 +206,12 @@ function Contacts() {
         if (regex.test(value)) {
           setValidationState({
             ...validationState,
-            email: "success"            
+            email: "success",
           });
         } else {
           setValidationState({
             ...validationState,
-            email: "error"            
+            email: "error",
           });
         }
         break;
@@ -233,16 +220,16 @@ function Contacts() {
       case "firstName": {
         const regex = /^([a-zA-Z]){1,15}$/;
         if (regex.test(value)) {
-          
           setValidationState({
             ...validationState,
-            firstName: "success"            
-          });        } 
-          else {
-            setValidationState({
-              ...validationState,
-              firstName: "error"            
-            });        }
+            firstName: "success",
+          });
+        } else {
+          setValidationState({
+            ...validationState,
+            firstName: "error",
+          });
+        }
         console.log();
         break;
       }
@@ -252,12 +239,14 @@ function Contacts() {
         if (regex.test(value)) {
           setValidationState({
             ...validationState,
-            lastName: "success"            
-          });        } else {
-            setValidationState({
-              ...validationState,
-              lastName: "error"            
-            });        }
+            lastName: "success",
+          });
+        } else {
+          setValidationState({
+            ...validationState,
+            lastName: "error",
+          });
+        }
         console.log();
         break;
       }
@@ -267,12 +256,14 @@ function Contacts() {
         if (regex.test(value)) {
           setValidationState({
             ...validationState,
-            message: "success"            
-          });        } else {
-            setValidationState({
-              ...validationState,
-              message: "error"            
-            });        }
+            message: "success",
+          });
+        } else {
+          setValidationState({
+            ...validationState,
+            message: "error",
+          });
+        }
         console.log();
         break;
       }
@@ -282,23 +273,22 @@ function Contacts() {
         if (regex.test(value)) {
           setValidationState({
             ...validationState,
-            additionalDetails: "success"            
-          });        } else {
-
-            setValidationState({
-              ...validationState,
-              additionalDetails: "error"            
-            });
+            additionalDetails: "success",
+          });
+        } else {
+          setValidationState({
+            ...validationState,
+            additionalDetails: "error",
+          });
         }
 
         break;
       }
     }
-  }
+  };
 
   const handleFocusOut = (e) => {
     // let value = e.target.value;
-
     // switch (e.target.id) {
     //   case "email": {
     //     const regex = /^[a-zA-Z0-9]*@[a-zA-Z]*\.[a-z]*$/;
@@ -307,7 +297,6 @@ function Contacts() {
     //     }
     //     break;
     //   }
-
     //   case "firstName": {
     //     const regex = /^([a-zA-Z]){1,15}$/;
     //     if (regex.test(value)) {
@@ -316,7 +305,6 @@ function Contacts() {
     //     console.log();
     //     break;
     //   }
-
     //   case "lastName": {
     //     const regex = /^([a-zA-Z]){1,15}$/;
     //     if (regex.test(value)) {
@@ -325,7 +313,6 @@ function Contacts() {
     //     console.log();
     //     break;
     //   }
-
     //   case "message": {
     //     const regex = /^(.){10,150}$/g;
     //     if (regex.test(value)) {
@@ -334,7 +321,6 @@ function Contacts() {
     //     console.log();
     //     break;
     //   }
-
     //   case "additionalDetails": {
     //     const regex = /(.*){1,50}$/;
     //     if (regex.test(value)) {
@@ -372,11 +358,7 @@ function Contacts() {
             <Grid container justify="space-between">
               <Grid item sm={5}>
                 <form className={classes.form} noValidate>
-                  
-                 
-                
-                   
-                    {/* <Grid item sx={12}>
+                  {/* <Grid item sx={12}>
                       <CssTextField
                         variant="outlined"
                         required
@@ -391,7 +373,7 @@ function Contacts() {
                       />
                     </Grid> */}
 
-                    {/* <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                       <CssTextField
                         variant="outlined"
                         required
@@ -433,76 +415,113 @@ function Contacts() {
                       />
                     </Grid> */}
 
-                  
                   <Grid container>
                     <Grid item="" xs={12} display="flex" flexDirection="column">
-                    <label className={classes.label} htmlFor="firstName">
+                      <label className={classes.label} htmlFor="firstName">
                         First Name
                       </label>
-                      
+
                       <input
-                        className={classes[validationState.firstName] + " " + classes.contactsInput}
+                        className={
+                          classes[validationState.firstName] +
+                          " " +
+                          classes.contactsInput
+                        }
                         type="text"
                         id="firstName"
                         onChange={onChange}
                         onBlur={handleFocusOut}
                       />
-                      
                     </Grid>
-                    <Grid item="" xs={12} flexDirection="column" className={classes.inputWrapper}>
-                    <label className={classes.label} htmlFor="" htmlFor="lastName" cl>
+                    <Grid
+                      item=""
+                      xs={12}
+                      flexDirection="column"
+                      className={classes.inputWrapper}
+                    >
+                      <label
+                        className={classes.label}
+                        htmlFor=""
+                        htmlFor="lastName"
+                        cl
+                      >
                         Last Name
                       </label>
                       <input
-                        className={classes[validationState.lastName] + " " + classes.contactsInput}
+                        className={
+                          classes[validationState.lastName] +
+                          " " +
+                          classes.contactsInput
+                        }
                         type="text"
                         id="lastName"
                         onChange={onChange}
                         onBlur={handleFocusOut}
                       />
-                      
                     </Grid>
-                    <Grid item="" xs={12} flexDirection="column" className={classes.inputWrapper}>
-                    <label className={classes.label}  htmlFor="email">
+                    <Grid
+                      item=""
+                      xs={12}
+                      flexDirection="column"
+                      className={classes.inputWrapper}
+                    >
+                      <label className={classes.label} htmlFor="email">
                         Email
                       </label>
-                      
+
                       <input
-                        className={classes[validationState.email] + " " + classes.contactsInput}
+                        className={
+                          classes[validationState.email] +
+                          " " +
+                          classes.contactsInput
+                        }
                         type="email"
                         id="email"
                         onChange={onChange}
                         onBlur={handleFocusOut}
                       />
-                      
                     </Grid>
-                    <Grid item=""  xs={12} flexDirection="column">
-                    <label className={classes.label} htmlFor="message">
+                    <Grid item="" xs={12} flexDirection="column">
+                      <label className={classes.label} htmlFor="message">
                         Message
                       </label>
-                      
+
                       <textarea
-                        className={classes[validationState.message] + " " + classes.contactsInput}
+                        className={
+                          classes[validationState.message] +
+                          " " +
+                          classes.contactsInput
+                        }
                         type=""
                         id="message"
                         onChange={onChange}
                         onBlur={handleFocusOut}
                       />
-                      
                     </Grid>
-                    <Grid item="" xs={12} flexDirection="column" className={classes.inputWrapper}>
-                    <label className={classes.label} htmlFor="additionalDetails">
+                    <Grid
+                      item=""
+                      xs={12}
+                      flexDirection="column"
+                      className={classes.inputWrapper}
+                    >
+                      <label
+                        className={classes.label}
+                        htmlFor="additionalDetails"
+                      >
                         Additional Details
                       </label>
-                      
+
                       <textarea
-                        className={classes[validationState.additionalDetails] + " " + classes.contactsInput}
+                        className={
+                          classes[validationState.additionalDetails] +
+                          " " +
+                          classes.contactsInput
+                        }
                         type=""
                         id="additionalDetails"
                         onChange={onChange}
                         onBlur={handleFocusOut}
                       />
-                      
                     </Grid>
                     <Button
                       type="submit"
@@ -518,38 +537,30 @@ function Contacts() {
 
                     <Snackbar
                       open={openAlert}
-                      
                       message={alrt.msg}
                       autoHideDuration={5000}
                       onClose={handleClose}
                       action={
                         <div className={classes.snackbar}>
-                          <IconButton
-                            onClick={handleClose}
-                            aria-label="close"
-                          >
+                          <IconButton onClick={handleClose} aria-label="close">
                             <CloseIcon />
                           </IconButton>
                         </div>
                       }
-                      
-                      
-
-                      
                     >
- <Alert  severity={alrt.severity}>
- <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpenAlert(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-        {alrt.msg}
-      </Alert>
+                      <Alert severity={alrt.severity}>
+                        <IconButton
+                          aria-label="close"
+                          color="inherit"
+                          size="small"
+                          onClick={() => {
+                            setOpenAlert(false);
+                          }}
+                        >
+                          <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                        {alrt.msg}
+                      </Alert>
                     </Snackbar>
                   </Grid>
 
@@ -566,17 +577,15 @@ function Contacts() {
                     <ContactsAddress />
                   </Grid>
                   <Grid item xs={12}>
-                <div className="contacts__map">
-                  <ContactsSimpleMap />
-                </div>
-              </Grid>
+                    <div className="contacts__map">
+                      <ContactsSimpleMap />
+                    </div>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
 
-            <Grid container justify="center">
-              
-            </Grid>
+            <Grid container justify="center"></Grid>
           </Paper>
         </div>
       </Container>
