@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { db } from "../../index";
 import Service from "./Service";
 import { useSelector } from "react-redux";
-import { selectLogginUser } from "../../reducers/selectors";
+import { selectLoggedinUser } from "../../reducers/selectors";
 
 function Copyright() {
   return (
@@ -61,7 +61,7 @@ const cards = [1, 2, 3, 4, 5, 6];
 export default function Services() {
   const classes = useStyles();
   const [services, setServices] = useState([]);
-  const loggedInUser = useSelector(selectLogginUser);
+  const loggedInUser = useSelector(selectLoggedinUser);
   useEffect(() => {
     const servicesRef = db.collection("services");
     servicesRef.get().then((querySnapShot) => {

@@ -3,8 +3,8 @@ import { TextField, Button, makeStyles } from "@material-ui/core";
 import { auth } from "..";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { CHANGE_EMAIL, SET_LOGGEDIN_USER } from "../actions/actions";
-import { selectLogginUser } from "../reducers/selectors";
+import { SET_LOGGEDIN_USER } from "../actions/actions";
+import { selectLoggedinUser } from "../reducers/selectors";
 import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,12 +36,16 @@ const useStyles = makeStyles((theme) => ({
   settings: {
     marginTop: "20px",
     display: "flex",
-    border: "2px solid #92AAC7",
+    border: "2px solid #2D4262",
     borderRadius: "5px",
     width: "90%",
     height: "40vh",
     alignItems: "center",
     justifyContent: "space-around",
+    [theme.breakpoints.down(900)]: {
+      flexDirection: "column",
+      height: "80vh",
+    },
   },
   email: {
     display: "flex",
@@ -49,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "30%",
+    [theme.breakpoints.down(900)]: {
+      width: "70%",
+    },
   },
   password: {
     display: "flex",
@@ -56,9 +63,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "30%",
+    [theme.breakpoints.down(900)]: {
+      width: "70%",
+    },
   },
   h6: {
-    color: "#92AAC7",
+    color: "#2D4262",
     letterSpacing: "3px",
   },
   input: {
@@ -73,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
   history: {
     marginTop: "20px",
-    border: "2px solid #92AAC7",
+    border: "2px solid #2D4262",
     borderRadius: "5px",
     width: "90%",
     height: "40vh",
@@ -89,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Settings() {
-  const loggedInUser = useSelector(selectLogginUser);
+  const loggedInUser = useSelector(selectLoggedinUser);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [newPassword, setNewPassword] = useState("");
@@ -188,15 +198,12 @@ function Settings() {
           style={{
             color: "white",
             opacity: "0.7",
-            textAlign: "justify",
+            textAlign: "center",
             width: "80%",
             marginTop: "10px",
           }}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. It is a long established fact that a reader will be
-          distracted by the readable content of a page when looking at its
-          layout.
+          This is your year to smile bright!
         </p>
       </div>
       <div className={classes.wrapper}>
@@ -281,7 +288,7 @@ function Settings() {
           <div>
             <h4
               style={{
-                color: "#92AAC7",
+                color: "#2D4262",
                 letterSpacing: "3px",
                 textAlign: "center",
               }}

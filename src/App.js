@@ -28,11 +28,11 @@ import { Snackbar } from "@material-ui/core";
 import { auth, db } from ".";
 import { SET_LOGGEDIN_USER } from "./actions/actions";
 import { connect, useSelector } from "react-redux";
-import { selectLogginUser } from "./reducers/selectors";
+import { selectLoggedinUser } from "./reducers/selectors";
 import Booking from "./components/Booking";
 
 function App({ dispatch }) {
-  const loggedInUser = useSelector(selectLogginUser);
+  const loggedInUser = useSelector(selectLoggedinUser);
   const onAuthStateChanged = async (user) => {
     const userData = user ? { email: user.email, uid: user.uid } : user;
     if (userData) {
