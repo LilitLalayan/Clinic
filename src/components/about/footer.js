@@ -2,13 +2,11 @@ import React from "react";
 
 const footer = () => {
     return(
-        
         <div class site-footer>
         <div >
         <div className="main-footer" >
            <div className="container">
                <div className="row">
-                   
                    {/* Column1 */}
                    <div className="col">
                        <h3>Basic services</h3>
