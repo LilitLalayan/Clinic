@@ -18,7 +18,7 @@ a {
 /* general styles */
 
 .nav {
-  background-color: #73605b;
+  background-color: #60bfe6;
   position: absolute;
   left: -220px;
   display: flex;
@@ -126,4 +126,11 @@ a {
   text-align: center;
   cursor: pointer;
   display: none;
+}
+
+.nav{
+  top:0;
+  position: sticky;
+  z-index:20;
+  
 }

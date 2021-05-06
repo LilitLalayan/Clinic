@@ -1,5 +1,17 @@
-:root {
-    --mainDark: #208dcc;
-    --mainWhite: #fff;
+.main-footer{
+    color: white;
+    background-color: #60bfe6;
+    padding-top: 3em;
+    position: relative;
+    bottom: 0;
+    width: 100%; 
+    margin-top: 200px;
+    text-align: center;
 }
 
+h2{
+    color: #000;
+}
+h4{
+    color: #000;
+}

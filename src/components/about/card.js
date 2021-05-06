@@ -20,7 +20,6 @@ const cardStyle = {
   }
 
 
-
 export default function ImgMediaCard() {
   const classes = useStyles();
 
