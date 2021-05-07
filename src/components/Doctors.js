@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "..";
-import { Container, Grid } from "@material-ui/core";
+import { Button, CardActions, Container, Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Doctor from "./Doctor";
+import "@fontsource/roboto";
+import { useSelector } from "react-redux";
+import { selectLoggedinUser } from "../reducers/selectors";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
-  root: {
-    boxShadow: "2px 2px 20px	paleturquoise	",
+  container: {
+    paddingBottom: "130px",
   },
-  media: {
-    height: 175,
-    backgroundSize: "cover",
+  typography: {
+    margin: "60px 60px",
+    textAlign: "center",
+    color: "gray",
+    background: `linear-gradient(gray, gray) center bottom / 185px 3px no-repeat`,
+    paddingBottom: "20px",
+    paddingTop: "20px",
   },
-  gridItem: {
-    margin: 50,
-    height: 300,
-    maxWidth: 320,
+  forButton: {
+    paddingBottom: "60px",
+    paddingTop: "10px",
   },
-  // asdd: {
-  //   // backgroundImage: `url("https://image.freepik.com/free-vector/dentist-medical-background-with-3d-tooth-design_1017-26095.jpg")`,
-  // },
 });
 
 export default function Doctors() {
   const classes = useStyles();
-
-
+  const loggedInUser = useSelector(selectLoggedinUser);
   const [allDocotors, setAllDoctors] = useState([]);
 
   console.log(allDocotors, 1);
@@ -42,21 +45,35 @@ export default function Doctors() {
     });
   }, []);
 
+  const book = () => {
+    if (loggedInUser) {
+      return;
+    } else {
+      alert("Please sign in!");
+    }
+  };
+
   return (
-    <div className={classes.asdd}>
+    <div className={classes.div}>
       <Container className={classes.cardGrid}>
-        {/* <Typography
-          component="h4"
-          variant="h3"
-          style={{
-            margin: "10px 10px",
-            textAlign: "center",
-            fontFamily: "Arial, Helvetica, sans-serif",
-          }}
-        >
+        <Typography className={classes.typography} component="h4" variant="h3">
           Our Doctors
-        </Typography> */}
-        <Grid container spacing={4}>
+        </Typography>
+        <Grid
+          container
+          className={classes.forButton}
+          spacing={3}
+          justify="center"
+        >
+          <Grid item>
+            <Link to="/booking" style={{ textDecoration: "none" }}>
+              <Button variant="contained" color="primary" onClick={book}>
+                make an appointment
+              </Button>
+            </Link>
+          </Grid>
+        </Grid>
+        <Grid container className={classes.container} spacing={4}>
           {allDocotors.map((doctor, index) => {
             return (
               <Doctor doctor={doctor} key={doctor.uid} index={index + 1} />

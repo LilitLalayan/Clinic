@@ -1,87 +1,114 @@
-import React, { useEffect, useState } from "react";
-import { TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { TextField, Button, makeStyles } from "@material-ui/core";
 import { auth } from "..";
 import firebase from "firebase";
+import { useDispatch, useSelector } from "react-redux";
+
+import { SET_LOGGEDIN_USER } from "../actions/actions";
+import { selectLoggedinUser } from "../reducers/selectors";
+import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "20vh",
     outline: "none",
   },
-  coantainer: {
+
+  container: {
+    display: "flex",
+    width: "100%",
+  },
+  info: {
+    paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
+    width: "20%",
+    backgroundColor: "#92AAC7",
     alignItems: "center",
-    marginTop: "20px",
+    height: "100vh",
   },
-  form: {
+  wrapper: {
     display: "flex",
     flexDirection: "column",
+    width: "80%",
+    height: "100vh",
     alignItems: "center",
-    width: "90vh",
   },
-  name: {
+  settings: {
     marginTop: "20px",
     display: "flex",
-    justifyContent: "space-between",
+
+    border: "2px solid #2D4262",
+    borderRadius: "5px",
+    width: "90%",
+    height: "40vh",
     alignItems: "center",
-    width: "90vh",
+    justifyContent: "space-around",
+
+    [theme.breakpoints.down(900)]: {
+      flexDirection: "column",
+      height: "80vh",
+    },
   },
   email: {
-    marginTop: "20px",
     display: "flex",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    width: "90vh",
-    [theme.breakpoints.down(800)]: {
-      flexDirection: "column",
+    width: "30%",
+
+    [theme.breakpoints.down(900)]: {
+      width: "70%",
     },
   },
   password: {
-    marginTop: "20px",
     display: "flex",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    width: "90vh",
-    [theme.breakpoints.down(800)]: {
-      flexDirection: "column",
-    },
-  },
-  newpass: {
-    width: "40vh",
-    marginTop: "8px",
-  },
-  input: {
-    width: "40vh",
-  },
-  newemail: {
-    width: "40vh",
-    marginTop: "8px",
-  },
-  Button: {
-    width: "20vh",
-    height: "6vh",
-    backgroundColor: "#2D4362",
-    color: "white",
-    [theme.breakpoints.down(800)]: {
-      marginTop: "20px",
-      width: "40vh",
+    width: "30%",
+
+    [theme.breakpoints.down(900)]: {
+      width: "70%",
     },
   },
   h6: {
-    width: "20vh",
+    color: "#2D4262",
+    letterSpacing: "3px",
+  },
+  input: {
+    marginTop: "10px",
+    width: "100%",
+  },
+  button: {
+    marginTop: "10px",
+    width: "100%",
+    backgroundColor: "#92AAC7",
+    color: "white",
+  },
+  history: {
+    marginTop: "20px",
+
+    border: "2px solid #2D4262",
+    borderRadius: "5px",
+    width: "90%",
+    height: "40vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  tooth: {
     display: "flex",
     justifyContent: "flex-end",
-    color: "#2D4362",
-    [theme.breakpoints.down(800)]: {
-      justifyContent: "center",
-    },
+    marginBottom: "5px",
   },
 }));
 
 function Settings() {
+
+  const loggedInUser = useSelector(selectLoggedinUser);
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -89,6 +116,7 @@ function Settings() {
 
   const reauthenticate = (currentPassword) => {
     const user = auth.currentUser;
+
     const cred = firebase.auth.EmailAuthProvider.credential(
       user.email,
       currentPassword
@@ -99,10 +127,19 @@ function Settings() {
     reauthenticate(currentPassword2)
       .then(() => {
         const user = auth.currentUser;
+
         user
           .updateEmail(newEmail)
           .then(function () {
             alert("You have successfully changed your email");
+            console.log(user);
+            dispatch({
+              type: SET_LOGGEDIN_USER,
+              user: {
+                ...loggedInUser,
+                email: newEmail,
+              },
+            });
             setCurrentPassword2("");
             setNewEmail("");
           })
@@ -136,21 +173,54 @@ function Settings() {
   };
 
   return (
-    <div className={classes.coantainer}>
-      <form className={classes.form} noValidate autoComplete="off">
+    <div className={classes.container}>
+      <div className={classes.info}>
+        <img
+          alt="icon"
+          src="http://localhost:3000/images/PikPng.png"
+          width="60%"
+        />
         <h1
           style={{
-            letterSpacing: "5px",
-            marginBottom: "20px",
-            color: "#73605b",
+            color: "white",
+            fontSize: "30px",
+            marginTop: "10px",
+            fontFamily: "sans-serif",
+            width: "80%",
+            textAlign: "center",
           }}
         >
-          Edit profile info
+          {loggedInUser.info.fullName}
         </h1>
+        <h5
+          style={{
+            color: "white",
+            marginTop: "10px",
+            fontFamily: "sans-serif",
+          }}
+        >
+          {loggedInUser.email}
+        </h5>
+        <p
+          style={{
+            color: "white",
+            opacity: "0.7",
+            textAlign: "center",
+            width: "80%",
+            marginTop: "10px",
+          }}
+        >
 
-        <div className={classes.email}>
-          <h6 className={classes.h6}>Change email</h6>
-          <div style={{ width: "40vh" }}>
+          This is your year to smile bright!
+        </p>
+      </div>
+      <div className={classes.wrapper}>
+        <div className={classes.settings}>
+          <div className={classes.email}>
+            <div style={{ display: "flex" }}>
+              <h6 className={classes.h6}>CHANGE EMAIL</h6>
+              <EditIcon color="primary" />
+            </div>
             <TextField
               className={classes.input}
               id="outlined-basic"
@@ -164,7 +234,7 @@ function Settings() {
               }}
             />
             <TextField
-              className={classes.newemail}
+              className={classes.input}
               id="outlined-basic"
               label="Enter new email"
               variant="outlined"
@@ -174,18 +244,20 @@ function Settings() {
                 setNewEmail(e.target.value);
               }}
             />
+
+            <Button
+              className={classes.button}
+              variant="outlined"
+              onClick={changeEmail}
+            >
+              Change
+            </Button>
           </div>
-          <Button
-            className={classes.Button}
-            variant="outlined"
-            onClick={changeEmail}
-          >
-            Change
-          </Button>
-        </div>
-        <div className={classes.password}>
-          <h6 className={classes.h6}>Change password</h6>
-          <div style={{ width: "40vh" }}>
+          <div className={classes.password}>
+            <div style={{ display: "flex" }}>
+              <h6 className={classes.h6}>CHANGE PASSWORD</h6>
+              <EditIcon color="primary" />
+            </div>
             <TextField
               className={classes.input}
               id="outlined-basic"
@@ -199,7 +271,7 @@ function Settings() {
               }}
             />
             <TextField
-              className={classes.newpass}
+              className={classes.input}
               id="outlined-basic"
               label="Enter new password"
               variant="outlined"
@@ -210,17 +282,41 @@ function Settings() {
                 setNewPassword(e.target.value);
               }}
             />
+
+            <Button
+              className={classes.button}
+              variant="outlined"
+              onClick={changePassword}
+            >
+              Change
+            </Button>
           </div>
-          <Button
-            className={classes.Button}
-            variant="outlined"
-            onClick={changePassword}
-            size="small"
-          >
-            Change
-          </Button>
         </div>
-      </form>
+        <div className={classes.history}>
+          <div>
+            <h4
+              style={{
+
+                color: "#2D4262",
+                letterSpacing: "3px",
+                textAlign: "center",
+              }}
+            >
+              BOOKING HISTORY
+            </h4>
+            <p style={{ textAlign: "center", color: "#006C84" }}>
+              nothing to show
+            </p>
+          </div>
+          <div className={classes.tooth}>
+            <img
+              alt="icon"
+              src="http://localhost:3000/images/kisspng-tooth.png"
+              width="5%"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

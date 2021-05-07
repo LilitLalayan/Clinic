@@ -8,10 +8,9 @@ import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useSelector } from "react-redux";
 import { auth } from "../..";
-import { selectLogginUser } from "../../reducers/selectors";
+import { selectLoggedinUser } from "../../reducers/selectors";
 import { makeStyles } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import EditIcon from "@material-ui/icons/Edit";
 
 const useStyles = makeStyles((theme) => ({
   appear: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     height: "23vh",
     zIndex: "2",
-    backgroundColor: "gray",
+    backgroundColor: "#92AAC7",
     color: "white",
     borderRadius: "3px",
     paddingTop: "5px",
@@ -36,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     "&:hover": {
-      border: "2px solid gray",
+      border: "2px solid white",
       borderRadius: "50%",
     },
   },
-  edit: {
+  profile: {
     color: "white",
 
     "&:hover": {
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 function Nav() {
   const classes = useStyles();
   const [isVisible, setIsVisible] = useState(false);
-  const loggedInUser = useSelector(selectLogginUser);
+  const loggedInUser = useSelector(selectLoggedinUser);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [navSwitcher, setNavSwitcher] = useState("closed-nav");
   const [displayFlex, setDisplayFlex] = useState("");
@@ -101,10 +100,9 @@ function Nav() {
             <span style={{ fontSize: "12px", marginBottom: "3px" }}>
               {loggedInUser.email}
             </span>
-            <Link to="/settings" className={classes.edit}>
+            <Link to="/settings" className={classes.profile}>
               <div>
-                <EditIcon />
-                <span style={{ fontSize: "12px" }}>edit</span>
+                <span style={{ fontSize: "12px" }}>Profile</span>
               </div>
             </Link>
             <hr
