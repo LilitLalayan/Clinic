@@ -8,8 +8,7 @@ import Container from '@material-ui/core/Container';
 import {Link} from 'react-router-dom';
 import {db} from "../../index"
 import Service from './Service';
-
-
+import Shop from "../shop/Shop";
 
 function Copyright() {
   return (
@@ -96,6 +95,7 @@ const classes =useStyles();
                  Book now
              </Button>
             </Link>
+
                 </Grid>
                 <Grid item>
                </Grid>
@@ -125,7 +125,7 @@ const classes =useStyles();
         </Typography> </div>
         <Copyright />
       </footer>
-      {/* End footer */}
+        {/* End footer */}
     </React.Fragment>
   );
 }
