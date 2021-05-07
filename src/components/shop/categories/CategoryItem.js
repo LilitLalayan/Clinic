@@ -14,38 +14,41 @@ import { storage } from "../../../index";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 200,
+    
   },
   media: {
-    height: 100,
+    height: 0,
   },
 
   
 });
 
-function CategoryItem({title,index}) {
+function CategoryItem({id,title,handleClick}) {
   const [url, setUrl] = useState("");
+  console.log(id,"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
   const classes = useStyles();
-  useEffect(() => {
+//   useEffect(() => {
     
-    var storageRef = storage.ref(`shop/CategoriesMain/img${index}.jpg`);
-storageRef.getDownloadURL().then(function(url) {
-  console.log(url);
-  setUrl(url)
-});
-  },);
+//     var storageRef = storage.ref(`shop/CategoriesMain/img${index}.jpg`);
+// storageRef.getDownloadURL().then(function(url) {
+//   console.log(url);
+//   setUrl(url)
+// });
+//   },);
+
 
   return (
-    <Grid item xs={3}>
-      <Card className={classes.root}>
+    <Grid item xs={2}>
+      <Card className={classes.root} onClick={handleClick}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={url}
+            // image={url}
             title={title}
           />
            <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" align="center">
+          <Typography gutterBottom variant="body2" component="h2" align="center">
             {title}
           </Typography>
           

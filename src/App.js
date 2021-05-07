@@ -72,6 +72,7 @@ function App({ dispatch }) {
             <Route path="/contacts" component={Contacts} />
             <Route path="/booking" component={Booking} />
             <Route path="/settings" component={Settings} />
+            <Route path="/shophome" component={ShopHome}></Route>
 
             <Redirect to="/" />
           </Switch>
