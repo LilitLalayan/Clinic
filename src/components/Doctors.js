@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Doctor from "./Doctor";
 import "@fontsource/roboto";
 import { useSelector } from "react-redux";
-import { selectLogginUser } from "../reducers/selectors";
+import { selectLoggedinUser } from "../reducers/selectors";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 
 export default function Doctors() {
   const classes = useStyles();
-  const loggedInUser = useSelector(selectLogginUser);
+  const loggedInUser = useSelector(selectLoggedinUser);
   const [allDocotors, setAllDoctors] = useState([]);
 
   console.log(allDocotors, 1);

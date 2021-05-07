@@ -14,8 +14,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { AVAILABLE_ORDER_TIMES } from "../constants/appConstants";
-import { selectLogginUser } from "../reducers/selectors";
 import { useSelector } from "react-redux";
+import { selectLoggedinUser } from "../reducers/selectors";
 import "@fontsource/roboto";
 import Snackbar from "@material-ui/core/Snackbar";
 // import Slide from "@material-ui/core/Slide";
@@ -72,7 +72,7 @@ function Alert(props) {
 export default function Booking() {
   const classes = useStyles();
 
-  const loggedInUser = useSelector(selectLogginUser);
+  const loggedInUser = useSelector(selectLoggedinUser);
   const [allDoctors, setAllDoctors] = useState([]);
   const [services, setServices] = useState([]);
   const [orderDate, setOrderDate] = useState("");
