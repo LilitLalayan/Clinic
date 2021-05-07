@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useSelector } from "react-redux";
 import { auth } from "../..";
-import { selectLogginUser } from "../../reducers/selectors";
+import { selectLoggedinUser } from "../../reducers/selectors";
 import { makeStyles } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 function Nav() {
   const classes = useStyles();
   const [isVisible, setIsVisible] = useState(false);
-  const loggedInUser = useSelector(selectLogginUser);
+  const loggedInUser = useSelector(selectLoggedinUser);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [navSwitcher, setNavSwitcher] = useState("closed-nav");
   const [displayFlex, setDisplayFlex] = useState("");
