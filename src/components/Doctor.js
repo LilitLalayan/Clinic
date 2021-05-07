@@ -5,11 +5,12 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Container, Grid } from "@material-ui/core";
 import { storage } from "..";
-import { Link } from "react-router-dom";
+import "@fontsource/roboto";
+// import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -46,18 +47,6 @@ function Doctor({ doctor, index }) {
       });
   }, []);
 
-  // storage
-  //   .ref()
-  //   .child(`doctorImages/DocImg${index}.jpg`)
-  //   .getDownloadURL()
-  //   .then((url) => {
-  //     // `url` is the download URL
-  //     setUrl(url);
-  //   })
-  //   .catch((error) => {
-  //     // Handle any errors
-  //   });
-
   return (
     <Grid className={classes.gridItem}>
       <Card className={classes.root}>
@@ -76,13 +65,7 @@ function Doctor({ doctor, index }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Link to="/booking" style={{ textDecoration: "none" }}>
-            <Button size="small" color="primary">
-              make an appointment
-            </Button>
-          </Link>
-        </CardActions>
+        <CardActions></CardActions>
       </Card>
     </Grid>
   );
