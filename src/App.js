@@ -9,6 +9,9 @@ import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Settings from "./components/Settings";
+import Shop from "./components/shop/ShoppingItem"
+
+//import StomCard from "./components/shop/StomCard";
 
 // import Implants from "./components/shop/Implants"
 // import Prostheses from "./components/shop/Prostheses"
@@ -32,6 +35,8 @@ import { SET_LOGGEDIN_USER } from "./actions/actions";
 import { connect, useSelector } from "react-redux";
 import { selectLoggedinUser } from "./reducers/selectors";
 import Booking from "./components/Booking";
+import Basket from "./components/shop/Basket";
+import Payment  from "./components/shop/Payment";
 
 function App({ dispatch }) {
   const loggedInUser = useSelector(selectLoggedinUser);
@@ -72,9 +77,13 @@ function App({ dispatch }) {
             <Route path="/doctors" component={Doctors} />
 
             <Route path="/contacts" component={Contacts} />
+            <Route path="/shop" component={Shop} />
             <Route path="/booking" component={Booking} />
             <Route path="/settings" component={Settings} />
+            <Route path="/basket" component={Basket} />
+            <Route path="/payment" component={Payment} />
             <Route path="/shophome" component={ShopHome}></Route>
+
 
             <Redirect to="/" />
           </Switch>
@@ -86,8 +95,12 @@ function App({ dispatch }) {
             <Route path="/services" component={Services} />
             <Route path="/doctors" component={Doctors} />
             <Route path="/contacts" component={Contacts} />
+            
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
+            <Route path="/basket" component={Basket} />
+            <Route path="/booking" component={Booking} />
+            <Route path="/payment" component={Payment} />
 
 
             {/* <Route path="/implants" component={Implants}></Route>
@@ -98,6 +111,7 @@ function App({ dispatch }) {
 
             <Route path="/inhalers" component={Inhalers}></Route>
             <Route path="/shophome" component={ShopHome}></Route> */}
+
 
 
             <Redirect to="/" />

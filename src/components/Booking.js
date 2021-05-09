@@ -1,3 +1,4 @@
+
 import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -6,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
 import { useState, useEffect } from "react";
 import { db } from "..";
 import Paper from "@material-ui/core/Paper";
@@ -41,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+
     color: "white",
     backgroundColor: "#60BFE6",
     borderRadius: "10px",
@@ -196,15 +199,18 @@ export default function Booking() {
       <CssBaseline />
       <Paper elevation={20}>
         <div className={classes.paper}>
+
           <Typography
             component="h1"
             variant="h4"
             style={{ textAlign: "left", color: "  #60BFE6" }}
           >
+
             Book Now
           </Typography>
           <br />
           <form className={classes.form} noValidate>
+
 
             <Grid item xs={12}>
               <FormControl className={classes.formControl}>
@@ -272,10 +278,12 @@ export default function Booking() {
                 type="date"
                 defaultValue="2017-05-24"
                 value={orderDate}
+
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
                 }}
+
                 onChange={onOrderDateChange}
               />
             </Grid>
@@ -305,12 +313,14 @@ export default function Booking() {
               </FormControl>
             </Grid>
             <br />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+
               disabled={
                 !selectedDoctor || !selectedService || !orderDate || !orderTime
               }
@@ -330,6 +340,7 @@ export default function Booking() {
                 </Alert>
               </Snackbar>
             </Link>
+
           </form>
         </div>
       </Paper>

@@ -21,7 +21,10 @@ import StarIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
 import { StylesProvider } from "@material-ui/core/styles";
 import "./ShopStyles.css"
+
 import { useSelector, useDispatch } from "react-redux";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -125,8 +128,10 @@ export default function ShoppingItem({
         <IconButton aria-label="Add" onClick={(e) => handleItemAddRemove(e,"increment",id)}>
           <AddIcon />
         </IconButton>
+
         <IconButton aria-label="Add to basket" onClick={(e) => handleAddToBasket(e,id)}>
           Add To Basket
+
         </IconButton>
       </CardActions>
     </Card>
