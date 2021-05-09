@@ -18,6 +18,7 @@ const styles = {
   }
 
 
+  
 function Aboutslider(){
     return(
         <div >

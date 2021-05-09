@@ -18,6 +18,8 @@ const cardStyle = {
    
     padding: '20px', 
   }
+
+
   
 export default function ImgMediaCard() {
   const classes = useStyles();
