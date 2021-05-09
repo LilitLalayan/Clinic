@@ -1,3 +1,4 @@
+
 .main-footer{
     color: white;
     background-color: #60bfe6;
@@ -15,3 +16,9 @@ h2{
 h4{
     color: #000;
 }
+
+:root {
+  --mainDark: #208dcc;
+  --mainWhite: #fff;
+}
+

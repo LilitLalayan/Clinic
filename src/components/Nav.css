@@ -19,7 +19,7 @@ a {
 
 .nav {
   background-color: #60bfe6;
-  position: absolute;
+  position: relative;
   left: -220px;
   display: flex;
   flex-direction: column;
