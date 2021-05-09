@@ -21,6 +21,10 @@ import StarIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
 import { StylesProvider } from "@material-ui/core/styles";
 import "./ShopStyles.css"
+import { Link } from "react-router-dom";
+
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 300,
@@ -117,8 +121,10 @@ export default function ShoppingItem({
         <IconButton aria-label="Add">
           <AddIcon />
         </IconButton>
-        <IconButton aria-label="Add to basket">
-          Add To Basket
+        <IconButton aria-label="Add to basket" >
+        <Link to="/basket" style={{ textDecoration: "none" }}>
+           Go to Basket
+        </Link>
         </IconButton>
       </CardActions>
     </Card>
