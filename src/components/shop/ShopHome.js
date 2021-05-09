@@ -1,13 +1,16 @@
 import React from "react";
 import Link from "react-router-dom";
-
+import { StylesProvider } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useRef } from "react";
+import "./ShopStyles.css";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
+import FormHelperText from '@material-ui/core/FormHelperText';
+
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
@@ -20,17 +23,20 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
-import {
-  hasSubCategories,
-  hasShoppingItems,
-} from "../../actions/changeCategory";
 import ShoppingItem from "./ShoppingItem";
 import CategoryItem from "./categories/CategoryItem";
 import { storage } from "../..";
-
+import TextField from "@material-ui/core/TextField";
+import SearchIcon from "@material-ui/icons/Search";
 import { db } from "../..";
 import { ContactsOutlined } from "@material-ui/icons";
+import formHelperText from '@material-ui/core/FormHelperText';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 //  states for  categories for pacients
 
 // state for sub category set
@@ -44,6 +50,18 @@ const useStyles = makeStyles((theme) => ({
     // marginTop: "60px",
   },
 
+  searchForm: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    maxHeight: "100px",
+    marginTop: "30px",
+  },
+
+  textField: {
+    width: "30%",
+  },
+
   root: {
     flexGrow: 1,
   },
@@ -54,7 +72,21 @@ const useStyles = makeStyles((theme) => ({
   control: {
     padding: theme.spacing(2),
   },
+
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+
+  option : {
+    padding: "4px"
+  }
 }));
+
+
 
 function ShopHome() {
   const [spacing, setSpacing] = React.useState(5);
@@ -65,7 +97,30 @@ function ShopHome() {
   const [allShoppingItems, setAllShoppingItems] = useState([]);
   const [allSubCategories, setAllSubCategories] = useState([]);
   const [categoriesData, setCategoriesData] = useState({});
-  console.log(allShoppingItems,"jjjjjjjjjjjjjjjjjjjjjjjjj")
+  const [searchValue, setSearchValue] = useState("");
+  const [temporaryBasket, setTemporaryBasket] = useState({});
+  const [searchResult, setSearchResult] = useState([]);
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [searchPainting, setSearchPainting] = useState([]);
+  const [basket, setBasket] = useState({});
+  console.log(temporaryBasket,"vvvvvvvvvvvvvvvvvvvvvvvvv")
+  console.log(basket,"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+  const isSearchCld = useRef({
+    i: false
+  });
+  const [filter, setFilter] = useState({
+    age: '',
+    name: 'hai',
+  });
+
+  // const handleChange = (event) => {
+  //   const name = event.target.name;
+  //   setState({
+  //     ...state,
+  //     [name]: event.target.value,
+  //   });
+  // };
+  console.log(allShoppingItems, "jjjjjjjjjjjjjjjjjjjjjjjjj");
   const dispatch = useDispatch();
   useEffect(() => {
     // adding data from firestore instead of empty arrays
@@ -293,6 +348,21 @@ function ShopHome() {
     //   .catch((error) => {
     //     console.error("Error writing document: ", error);
     //   });
+    // var washingtonRef = db.collection("shopItems").doc("toothPaste9");
+
+    // // Set the "capital" field of the city 'DC'
+    // return washingtonRef
+    //   .update({
+    //     searchPriority: 0,
+    //   })
+    //   .then(() => {
+    //     console.log("Document successfully updated!");
+    //   })
+    //   .catch((error) => {
+    //     // The document probably doesn't exist.
+    //     console.error("Error updating document: ", error);
+    //   });
+
     // get all catgeroies data from firestore
     const categories = db
       .collection("categories")
@@ -353,6 +423,7 @@ function ShopHome() {
       case "1": {
         console.log(id, "ttttttttttttttttttttttttttttttt");
         setCurrentSubCategory(id);
+        setIsSearchClicked(false);
       }
 
       // case "2" : {
@@ -361,94 +432,286 @@ function ShopHome() {
     }
   };
 
+  const handleSearchClick = (e) => {
+    const arr = [];
+    const splittedSearchValue = searchValue.toLowerCase().split(" ");
+    console.log(allShoppingItems, "iiiiiiiiiiiiiiiiiiiiiiii");
+    splittedSearchValue.forEach((value) => {
+      allShoppingItems.forEach((item) =>
+        item.tags.includes(value) ? arr.push(item) : null
+      );
+    });
+    // const set(...result)
+    console.log(arr, "tttttttttttttttt");
+    
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i].title === arr[j].title) {
+          
+          arr[i].searchPriority++;
+        }
+      }
+    }
+    console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+    setIsSearchClicked(true);
+    // isSearchCld.current.i = true;
+    setSearchResult(Array.from(new Set(arr)).slice().sort((a,b) => b.searchPriority - a.searchPriority));
+    arr.forEach(item => item.searchPriority = 0)
+    
+  };
+
+  const handleFilterChange = (e) => {
+    console.log(e.target.value,"ppppppppppppppppp")
+    switch(e.target.value) {
+      case "priceAcc": {
+        console.log(allShoppingItems,"rrrrrrrrrrrrrrrrrr")
+
+        setAllShoppingItems(allShoppingItems.slice().sort((a,b) => Number.parseInt(a.price) - Number.parseInt(b.price)));
+        setSearchResult(searchResult.slice().sort((a,b) => Number.parseInt(a.price) - Number.parseInt(b.price)))
+        break;
+      }
+
+      case "priceDescending": {
+        console.log(allShoppingItems,"eeeeeeeeeeeeeeeeeeeeee")
+        setSearchResult(searchResult.slice().sort((a,b) => Number.parseInt(b.price) - Number.parseInt(a.price)))
+
+        setAllShoppingItems(allShoppingItems.slice().sort((a,b) => Number.parseInt(b.price) - Number.parseInt(a.price)));
+        break;
+      }
+
+      case "popularityAcc": {
+        console.log(allShoppingItems,"qqqqqqqqqqrrrrrrrrrr")
+        setSearchResult(searchResult.slice().sort((a,b) => Number.parseInt(a.popularity) - Number.parseInt(b.popularity)))
+
+        setAllShoppingItems(allShoppingItems.slice().sort((a,b) => Number.parseInt(a.popularity) - Number.parseInt(b.popularity)));
+        break;
+      }
+
+      case "popularityDescending": {
+        setSearchResult(searchResult.slice().sort((a,b) => Number.parseInt(b.popularity) - Number.parseInt(a.popularity)))
+        setAllShoppingItems(allShoppingItems.slice().sort((a,b) => Number.parseInt(b.popularity) - Number.parseInt(a.popularity)));
+        break;
+      }
+    }
+  }
+
+  const handleItemAddRemove = (e, name,itemId) => {
+    switch(name) {
+      case "increment": {
+        setTemporaryBasket((oldState) => ({
+          ...oldState,
+          [itemId] : oldState[itemId] === undefined ? 1 : oldState[itemId] + 1
+        }))
+        break;
+      }
+
+      case "decrement": {
+        setTemporaryBasket((oldState) => ({
+          ...oldState,
+          [itemId] : oldState[itemId] === undefined ? 1 : oldState[itemId] - 1
+        }))
+        break;
+      }
+    }
+    
+    
+  }
+
+  const handleAddToBasket = (e,id) => {
+    setBasket((oldState) => ({
+      ...oldState,
+      [id]: temporaryBasket[id]
+    }))
+  }
+  console.log("ccccccccccccccccccccccccccccccccccccccccccccc")
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   console.log(allCategories, "ccccccccccc");
   console.log(allShoppingItems, "ssssssssss");
   console.log(allSubCategories, "eeeeeeee");
-  return (
-    <div className="categories">
-      <button
-        onClick={() => {
-          // dispatch(type: INCREMENT)
-          {
-          }
-        }}
-      >
-        increment
-      </button>
-      <Typography className={classes.typography} variant="h6" align="center">
-        <br />
-      </Typography>
-      <Grid
-        container
-        justify="center"
-        spacing={spacing}
-        className={classes.container}
-      >
-        {/* painting categories */}
-        {allCategories.map((category) => {
-          return (
-            <CategoryItem
-              id={category.id}
-              title={category.title}
-              handleClick={(event) =>
-                handleClick(event, category.id, category.groupId)
-              }
-            />
-          );
-        })}
-      </Grid>
 
-      <Grid
-        container
-        justify="center"
-        spacing={spacing}
-        className={classes.container}
-      >
-        {/* filtering categories and painting */}
-        {allSubCategories
-          .filter((subCategory) => subCategory.categoryId === currentCategory)
-          .map((subCategory) => {
+  const a = () => {
+    console.log(isSearchClicked,"uuuuuuuuuuuuuuuuuuuuuuuu")
+    if (isSearchClicked) {
+      console.log(isSearchCld.current.i ," xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+      // setIsSearchClicked(false);
+      // isSearchCld.current.i = false;
+      return searchResult.map(shoppingItem => {
+        return (<ShoppingItem
+        id={shoppingItem.id}
+        title={shoppingItem.title}
+        price={shoppingItem.price}
+        imageUrl={shoppingItem.imageUrl}
+        date={shoppingItem.date}
+        popularity={shoppingItem.popularity}
+        tmpItemCount={temporaryBasket[shoppingItem.id]}
+        handleItemAddRemove={handleItemAddRemove}
+        handleAddToBasket={handleAddToBasket}
+        onClick={(event) =>
+          handleClick(event, shoppingItem.id, shoppingItem.groupId)
+        }
+      />)
+      });
+      // setIsSearchClicked(false);
+      
+    } else {
+      console.log("ssssssssssssssssssssssssssssssssss")
+      return allShoppingItems
+      .filter(
+        (shoppingItem) =>
+          shoppingItem.subCategoryId === currentSubCategory
+      )
+      .map((shoppingItem) => {
+        return (
+          <ShoppingItem
+            id={shoppingItem.id}
+            title={shoppingItem.title}
+            price={shoppingItem.price}
+            imageUrl={shoppingItem.imageUrl}
+            date={shoppingItem.date}
+            tmpItemCount={temporaryBasket[shoppingItem.id]}
+            handleSearchClick={handleAddToBasket}
+            popularity={shoppingItem.popularity}
+            handleItemAddRemove={handleItemAddRemove}
+            handleAddToBasket={handleAddToBasket}
+            onClick={(event) =>
+              handleClick(event, shoppingItem.id, shoppingItem.groupId)
+            }
+          />
+        );
+      });
+    }
+
+    
+  }
+  return (
+    <StylesProvider>
+      <div className="categories">
+        <form action="" className={classes.searchForm}>
+          <TextField
+            label="Search"
+            align="center"
+            className={classes.textField}
+            onChange={handleSearchChange}
+          ></TextField>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleSearchClick}
+          >
+            <SearchIcon />
+          </Button>
+          <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-native-helper">Filter</InputLabel>
+        <NativeSelect
+          // value={state.age}
+          onChange={handleFilterChange}
+          inputProps={{
+            name: 'age',
+            id: 'age-native-helper',
+          }}
+        >
+          <option aria-label="None" value="" />
+          <option value={"priceAcc"} className={classes.option}>By Price accending</option>
+          <option value={"priceDescending"} className={classes.option}>By Price descending</option>
+          <option value={"popularityAcc"} className={classes.option}>By Popularity accending</option>
+          <option value={"popularityDescending"} className={classes.option}>By Popularity descending</option>
+
+        </NativeSelect>
+      </FormControl>
+        </form>
+
+        <Typography className={classes.typography} variant="h6" align="center">
+          <br />
+        </Typography>
+        <Grid
+          container
+          justify="center"
+          spacing={spacing}
+          className={classes.container}
+        >
+          {/* painting categories */}
+          {allCategories.map((category) => {
             return (
               <CategoryItem
-                id={subCategory.id}
-                title={subCategory.title}
+                id={category.id}
+                title={category.title}
                 handleClick={(event) =>
-                  handleClick(event, subCategory.id, subCategory.groupId)
+                  handleClick(event, category.id, category.groupId)
                 }
               />
             );
           })}
-      </Grid>
+        </Grid>
 
-      <Grid
-        container
-        justify="center"
-        spacing={spacing}
-        className={classes.container}
-      >
-        {/* filtering categories and painting */}
-        {allShoppingItems
-          .filter(
-            (shoppingItem) => shoppingItem.subCategoryId === currentSubCategory
-          )
-          .map((shoppingItem) => {
+        <Grid
+          container
+          justify="center"
+          spacing={spacing}
+          className={classes.container}
+        >
+          {/* filtering categories and painting */}
+          {allSubCategories
+            .filter((subCategory) => subCategory.categoryId === currentCategory)
+            .map((subCategory) => {
+              return (
+                <CategoryItem
+                  id={subCategory.id}
+                  title={subCategory.title}
+                  handleClick={(event) =>
+                    handleClick(event, subCategory.id, subCategory.groupId)
+                  }
+                />
+              );
+            })}
+        </Grid>
 
-            return (
-              <ShoppingItem
-                id={shoppingItem.id}
-                title={shoppingItem.title}
-                price={shoppingItem.price}
-                imageUrl={shoppingItem.imageUrl}
-                date={shoppingItem.date}
-                popularity={shoppingItem.popularity}
-                onClick={(event) =>
-                  handleClick(event, shoppingItem.id, shoppingItem.groupId)
-                }
-              />
-            );
-          })}
-      </Grid>
-    </div>
+        <Grid
+          container
+          justify="center"
+          spacing={spacing}
+          className={classes.container}
+        >
+          {a()}
+          {/* filtering categories and painting */}
+          {/* { (isSearchClicked)  ?  searchResult.map(shoppingItem => {
+            return (<ShoppingItem
+            id={shoppingItem.id}
+            title={shoppingItem.title}
+            price={shoppingItem.price}
+            imageUrl={shoppingItem.imageUrl}
+            date={shoppingItem.date}
+            popularity={shoppingItem.popularity}
+            onClick={(event) =>
+              handleClick(event, shoppingItem.id, shoppingItem.groupId)
+            }
+          />)
+          }) :  allShoppingItems
+            .filter(
+              (shoppingItem) =>
+                shoppingItem.subCategoryId === currentSubCategory
+            )
+            .map((shoppingItem) => {
+              return (
+                <ShoppingItem
+                  id={shoppingItem.id}
+                  title={shoppingItem.title}
+                  price={shoppingItem.price}
+                  imageUrl={shoppingItem.imageUrl}
+                  date={shoppingItem.date}
+                  popularity={shoppingItem.popularity}
+                  onClick={(event) =>
+                    handleClick(event, shoppingItem.id, shoppingItem.groupId)
+                  }
+                />
+              );
+            })} */}
+        </Grid>
+      </div>
+    </StylesProvider>
   );
 }
 

@@ -3,5 +3,5 @@ export const initialState = {
     authError: null,
     loggedInUser: null,
   },
-  increment: 0
+  items: [],
 };
