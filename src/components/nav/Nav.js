@@ -101,7 +101,7 @@ function Nav() {
             <span style={{ fontSize: "12px", marginBottom: "3px" }}>
               {loggedInUser.email}
             </span>
-            <Link to="/settings" className={classes.profile}>
+            <Link to="/profile" className={classes.profile}>
               <div>
                 <span style={{ fontSize: "12px" }}>Profile</span>
               </div>
