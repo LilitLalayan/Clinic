@@ -6,12 +6,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles,  makeStyles } from '@material-ui/core/styles';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+
 
 
 const styles = (theme) => ({
@@ -27,6 +28,7 @@ const styles = (theme) => ({
     },
   });
   
+ 
   const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
@@ -81,7 +83,8 @@ const styles = (theme) => ({
             <Typography gutterBottom>
             <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name" />
+          <TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name"/>
+    
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
@@ -90,6 +93,7 @@ const styles = (theme) => ({
             label="Card number"
             fullWidth
             autoComplete="cc-number"
+           
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -103,6 +107,7 @@ const styles = (theme) => ({
             helperText="Last three digits on signature strip"
             fullWidth
             autoComplete="cc-csc"
+           
           />
         </Grid>
         <Grid item xs={12}>
