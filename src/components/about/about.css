@@ -1,0 +1,19 @@
+.carousel-inner {
+    /* display: flex;
+    justify-content: center; */
+    width: 60% !important ;
+    margin: auto !important;
+    height: 550px !important;
+}
+
+.carousel-item {
+    width: 100% !important;
+    margin:  auto;
+    height: 100% !important;
+
+} 
+
+.carousel-img {
+    width: 100% !important;
+    height: 100% !important;
+}
