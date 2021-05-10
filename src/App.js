@@ -8,6 +8,9 @@ import Doctors from "./components/Doctors";
 import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import Shop from "./components/shop/ShoppingItem"
+
+//import StomCard from "./components/shop/StomCard";
 import Profile from "./components/Profile";
 
 // import Implants from "./components/shop/Implants"
@@ -16,7 +19,9 @@ import Profile from "./components/Profile";
 // import Brushes from "./components/shop/Brushes"
 // import Braces from "./components/shop/Braces"
 // import ToothPaste from "./components/shop/ToothPaste"
-// import ShopHome  from "./components/shop/ShopHome"
+
+import ShopHome  from "./components/shop/ShopHome"
+
 
 import {
   BrowserRouter as Router,
@@ -30,6 +35,8 @@ import { SET_LOGGEDIN_USER } from "./actions/actions";
 import { connect, useSelector } from "react-redux";
 import { selectLoggedinUser } from "./reducers/selectors";
 import Booking from "./components/Booking";
+import Basket from "./components/shop/Basket";
+import Payment  from "./components/shop/Payment";
 
 function App({ dispatch }) {
   const loggedInUser = useSelector(selectLoggedinUser);
@@ -69,7 +76,13 @@ function App({ dispatch }) {
             <Route path="/services" component={Services} />
             <Route path="/doctors" component={Doctors} />
             <Route path="/contacts" component={Contacts} />
+            <Route path="/shop" component={Shop} />
             <Route path="/booking" component={Booking} />
+            <Route path="/basket" component={Basket} />
+            <Route path="/payment" component={Payment} />
+            <Route path="/shophome" component={ShopHome}></Route>
+
+
             <Route path="/profile" component={Profile} />
             <Redirect to="/" />
           </Switch>
@@ -81,16 +94,24 @@ function App({ dispatch }) {
             <Route path="/services" component={Services} />
             <Route path="/doctors" component={Doctors} />
             <Route path="/contacts" component={Contacts} />
+            
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
+            <Route path="/basket" component={Basket} />
+            <Route path="/booking" component={Booking} />
+            <Route path="/payment" component={Payment} />
+
 
             {/* <Route path="/implants" component={Implants}></Route>
             <Route path="/toothbrushes" exact component={Brushes}></Route>
             <Route path="/toothpaste" exact component={ToothPaste}></Route>
             <Route path="/prostheses" component={Prostheses}></Route>
             <Route path="/braces" component={Braces}></Route>
+
             <Route path="/inhalers" component={Inhalers}></Route>
             <Route path="/shophome" component={ShopHome}></Route> */}
+
+
 
             <Redirect to="/" />
           </Switch>

@@ -1,3 +1,4 @@
+
 import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -6,11 +7,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
 import { useState, useEffect } from "react";
 import { db, storage } from "..";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { AVAILABLE_ORDER_TIMES } from "../constants/appConstants";
@@ -64,7 +67,15 @@ const useStyles = makeStyles((theme) => ({
     },
     paddingBottom: "10px",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -102,6 +113,7 @@ export default function Booking() {
     doctorsRef.get().then((querySnapShot) => {
       const data = [];
       querySnapShot.forEach((snapShotData) => {
+
         data.push({
           ...(snapShotData.data() || {}),
           id: snapShotData.id,
@@ -110,6 +122,7 @@ export default function Booking() {
       setAllDoctors(data);
     });
   }, []);
+
 
   useEffect(() => {
     const servicesRef = db.collection("services");
@@ -170,6 +183,7 @@ export default function Booking() {
         });
     } catch (error) {}
   };
+
 
   const onOrderDateChange = (event) => {
     setOrderDate(event.target.value);
