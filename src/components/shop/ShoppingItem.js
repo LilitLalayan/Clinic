@@ -21,13 +21,14 @@ import StarIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
 import { StylesProvider } from "@material-ui/core/styles";
 import "./ShopStyles.css"
-import { Link } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
 
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
+    maxWidth: 250,
   },
   media: {
     height: 0,
@@ -78,10 +79,15 @@ export default function ShoppingItem({
   price,
   popularity,
   date,
+  handleItemAddRemove,
+  handleAddToBasket,
+  id,
+  quantity
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const couuntOfStars = +popularity
+  const couuntOfStars = +popularity;
+  
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -112,20 +118,18 @@ export default function ShoppingItem({
             return (<StarIcon />);
           })}
         </Grid>
-        <Typography variant="body2" className={classes.typography}> Added {`${date}`}</Typography>
+        <Typography variant="body2" className={classes.typography}> Added {`${date.toString()}`}</Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Remove">
+        <Typography variant="body2">{""}</Typography>
+        <IconButton aria-label="Remove" onClick={(e) => handleItemAddRemove(e,"decrement",id,imageUrl,title,price)}>
           <RemoveIcon />
         </IconButton>
-        <IconButton aria-label="Add">
+        <IconButton aria-label="Add" onClick={(e) => handleItemAddRemove(e,"increment",id,imageUrl,title,price)}>
           <AddIcon />
         </IconButton>
-        <IconButton aria-label="Add to basket" >
-        <Link to="/basket" style={{ textDecoration: "none" }}>
-           Go to Basket
-        </Link>
-        </IconButton>
+         <Typography variant="body2">{quantity}</Typography> 
+       
       </CardActions>
     </Card>
     </Grid>

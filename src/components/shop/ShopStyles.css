@@ -1,8 +1,49 @@
 .typography {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .MuiCardMedia-root {
-    background-size: 80% !important;
+  background-size: 80% !important;
 }
 
+.MuiTextField-root {
+  border-color: orange !important;
+}
+
+.MuiInputBase-input {
+  border-color: orange !important;
+}
+
+.MuiInput-underline:before {
+  border-color: #60bfe6 !important;
+}
+
+.makeStyles-formControl-47 {
+  margin-bottom: 0 !important;
+  margin-left: 50px !important;
+}
+
+.carousel-inner {
+  /* display: flex;
+    justify-content: center; */
+  width: 100%;
+}
+
+.carousel-item {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.carousel-img {
+  width: 100%;
+}
+
+.basket {
+  width: 80% !important;
+  height: 600px !important;
+}
+
+.MuiDialog-paperWidthSm {
+  width: 80%;
+  height: 600px;
+}

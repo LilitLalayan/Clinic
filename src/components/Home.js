@@ -91,6 +91,11 @@ const useStyles = makeStyles({
 
   title: {
     marginBottom: "40px",
+    color: "white",
+  },
+
+  dentalInnerGrid: {
+    height: "auto",
   },
 
   card: {
@@ -136,36 +141,6 @@ function Home() {
   return (
     <div className="home">
       <ImageSlider />
-
-      <Paper
-        elevation={10}
-        style={{
-          width: "250px",
-          padding: "60px 20px",
-          position: "relative",
-          left: "60%",
-          marginTop: "-140px",
-          zIndex: "1",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography variant="h6" style={{ textAlign: "center" }}>
-          Plan your next visit
-          <Link to="/booking" style={{ textDecoration: "none" }}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={book}
-              style={{ marginTop: "20px" }}
-            >
-              Make an appointment
-            </Button>
-          </Link>
-        </Typography>
-      </Paper>
 
       <Container fixed>
         <Grid container justify="center">
@@ -330,69 +305,25 @@ function Home() {
           );
         })}
       </SliderTransform>
-      <Grid
-        container
-        style={{ marginTop: "200px", background: "#60BFE6", padding: "80px 0" }}
-      >
-        <Grid
-          item
-          sm={6}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography
-            variant="h3"
-            style={{ textAlign: "center", fontWeight: "100" }}
-          >
-            Our Cases <br /> & <br /> Patient Stories
-          </Typography>
-        </Grid>
-
-        <Grid item sm={6}>
-          <Grid container alignItems="center">
-            <Grid item sm={3} style={{ marginLeft: "30px" }}>
-              <img
-                style={{ marginTop: "-60px", marginLeft: "30px" }}
-                className="home__clients-img"
-                src="http://localhost:3000/images/patimages/img1.jpg"
-              />
-            </Grid>
-
-            <Grid item sm={3} style={{ marginLeft: "30px" }}>
-              <img
-                style={{ matrginBottom: "-30px", marginLeft: "30px" }}
-                className="home__clients-img"
-                src="http://localhost:3000/images/patimages/img2.jpg"
-              />
-            </Grid>
-
-            <Grid item sm={3} style={{ marginLeft: "30px" }}>
-              <img
-                style={{ marginTop: "-30px", marginLeft: "30px" }}
-                className="home__clients-img"
-                src="http://localhost:3000/images/patimages/img3.jpg"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
 
       <Container fixed style={{ marginTop: "100px" }}>
-        <Grid container spacing={6} alignItems="center">
-          <Grid item md={6}>
+        <Grid
+          container
+          spacing={6}
+          alignItems="center"
+          className={classes.dentalInnerGrid}
+        >
+          <Grid item md={6} style={{ height: "auto" }}>
             <img
               style={{
-                width: "600px",
-                height: "600px",
+                width: "100%",
+                height: "100%",
                 objectFit: "cover",
                 borderRadius: "50%",
               }}
               className="home__clinic-img"
               src="http://localhost:3000/images/dental-cabinet.jpg"
-              width="50%"
+              width="100%"
             />
           </Grid>
           <Grid
@@ -512,27 +443,32 @@ function Home() {
       </Paper>
 
       <Container fixed style={{ marginTop: "100px" }}>
-        <Grid container spacing={6} alignItems="center">
-          <Grid item md={6}>
+        <Grid
+          container
+          spacing={6}
+          alignItems="center"
+          className={classes.dentalInnerGrid}
+        >
+          <Grid item md={6} style={{ height: "auto" }}>
             <img
               style={{
-                width: "600px",
+                width: "100%",
+                height: "100%",
                 objectFit: "cover",
-                height: "600px",
                 borderRadius: "50%",
               }}
               className="home__clinic-img"
               src="http://localhost:3000/images/dental-cabinet2.jfif"
-              width="50%"
+              width="100%"
             />
           </Grid>
           <Grid
             item
             md={6}
-            style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;" }}
+            style={{ boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px" }}
           >
             <Typography component="h2" variant="h4">
-              Dentist Clinic
+              A Warm Welcome and a Beautiful Smile
             </Typography>
             <br />
             <Typography
@@ -576,6 +512,8 @@ function Home() {
           </Grid>
         </Grid>
       </Container>
+
+      
 
       <Container fixed>
         <Typography

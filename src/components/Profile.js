@@ -3,7 +3,6 @@ import { TextField, Button, makeStyles, withStyles } from "@material-ui/core";
 import { auth, db, storage } from "..";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
-
 import { SET_LOGGEDIN_USER } from "../actions/actions";
 import { selectLoggedinUser } from "../reducers/selectors";
 import EditIcon from "@material-ui/icons/Edit";
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sidebar: {
     width: "20%",
-    height: "92vh",
+    height: "92.3vh",
     backgroundColor: "#60bfe6",
     display: "flex",
     flexDirection: "column",
@@ -43,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-
     width: "90%",
     height: "30vh",
     border: "1px solid #3f51b5",
@@ -55,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
     height: "50vh",
     alignItems: "center",
-
     justifyContent: "center",
     border: "1px solid #3f51b5",
     borderRadius: "3px",
@@ -81,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "17px",
     fontFamily: "sans-serif",
     paddingTop: "10px",
-
   },
   email: {
     display: "flex",
@@ -89,14 +85,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-
   },
   password: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-
   },
   input: {
     marginTop: "10px",
@@ -104,9 +98,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: "10px",
-
     marginBottom: "10px",
-
     width: "90%",
     backgroundColor: "#3f51b5",
     color: "white",
@@ -137,8 +129,7 @@ const styles = (theme) => ({
   },
 });
 
-function Settings() {
-
+function Profile() {
   const loggedInUser = useSelector(selectLoggedinUser);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -296,7 +287,6 @@ function Settings() {
           aria-labelledby="customized-dialog-title"
           open={open}
         >
-
           <DialogTitle id="customized-dialog-title" onClose={handleClose}>
             Change Email
           </DialogTitle>
@@ -397,10 +387,8 @@ function Settings() {
           <div className={classes.orders}>
             <h4
               style={{
-
                 marginTop: "10px",
                 color: "purple",
-
                 textAlign: "center",
                 letterSpacing: "3px",
                 fontFamily: "sans-serif",
@@ -428,4 +416,4 @@ function Settings() {
   );
 }
 
-export default Settings;
+export default Profile;

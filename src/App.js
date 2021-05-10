@@ -8,10 +8,10 @@ import Doctors from "./components/Doctors";
 import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
-import Settings from "./components/Settings";
 import Shop from "./components/shop/ShoppingItem"
 
 //import StomCard from "./components/shop/StomCard";
+import Profile from "./components/Profile";
 
 // import Implants from "./components/shop/Implants"
 // import Prostheses from "./components/shop/Prostheses"
@@ -75,16 +75,15 @@ function App({ dispatch }) {
             <Route path="/about" component={About} />
             <Route path="/services" component={Services} />
             <Route path="/doctors" component={Doctors} />
-
             <Route path="/contacts" component={Contacts} />
             <Route path="/shop" component={Shop} />
             <Route path="/booking" component={Booking} />
-            <Route path="/settings" component={Settings} />
             <Route path="/basket" component={Basket} />
             <Route path="/payment" component={Payment} />
             <Route path="/shophome" component={ShopHome}></Route>
 
 
+            <Route path="/profile" component={Profile} />
             <Redirect to="/" />
           </Switch>
         ) : (

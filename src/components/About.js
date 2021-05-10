@@ -7,9 +7,10 @@ import Slider from './about/slider';
 
 
 
+
 const inlineStyle = {
   right: '42%',
-  top: '18%',
+  top: '14%',
   position: 'absolute',
   color: 'white',
   padding: '20px', 
@@ -30,10 +31,10 @@ const styles= {
 function About() {
   return <div>
       <div className="about">
-      <img src={Aboutus} width="1519" height="200" alt="aboutus" />
-      <div  style={inlineStyle}><h1><strong>ABOUT US</strong></h1></div>
+       <img src={Aboutus} width="100%" height="200" alt="aboutus" />
+         <div  style={inlineStyle}><h1><strong>ABOUT US</strong></h1></div>
       <Card />
-            <div style={{height: 1100}}>
+            <div style={{height: 650}}>
         <Figure style={textStyle}>
          <h1><strong>History</strong></h1>  
          <h4><strong style={styles}>Smile Dental Clinic</strong> is an innovative medicine center, founded in 2015.</h4>
@@ -47,12 +48,14 @@ function About() {
          <p>In 2018, the range of services was enriched with jaw surgery. Despite the large list of plastic surgeries offered, which is constantly expanding according to the needs of our patients, we pay great attention to cooperation with foreign specialists. This type of cooperation opens new opportunities for the citizens and guests of our country.</p>
          <p>Being a customer-oriented company, it is very important for us to provide a safe environment for every client visiting our clinic, perfect insight into the culture of human interaction and fair treatment with the provision of technical and professional qualifications.</p>
         </Figure>
+       
       </div>
-    </div>
+  
+     </div>
         <Slider />
         <Footer />
-  <div> 
- </div> 
+    <div> 
+  </div> 
 </div>;
 }
 
