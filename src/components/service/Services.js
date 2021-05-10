@@ -112,7 +112,7 @@ export default function Services() {
                 <Grid item>
                   <Link to="/booking" style={{ textDecoration: "none" }}>
                     <Button variant="contained" color="primary" onClick={book}>
-                      Book now
+                      Make an appointment
                     </Button>
                   </Link>
                 </Grid>

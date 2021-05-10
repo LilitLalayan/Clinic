@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useState, useEffect } from "react";
-import { db } from "..";
+import { db, storage } from "..";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -18,17 +18,17 @@ import { useSelector } from "react-redux";
 import { selectLoggedinUser } from "../reducers/selectors";
 import "@fontsource/roboto";
 import Snackbar from "@material-ui/core/Snackbar";
-// import Slide from "@material-ui/core/Slide";
 import MuiAlert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(5),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "60px",
+    padding: "30px",
+    height: "80vh",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -36,17 +36,19 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
+    height: "80vh",
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 1),
     color: "white",
-    backgroundColor: "#60BFE6",
+    backgroundColor: "#3f51b5",
     borderRadius: "10px",
+    minWidth: 300,
   },
   formControl: {
-    margin: theme.spacing(3),
-    minWidth: 250,
+    margin: theme.spacing(2),
+    minWidth: 300,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -180,16 +182,19 @@ export default function Booking() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component="main"
+      maxWidth="xs"
+      style={{ backgroundColor: "#3f51b5" }}
+    >
       <CssBaseline />
       <Paper elevation={20}>
         <div className={classes.paper}>
           <Typography
-            component="h1"
-            variant="h4"
-            style={{ textAlign: "left", color: "  #60BFE6" }}
+            variant="h5"
+            style={{ textAlign: "left", color: "#3f51b5" }}
           >
-            Book Now
+            FILL IN THE FORM
           </Typography>
           <br />
           <form className={classes.form} noValidate>
@@ -300,7 +305,7 @@ export default function Booking() {
               }
               onClick={onSubmitOrder}
             >
-              Book Now
+              SUBMIT
             </Button>
             <Link to="/Home">
               <Snackbar
