@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sidebar: {
     width: "20%",
-    height: "92vh",
+    height: "92.3vh",
     backgroundColor: "#60bfe6",
     display: "flex",
     flexDirection: "column",
@@ -129,7 +129,7 @@ const styles = (theme) => ({
   },
 });
 
-function Settings() {
+function Profile() {
   const loggedInUser = useSelector(selectLoggedinUser);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -416,4 +416,4 @@ function Settings() {
   );
 }
 
-export default Settings;
+export default Profile;

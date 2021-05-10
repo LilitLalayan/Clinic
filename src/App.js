@@ -8,7 +8,7 @@ import Doctors from "./components/Doctors";
 import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
-import Settings from "./components/Settings";
+import Profile from "./components/Profile";
 
 // import Implants from "./components/shop/Implants"
 // import Prostheses from "./components/shop/Prostheses"
@@ -68,11 +68,9 @@ function App({ dispatch }) {
             <Route path="/about" component={About} />
             <Route path="/services" component={Services} />
             <Route path="/doctors" component={Doctors} />
-
             <Route path="/contacts" component={Contacts} />
             <Route path="/booking" component={Booking} />
-            <Route path="/settings" component={Settings} />
-
+            <Route path="/profile" component={Profile} />
             <Redirect to="/" />
           </Switch>
         ) : (

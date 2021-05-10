@@ -91,6 +91,7 @@ const useStyles = makeStyles({
 
   title: {
     marginBottom: "40px",
+    color: "white",
   },
 
   card: {
