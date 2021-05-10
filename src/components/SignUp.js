@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { auth, db } from "..";
+import React, { useEffect, useState } from "react";
+import { auth, db, storage } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
 import { useDispatch } from "react-redux";
@@ -21,16 +21,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "5vh",
     marginBottom: "20px",
     width: "60vh",
+    height: "57vh",
     display: "flex",
     justifyContent: "center",
     boxShadow: "0 4px 12px rgb(0 0 0 / 15%)",
   },
 
   Button: {
-    backgroundColor: "#92AAC7",
+    backgroundColor: "#3f51b5",
     width: "45vh",
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 30,
+    color: "white",
   },
   input: {
     width: "45vh",
@@ -50,6 +52,21 @@ function SignUp() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    storage
+      .ref()
+      .child(`smile.jpg`)
+      .getDownloadURL()
+      .then((url) => {
+        setUrl(url);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
+
   const signUp = () => {
     setNameError("");
     setEmailError("");
@@ -94,11 +111,7 @@ function SignUp() {
       }}
     >
       <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <img
-          src="http://localhost:3000/images/smile.jpg"
-          alt="logo"
-          width="100"
-        />
+        <img src={url} alt="logo" width="100" />
       </div>
       <Card className={classes.card}>
         <form className="form" noValidate autoComplete="off">

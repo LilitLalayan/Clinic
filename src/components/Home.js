@@ -17,7 +17,7 @@ import Box from "@material-ui/core/Box";
 import "./contacts/Contacts.css";
 import ContactsSimpleMap from "./contacts/ContactsSimpleMap";
 import CheckIcon from "@material-ui/icons/CheckCircle";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
@@ -30,6 +30,9 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLoggedinUser } from "../reducers/selectors";
 
 const useStyles = makeStyles({
   root: {
@@ -88,6 +91,7 @@ const useStyles = makeStyles({
 
   title: {
     marginBottom: "40px",
+    color: "white",
   },
 
   dentalInnerGrid: {
@@ -124,9 +128,15 @@ const useStyles = makeStyles({
 });
 
 function Home() {
+  const loggedInUser = useSelector(selectLoggedinUser);
   const classes = useStyles();
-
-  console.log(MainSliderImages, "lll");
+  const book = () => {
+    if (loggedInUser) {
+      return;
+    } else {
+      alert("Please sign in!");
+    }
+  };
 
   return (
     <div className="home">
