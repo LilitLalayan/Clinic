@@ -356,7 +356,7 @@ function Contacts() {
         </Typography> */}
           <Paper elevation={10} style={{ padding: "40px" }}>
             <Grid container justify="space-between">
-              <Grid item sm={5}>
+              <Grid item sm={5} xs={12}>
                 <form className={classes.form} noValidate>
                   {/* <Grid item sx={12}>
                       <CssTextField

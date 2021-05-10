@@ -17,19 +17,22 @@ import Box from "@material-ui/core/Box";
 import "./contacts/Contacts.css";
 import ContactsSimpleMap from "./contacts/ContactsSimpleMap";
 import CheckIcon from "@material-ui/icons/CheckCircle";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import SliderTransform from "./slider/SliderTransform";
-import {reviewsSliderData} from "./slider/reviewsSliderData";
+import { reviewsSliderData } from "./slider/reviewsSliderData";
 import Avatar from "@material-ui/core/Avatar";
-import StarIcon from '@material-ui/icons/Star';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import StarIcon from "@material-ui/icons/Star";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLoggedinUser } from "../reducers/selectors";
 
 const useStyles = makeStyles({
   root: {
@@ -58,7 +61,7 @@ const useStyles = makeStyles({
 
   Paper: {
     padding: "40px 10px",
-    marginTop: "80px"
+    marginTop: "80px",
   },
   typography: {
     marginBottom: "40px",
@@ -88,34 +91,36 @@ const useStyles = makeStyles({
 
   title: {
     marginBottom: "40px",
+    color: "white",
+  },
+
+  dentalInnerGrid: {
+    height: "auto",
   },
 
   card: {
     height: "100%",
-    boxShadow: "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;"
+    boxShadow:
+      "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;",
   },
 
   reviewSlideAvatar: {
     marginBottom: "40px",
-    height: "200px"
+    height: "200px",
   },
 
   reviewsSlideRate: {
-    marginBottom: "40px"
+    marginBottom: "40px",
   },
   reviewsSlideName: {
-    marginBottom: "40px"
+    marginBottom: "40px",
   },
 
-  reviewsSlideText: {
-
-  },
+  reviewsSlideText: {},
 
   starIcon: {
-    color: "#00239c"
-  }
-
-
+    color: "#00239c",
+  },
 
   // asdd: {
   //   // backgroundImage: `url("https://image.freepik.com/free-vector/dentist-medical-background-with-3d-tooth-design_1017-26095.jpg")`,
@@ -123,36 +128,19 @@ const useStyles = makeStyles({
 });
 
 function Home() {
+  const loggedInUser = useSelector(selectLoggedinUser);
   const classes = useStyles();
-
-  console.log(MainSliderImages, "lll");
+  const book = () => {
+    if (loggedInUser) {
+      return;
+    } else {
+      alert("Please sign in!");
+    }
+  };
 
   return (
     <div className="home">
-
-      <ImageSlider/>
-
-
-
-      <Paper
-        elevation={10}
-        style={{
-          width: "250px",
-          padding: "60px 20px",
-          position: "relative",
-          left: "60%",
-          marginTop: "-140px",
-          zIndex: "1",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography variant="h5">Plan Your</Typography>
-
-
-      </Paper>
+      <ImageSlider />
 
       <Container fixed>
         <Grid container justify="center">
@@ -234,46 +222,72 @@ function Home() {
         </Grid>
       </Container>
 
+      <SliderTransform width={30} margin="">
+        {reviewsSliderData.map((review) => {
+          return (
+            <div
+              className="reviewsSlideItem"
+              style={{
+                display: "flex",
+                justufyContent: "center",
+                flexDirection: "column",
+                alignItems: "center",
+                flex: "0 0 30%",
+                margin: "2.5%",
+                height: "500px",
+              }}
+            >
+              {" "}
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.reviewSlideAvatar}
+                    image={review.avatar}
+                    title={review.name}
+                  />
+                  <CardContent>
+                    <Typography
+                      align="center"
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                    >
+                      {review.name}
+                    </Typography>
 
-        <SliderTransform width={30} margin="">
-          {reviewsSliderData.map(review => {
-            return (
-            
-              <div className="reviewsSlideItem" style={{
-              display: "flex",
-              justufyContent: "center",
-              flexDirection: "column",
-              alignItems: "center",
-              flex: "0 0 30%",
-              margin: "2.5%",
-              height: "500px" 
-            }}>  <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.reviewSlideAvatar}
-                image={review.avatar}
-                title={review.name}
-              />
-              <CardContent>
-                <Typography align="center" gutterBottom variant="h5" component="h2">
-                  {review.name}
-                </Typography>
+                    <Grid
+                      container
+                      justify="center"
+                      className={classes.reviewsSlideRate}
+                    >
+                      <Grid item xs={1}>
+                        <StarIcon className={classes.starIcon} />
+                      </Grid>
+                      <Grid item xs={1}>
+                        <StarIcon className={classes.starIcon} />
+                      </Grid>
+                      <Grid item xs={1}>
+                        <StarIcon className={classes.starIcon} />
+                      </Grid>
+                      <Grid item xs={1}>
+                        <StarIcon className={classes.starIcon} />
+                      </Grid>
+                      <Grid item xs={1}>
+                        <StarIcon className={classes.starIcon} />
+                      </Grid>
+                    </Grid>
 
-                <Grid container justify="center" className={classes.reviewsSlideRate}>
-                  <Grid item xs={1}><StarIcon className={classes.starIcon}/></Grid>
-                  <Grid item xs={1}><StarIcon className={classes.starIcon}/></Grid>
-                  <Grid item xs={1}><StarIcon className={classes.starIcon}/></Grid>
-                  <Grid item xs={1}><StarIcon className={classes.starIcon}/></Grid>
-                  <Grid item xs={1}><StarIcon className={classes.starIcon}/></Grid>
-                </Grid>
-
-                <Typography align="center" variant="body2" color="textSecondary" component="p">
-                 {review.text}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-           
-          </Card>
+                    <Typography
+                      align="center"
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {review.text}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
               {/* <Avatar className={classes.reviewsSlideAvatar} src={review.avatar} variant="rounded"></Avatar>
               <Typography align="center" variant="h5" className={classes.reviewsSlideName}>{review.name}</Typography>
              
@@ -288,72 +302,35 @@ function Home() {
               <Typography align="center" variant="body1" className="reviewsSlideText">{review.text}</Typography>
              */}
             </div>
-            
-            
-            )
-          })}
-          
-        </SliderTransform>
-      <Grid
-        container
-        style={{ marginTop: "200px", background: "#60BFE6", padding: "80px 0" }}
-      >
-        <Grid
-          item
-          sm={6}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography
-            variant="h3"
-            style={{ textAlign: "center", fontWeight: "100" }}
-          >
-            Our Cases <br /> & <br /> Patient Stories
-          </Typography>
-        </Grid>
-
-        <Grid item sm={6} >
-          <Grid container alignItems="center">
-            <Grid item sm={3} style={{ marginLeft: "30px" }}>
-              <img
-                style={{ marginTop: "-60px", marginLeft: "30px" }}
-                className="home__clients-img"
-                src="http://localhost:3000/images/patimages/img1.jpg"
-              />
-            </Grid>
-
-            <Grid item sm={3} style={{ marginLeft: "30px" }}>
-              <img
-                style={{ matrginBottom: "-30px", marginLeft: "30px" }}
-                className="home__clients-img"
-                src="http://localhost:3000/images/patimages/img2.jpg"
-              />
-            </Grid>
-
-            <Grid item sm={3} style={{ marginLeft: "30px" }}>
-              <img
-                style={{ marginTop: "-30px", marginLeft: "30px" }}
-                className="home__clients-img"
-                src="http://localhost:3000/images/patimages/img3.jpg"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+          );
+        })}
+      </SliderTransform>
 
       <Container fixed style={{ marginTop: "100px" }}>
-        <Grid container spacing={6} alignItems="center">
-          <Grid item md={6}>
-            <img style={{width: "600px", height: "600px", objectFit: "cover",borderRadius: "50%"}}
+        <Grid
+          container
+          spacing={6}
+          alignItems="center"
+          className={classes.dentalInnerGrid}
+        >
+          <Grid item md={6} style={{ height: "auto" }}>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
               className="home__clinic-img"
               src="http://localhost:3000/images/dental-cabinet.jpg"
-              width="50%"
+              width="100%"
             />
           </Grid>
-          <Grid item md={6} style={{boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px"}}>
+          <Grid
+            item
+            md={6}
+            style={{ boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px" }}
+          >
             <Typography component="h2" variant="h4">
               A Warm Welcome and a Beautiful Smile
             </Typography>
@@ -466,17 +443,32 @@ function Home() {
       </Paper>
 
       <Container fixed style={{ marginTop: "100px" }}>
-        <Grid container spacing={6} alignItems="center">
-          <Grid item md={6}>
-            <img style={{width: "600px",objectFit:"cover",height: "600px",borderRadius: "50%"}}
+        <Grid
+          container
+          spacing={6}
+          alignItems="center"
+          className={classes.dentalInnerGrid}
+        >
+          <Grid item md={6} style={{ height: "auto" }}>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
               className="home__clinic-img"
               src="http://localhost:3000/images/dental-cabinet2.jfif"
-              width="50%"
+              width="100%"
             />
           </Grid>
-          <Grid item md={6} style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;"}}>
+          <Grid
+            item
+            md={6}
+            style={{ boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px" }}
+          >
             <Typography component="h2" variant="h4">
-              Dentist Clinic
+              A Warm Welcome and a Beautiful Smile
             </Typography>
             <br />
             <Typography
@@ -521,8 +513,13 @@ function Home() {
         </Grid>
       </Container>
 
+      
+
       <Container fixed>
-        <Typography variant="h3" style={{ textAlign: "center",marginBottom:"80px" }}>
+        <Typography
+          variant="h3"
+          style={{ textAlign: "center", marginBottom: "80px" }}
+        >
           Find Us
         </Typography>
         <Grid container>
@@ -535,7 +532,6 @@ function Home() {
     </div>
   );
 }
-
 
 <Container></Container>;
 

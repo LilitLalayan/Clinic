@@ -32,7 +32,6 @@ export default function Doctors() {
   const loggedInUser = useSelector(selectLoggedinUser);
   const [allDocotors, setAllDoctors] = useState([]);
 
-  console.log(allDocotors, 1);
   useEffect(() => {
     // retrieving doctors data from firebase-database
     const doctorsRef = db.collection("doctors");

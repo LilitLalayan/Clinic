@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,6 +10,7 @@ import { Link } from "react-router-dom";
 import { db } from "../../index";
 import Service from "./Service";
 import { useSelector } from "react-redux";
+
 import { selectLoggedinUser } from "../../reducers/selectors";
 
 function Copyright() {
@@ -61,6 +63,7 @@ const cards = [1, 2, 3, 4, 5, 6];
 export default function Services() {
   const classes = useStyles();
   const [services, setServices] = useState([]);
+
   const loggedInUser = useSelector(selectLoggedinUser);
   useEffect(() => {
     const servicesRef = db.collection("services");
@@ -109,10 +112,21 @@ export default function Services() {
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
+
+              <Grid item>
+
+            <Link to="/booking" style={{ textDecoration: "none" }}>
+             <Button variant="contained" color="primary">
+                 Book now
+             </Button>
+            </Link>
+
+                </Grid>
+
                 <Grid item>
                   <Link to="/booking" style={{ textDecoration: "none" }}>
                     <Button variant="contained" color="primary" onClick={book}>
-                      Book now
+                      Make an appointment
                     </Button>
                   </Link>
                 </Grid>
@@ -160,7 +174,7 @@ export default function Services() {
         </div>
         <Copyright />
       </footer>
-      {/* End footer */}
+        {/* End footer */}
     </React.Fragment>
   );
 }

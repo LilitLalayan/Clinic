@@ -3,4 +3,5 @@ export const initialState = {
     authError: null,
     loggedInUser: null,
   },
+  items: [],
 };
