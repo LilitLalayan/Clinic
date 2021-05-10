@@ -1,111 +1,206 @@
-import React, { useState } from "react";
-import { TextField, Button, makeStyles } from "@material-ui/core";
-import { auth } from "..";
+import React, { useEffect, useState } from "react";
+import { TextField, Button, makeStyles, withStyles } from "@material-ui/core";
+import { auth, db, storage } from "..";
 import firebase from "firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_LOGGEDIN_USER } from "../actions/actions";
 import { selectLoggedinUser } from "../reducers/selectors";
 import EditIcon from "@material-ui/icons/Edit";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import "../styles/profile.css";
+import Dialog from "@material-ui/core/Dialog";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import Typography from "@material-ui/core/Typography";
+import FilterVintageIcon from "@material-ui/icons/FilterVintage";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "20vh",
-    outline: "none",
-  },
-
   container: {
     display: "flex",
     width: "100%",
   },
-  info: {
-    paddingTop: "20px",
-    display: "flex",
-    flexDirection: "column",
+  sidebar: {
     width: "20%",
-    backgroundColor: "#92AAC7",
-    alignItems: "center",
-    height: "100vh",
-  },
-  wrapper: {
+    height: "92vh",
+    backgroundColor: "#60bfe6",
     display: "flex",
     flexDirection: "column",
-    width: "80%",
-    height: "100vh",
     alignItems: "center",
+    borderTop: "1px solid white",
   },
-  settings: {
-    marginTop: "20px",
+
+  info: {
     display: "flex",
-    border: "2px solid #2D4262",
-    borderRadius: "5px",
+    flexDirection: "column",
     width: "90%",
-    height: "40vh",
+    height: "90vh",
     alignItems: "center",
     justifyContent: "space-around",
-    [theme.breakpoints.down(900)]: {
-      flexDirection: "column",
-      height: "80vh",
-    },
+  },
+  carousel: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    width: "90%",
+    height: "30vh",
+    border: "1px solid #3f51b5",
+    borderRadius: "3px",
+  },
+  history: {
+    display: "flex",
+    flexDirection: "column",
+    width: "90%",
+    height: "50vh",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid #3f51b5",
+    borderRadius: "3px",
+    opacity: "0.7",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  },
+  orders: {
+    width: "70%",
+    height: "35vh",
+    backgroundColor: "white",
+    borderRadius: "3px",
+    border: "1px solid #3f51b5",
+  },
+  allorders: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    overflow: "scroll",
+    height: "25vh",
+    marginTop: "20px",
+    color: "#3f51b5",
+    fontSize: "17px",
+    fontFamily: "sans-serif",
+    paddingTop: "10px",
   },
   email: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "30%",
-    [theme.breakpoints.down(900)]: {
-      width: "70%",
-    },
+    width: "100%",
   },
   password: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "30%",
-    [theme.breakpoints.down(900)]: {
-      width: "70%",
-    },
-  },
-  h6: {
-    color: "#2D4262",
-    letterSpacing: "3px",
   },
   input: {
     marginTop: "10px",
-    width: "100%",
+    width: "90%",
   },
   button: {
     marginTop: "10px",
-    width: "100%",
-    backgroundColor: "#92AAC7",
+    marginBottom: "10px",
+    width: "90%",
+    backgroundColor: "#3f51b5",
     color: "white",
   },
-  history: {
-    marginTop: "20px",
-    border: "2px solid #2D4262",
-    borderRadius: "5px",
-    width: "90%",
-    height: "40vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  tooth: {
-    display: "flex",
-    justifyContent: "flex-end",
-    marginBottom: "5px",
+  icon: {
+    color: "white",
+    fontSize: "200px",
+    [theme.breakpoints.down(950)]: {
+      fontSize: "150px",
+    },
+    [theme.breakpoints.down(670)]: {
+      fontSize: "100px",
+    },
   },
 }));
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+    width: "50vh",
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
 
 function Settings() {
   const loggedInUser = useSelector(selectLoggedinUser);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-  const [currentPassword2, setCurrentPassword2] = useState("");
+  const [orders, setOrders] = useState([]);
+  const [services, setServices] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    storage
+      .ref()
+      .child(`ProfilePage/3601715.jpg`)
+      .getDownloadURL()
+      .then((url) => {
+        setUrl(url);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const DialogTitle = withStyles(styles)((props) => {
+    const { children, classes, onClose, ...other } = props;
+    return (
+      <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        <Typography variant="h6">{children}</Typography>
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={onClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </MuiDialogTitle>
+    );
+  });
+
+  useEffect(() => {
+    const servicesRef = db.collection("services");
+    servicesRef.get().then((querySnapShot) => {
+      const data = [];
+      querySnapShot.forEach((s) => {
+        data.push({
+          ...(s.data() || {}),
+          id: s.id,
+        });
+      });
+      setServices(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    const ordersRef = db.collection("orders");
+    ordersRef.get().then((querySnapShot) => {
+      const data = [];
+      querySnapShot.forEach((order) => {
+        data.push(order.data());
+      });
+      setOrders(data.filter((o) => o.userId === loggedInUser.uid));
+    });
+  }, []);
 
   const reauthenticate = (currentPassword) => {
     const user = auth.currentUser;
@@ -117,7 +212,7 @@ function Settings() {
     return user.reauthenticateWithCredential(cred);
   };
   const changeEmail = () => {
-    reauthenticate(currentPassword2)
+    reauthenticate(currentPassword)
       .then(() => {
         const user = auth.currentUser;
 
@@ -125,7 +220,6 @@ function Settings() {
           .updateEmail(newEmail)
           .then(function () {
             alert("You have successfully changed your email");
-            console.log(user);
             dispatch({
               type: SET_LOGGEDIN_USER,
               user: {
@@ -133,28 +227,9 @@ function Settings() {
                 email: newEmail,
               },
             });
-            setCurrentPassword2("");
-            setNewEmail("");
-          })
-          .catch(function (error) {
-            alert(error.message);
-          });
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
-
-  const changePassword = () => {
-    reauthenticate(currentPassword)
-      .then(() => {
-        const user = auth.currentUser;
-        user
-          .updatePassword(newPassword)
-          .then(function () {
-            alert("You have successfully changed your password");
             setCurrentPassword("");
-            setNewPassword("");
+            setNewEmail("");
+            handleClose();
           })
           .catch(function (error) {
             alert(error.message);
@@ -167,52 +242,56 @@ function Settings() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.info}>
-        <img
-          alt="icon"
-          src="http://localhost:3000/images/PikPng.png"
-          width="60%"
-        />
-        <h1
+      <div className={classes.sidebar}>
+        <AccountCircleIcon className={classes.icon} />
+        <h2
           style={{
-            color: "white",
-            fontSize: "30px",
-            marginTop: "10px",
             fontFamily: "sans-serif",
+            color: "white",
+            fontSize: "25px",
             width: "80%",
             textAlign: "center",
           }}
         >
           {loggedInUser.info.fullName}
-        </h1>
-        <h5
+        </h2>
+        <div
           style={{
-            color: "white",
-            marginTop: "10px",
-            fontFamily: "sans-serif",
+            display: "flex",
+            width: "90%",
+            justifyContent: "center",
           }}
         >
-          {loggedInUser.email}
-        </h5>
-        <p
-          style={{
-            color: "white",
-            opacity: "0.7",
-            textAlign: "center",
-            width: "80%",
-            marginTop: "10px",
-          }}
+          <p
+            style={{
+              fontFamily: "sans-serif",
+              color: "#3f51b5",
+              marginRight: "5px",
+            }}
+          >
+            {loggedInUser.email}
+          </p>
+          <span>
+            <EditIcon
+              style={{
+                color: "#3f51b5",
+                fontSize: "20",
+                cursor: "pointer",
+              }}
+              onClick={handleClickOpen}
+            />
+          </span>
+        </div>
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
         >
-          This is your year to smile bright!
-        </p>
-      </div>
-      <div className={classes.wrapper}>
-        <div className={classes.settings}>
+          <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+            Change Email
+          </DialogTitle>
+
           <div className={classes.email}>
-            <div style={{ display: "flex" }}>
-              <h6 className={classes.h6}>CHANGE EMAIL</h6>
-              <EditIcon color="primary" />
-            </div>
             <TextField
               className={classes.input}
               id="outlined-basic"
@@ -220,9 +299,9 @@ function Settings() {
               type="password"
               variant="outlined"
               size="small"
-              value={currentPassword2}
+              value={currentPassword}
               onChange={(e) => {
-                setCurrentPassword2(e.target.value);
+                setCurrentPassword(e.target.value);
               }}
             />
             <TextField
@@ -236,7 +315,6 @@ function Settings() {
                 setNewEmail(e.target.value);
               }}
             />
-
             <Button
               className={classes.button}
               variant="outlined"
@@ -245,66 +323,92 @@ function Settings() {
               Change
             </Button>
           </div>
-          <div className={classes.password}>
-            <div style={{ display: "flex" }}>
-              <h6 className={classes.h6}>CHANGE PASSWORD</h6>
-              <EditIcon color="primary" />
-            </div>
-            <TextField
-              className={classes.input}
-              id="outlined-basic"
-              label="Enter current password"
-              variant="outlined"
-              type="password"
-              size="small"
-              value={currentPassword}
-              onChange={(e) => {
-                setCurrentPassword(e.target.value);
-              }}
-            />
-            <TextField
-              className={classes.input}
-              id="outlined-basic"
-              label="Enter new password"
-              variant="outlined"
-              type="password"
-              size="small"
-              value={newPassword}
-              onChange={(e) => {
-                setNewPassword(e.target.value);
-              }}
-            />
+        </Dialog>
 
-            <Button
-              className={classes.button}
-              variant="outlined"
-              onClick={changePassword}
-            >
-              Change
-            </Button>
+        <p
+          style={{
+            fontFamily: "sans-serif",
+            color: "white",
+            marginTop: "40px",
+            width: "70%",
+            textAlign: "center",
+            letterSpacing: "3px",
+          }}
+        >
+          This is your year to smile bright!
+        </p>
+        <FilterVintageIcon style={{ color: "white", fontSize: "50" }} />
+      </div>
+      <div className={classes.info}>
+        <div className={classes.carousel}>
+          <div className="content-slider">
+            <div className="slider">
+              <div className="mask">
+                <ul>
+                  <li className="anim1">
+                    <div className="quote">
+                      The average person spends 38 days brushing their teeth
+                      during their lifetime.
+                    </div>
+                  </li>
+                  <li className="anim2">
+                    <div className="quote">
+                      Tooth enamel is the hardest part of the entire body; even
+                      harder than bone.
+                    </div>
+                  </li>
+                  <li className="anim3">
+                    <div className="quote">
+                      One third of your teeth are underneath your gums.
+                    </div>
+                  </li>
+                  <li className="anim4">
+                    <div className="quote">
+                      No two people have the same set of teeth; they are as
+                      unique as your fingerprint.
+                    </div>
+                  </li>
+                  <li className="anim5">
+                    <div className="quote">
+                      Teeth are the only part of the human body that can’t
+                      repair itself. They are coated in enamel, which is not a
+                      living tissue.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-        <div className={classes.history}>
-          <div>
+        <div
+          className={classes.history}
+          style={{ backgroundImage: `url(${url})` }}
+        >
+          <div className={classes.orders}>
             <h4
               style={{
-                color: "#2D4262",
-                letterSpacing: "3px",
+                marginTop: "10px",
+                color: "purple",
                 textAlign: "center",
+                letterSpacing: "3px",
+                fontFamily: "sans-serif",
               }}
             >
-              BOOKING HISTORY
+              History of ordered services
             </h4>
-            <p style={{ textAlign: "center", color: "#006C84" }}>
-              nothing to show
-            </p>
-          </div>
-          <div className={classes.tooth}>
-            <img
-              alt="icon"
-              src="http://localhost:3000/images/kisspng-tooth.png"
-              width="5%"
-            />
+            <div className={classes.allorders}>
+              {orders
+                ? orders.map((o, index) => {
+                    const s = services.filter((s) => s.id === o.serviceId);
+                    o.name = s[0].name;
+                    return (
+                      <p key={index}>{`${o.date.toDate().toDateString()}, ${
+                        o.name
+                      }`}</p>
+                    );
+                  })
+                : "Nothing to show"}
+            </div>
           </div>
         </div>
       </div>

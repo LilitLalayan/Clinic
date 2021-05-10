@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     height: "23vh",
     zIndex: "2",
-    backgroundColor: "#92AAC7",
-    color: "white",
+    backgroundColor: "white",
+    color: "gray",
     borderRadius: "3px",
     paddingTop: "5px",
     textAlign: "center",
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    border: "1px solid gray",
   },
   disappear: {
     display: "none",
@@ -40,11 +41,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   profile: {
-    color: "white",
+    color: "gray",
 
     "&:hover": {
       textDecoration: "none",
-      color: "white",
+      color: "gray",
     },
   },
 }));
@@ -107,7 +108,7 @@ function Nav() {
             </Link>
             <hr
               style={{
-                border: "1px solid white",
+                border: "1px solid gray",
                 opacity: "0.5",
                 margin: 0,
                 marginTop: "15px",

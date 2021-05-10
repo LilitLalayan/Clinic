@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { auth } from "..";
+import React, { useEffect, useState } from "react";
+import { auth, storage } from "..";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Card } from "@material-ui/core";
 import { useDispatch } from "react-redux";
@@ -22,15 +22,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "5vh",
     marginBottom: "20px",
     width: "60vh",
+    height: "50vh",
     display: "flex",
     justifyContent: "center",
     boxShadow: "0 4px 12px rgb(0 0 0 / 15%)",
   },
 
   Button: {
-    backgroundColor: "#92AAC7",
+    marginTop: "20px",
+    backgroundColor: "#3f51b5",
     width: "45vh",
     marginBottom: 10,
+    color: "white",
   },
 
   firstInput: {
@@ -42,11 +45,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
   },
   signUp: {
-    color: "#92AAC7",
+    color: "#3f51b5",
     fontWeight: "bold",
     "&:hover": {
       textDecoration: "none",
-      color: "#7DA3A1",
+      color: "#3f51b5",
     },
   },
   span: {
@@ -61,6 +64,20 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    storage
+      .ref()
+      .child(`smile.jpg`)
+      .getDownloadURL()
+      .then((url) => {
+        setUrl(url);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
 
   const signIn = () => {
     if (!email) {
@@ -105,11 +122,7 @@ function SignIn() {
       }}
     >
       <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <img
-          src="http://localhost:3000/images/smile.jpg"
-          alt="logo"
-          width="100"
-        />
+        <img src={url} alt="logo" width="100" />
       </div>
       <Card className={classes.card}>
         <form className="formControl" noValidate autoComplete="off">
