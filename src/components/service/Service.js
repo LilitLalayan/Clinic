@@ -53,11 +53,11 @@ const Service = ({ service, index }) => {
     .child(`/servicesImg/ServiceImg${index}.jpg`)
     .getDownloadURL()
     .then((url) => {
-      // `url` is the download URL for 'images/stars.jpg'
+    
       setUrl(url);
     })
     .catch((error) => {
-      // Handle any errors
+    
     });
 
   useEffect(async () => {
@@ -66,13 +66,7 @@ const Service = ({ service, index }) => {
       const res = d.map((d) => d.data());
       console.log(res);
       setDoctors(res);
-      //service.doctors[0].get().then(d => {
-      //     console.log(d.data())
-      // })
-
-      //const d = await Promise.all(service.doctors.map(d => d.get()))
-      //console.log(d)
-      // setDoctors(d.map(d => d.data()))
+  
     }
   }, [service]);
 

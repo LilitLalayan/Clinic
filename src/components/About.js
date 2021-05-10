@@ -26,6 +26,7 @@ const styles= {
   color: 'blue',
 };
 
+
 function About() {
   return <div>
       <div className="about">
@@ -48,12 +49,13 @@ function About() {
         </Figure>
       </div>
     </div>
-        < Slider />
+        <Slider />
         <Footer />
   <div> 
  </div> 
 </div>;
 }
+
 
 export default About;
 
