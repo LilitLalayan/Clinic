@@ -28,7 +28,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
+    maxWidth: 250,
   },
   media: {
     height: 0,
@@ -82,7 +82,7 @@ export default function ShoppingItem({
   handleItemAddRemove,
   handleAddToBasket,
   id,
-  tmpItemCount
+  quantity
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -121,18 +121,15 @@ export default function ShoppingItem({
         <Typography variant="body2" className={classes.typography}> Added {`${date.toString()}`}</Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Typography variant="body2">{tmpItemCount}</Typography>
-        <IconButton aria-label="Remove" onClick={(e) => handleItemAddRemove(e,"decrement",id)}>
+        <Typography variant="body2">{""}</Typography>
+        <IconButton aria-label="Remove" onClick={(e) => handleItemAddRemove(e,"decrement",id,imageUrl,title,price)}>
           <RemoveIcon />
         </IconButton>
-        <IconButton aria-label="Add" onClick={(e) => handleItemAddRemove(e,"increment",id)}>
+        <IconButton aria-label="Add" onClick={(e) => handleItemAddRemove(e,"increment",id,imageUrl,title,price)}>
           <AddIcon />
         </IconButton>
-
-        <IconButton aria-label="Add to basket" onClick={(e) => handleAddToBasket(e,id)}>
-          Add To Basket
-
-        </IconButton>
+         <Typography variant="body2">{quantity}</Typography> 
+       
       </CardActions>
     </Card>
     </Grid>

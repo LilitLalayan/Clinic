@@ -39,8 +39,8 @@ function CategoryItem({id,title,handleClick}) {
 
 
   return (
-    <Grid item xs={2}>
-      <Card className={classes.root} onClick={handleClick}>
+    <Grid item xs={3}>
+      <Card className={classes.root} onClick={handleClick} elevation="4">
         <CardActionArea>
           <CardMedia
             className={classes.media}
