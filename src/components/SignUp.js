@@ -102,90 +102,94 @@ function SignUp() {
   };
 
   return (
-    <div
-      className={classes.signinForm}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          signUp();
-        }
-      }}
-    >
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <img src={url} alt="logo" width="100" />
-      </div>
-      <Card className={classes.card}>
-        <form className="form" noValidate autoComplete="off">
-          <h1 style={{ color: "gray" }}>Sign up</h1>
-          <TextField
-            autoComplete="off"
-            required
-            className={classes.firstInput}
-            type="text"
-            label="Full Name"
-            size="small"
-            value={name}
-            helperText={nameError}
-            error={nameError ? true : false}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-          <br />
-
-          <TextField
-            autoComplete="email"
-            required
-            className={classes.input}
-            name="email"
-            label="Email"
-            size="small"
-            value={email}
-            helperText={emailError}
-            error={emailError ? true : false}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <br />
-
-          <TextField
-            autoComplete="off"
-            required
-            className={classes.input}
-            type="password"
-            label="Password"
-            size="small"
-            value={password}
-            helperText={passwordError}
-            error={passwordError ? true : false}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <br />
-
-          <div className="Btn">
-            <Button
-              className={classes.Button}
-              variant="outlined"
-              onClick={signUp}
-            >
-              Sign Up
-            </Button>
+    <>
+      {url && (
+        <div
+          className={classes.signinForm}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              signUp();
+            }
+          }}
+        >
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <img src={url} alt="logo" width="100" />
           </div>
-        </form>
-      </Card>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <CopyrightIcon fontSize="small" />
-        <span>{new Date().getFullYear()}</span>
-      </div>
-    </div>
+          <Card className={classes.card}>
+            <form className="form" noValidate autoComplete="off">
+              <h1 style={{ color: "gray" }}>Sign up</h1>
+              <TextField
+                autoComplete="off"
+                required
+                className={classes.firstInput}
+                type="text"
+                label="Full Name"
+                size="small"
+                value={name}
+                helperText={nameError}
+                error={nameError ? true : false}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <br />
+
+              <TextField
+                autoComplete="email"
+                required
+                className={classes.input}
+                name="email"
+                label="Email"
+                size="small"
+                value={email}
+                helperText={emailError}
+                error={emailError ? true : false}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <br />
+
+              <TextField
+                autoComplete="off"
+                required
+                className={classes.input}
+                type="password"
+                label="Password"
+                size="small"
+                value={password}
+                helperText={passwordError}
+                error={passwordError ? true : false}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <br />
+
+              <div className="Btn">
+                <Button
+                  className={classes.Button}
+                  variant="outlined"
+                  onClick={signUp}
+                >
+                  Sign Up
+                </Button>
+              </div>
+            </form>
+          </Card>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <CopyrightIcon fontSize="small" />
+            <span>{new Date().getFullYear()}</span>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

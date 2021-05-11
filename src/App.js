@@ -8,7 +8,7 @@ import Doctors from "./components/Doctors";
 import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
-import Shop from "./components/shop/ShoppingItem"
+import Shop from "./components/shop/ShoppingItem";
 
 //import StomCard from "./components/shop/StomCard";
 import Profile from "./components/Profile";
@@ -20,8 +20,7 @@ import Profile from "./components/Profile";
 // import Braces from "./components/shop/Braces"
 // import ToothPaste from "./components/shop/ToothPaste"
 
-import ShopHome  from "./components/shop/ShopHome"
-
+import ShopHome from "./components/shop/ShopHome";
 
 import {
   BrowserRouter as Router,
@@ -29,17 +28,21 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { Snackbar } from "@material-ui/core";
+import { LinearProgress, Snackbar } from "@material-ui/core";
 import { auth, db } from ".";
 import { SET_LOGGEDIN_USER } from "./actions/actions";
 import { connect, useSelector } from "react-redux";
-import { selectLoggedinUser } from "./reducers/selectors";
+import {
+  selectIsAuthenticating,
+  selectLoggedinUser,
+} from "./reducers/selectors";
 import Booking from "./components/Booking";
 import Basket from "./components/shop/Basket";
-import Payment  from "./components/shop/Payment";
+import Payment from "./components/shop/Payment";
 
 function App({ dispatch }) {
   const loggedInUser = useSelector(selectLoggedinUser);
+  const isAuthenticating = useSelector(selectIsAuthenticating);
   const onAuthStateChanged = async (user) => {
     const userData = user ? { email: user.email, uid: user.uid } : user;
     if (userData) {
@@ -56,7 +59,9 @@ function App({ dispatch }) {
   useEffect(() => {
     auth.onAuthStateChanged(onAuthStateChanged);
   }, []);
-
+  if (isAuthenticating) {
+    return <LinearProgress />;
+  }
   return (
     <Router>
       <div className="App">
@@ -81,8 +86,6 @@ function App({ dispatch }) {
             <Route path="/basket" component={Basket} />
             <Route path="/payment" component={Payment} />
             <Route path="/shophome" component={ShopHome}></Route>
-
-
             <Route path="/profile" component={Profile} />
             <Redirect to="/" />
           </Switch>
@@ -94,13 +97,10 @@ function App({ dispatch }) {
             <Route path="/services" component={Services} />
             <Route path="/doctors" component={Doctors} />
             <Route path="/contacts" component={Contacts} />
-            
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
             <Route path="/basket" component={Basket} />
-            <Route path="/booking" component={Booking} />
             <Route path="/payment" component={Payment} />
-
 
             {/* <Route path="/implants" component={Implants}></Route>
             <Route path="/toothbrushes" exact component={Brushes}></Route>
@@ -110,8 +110,6 @@ function App({ dispatch }) {
 
             <Route path="/inhalers" component={Inhalers}></Route>
             <Route path="/shophome" component={ShopHome}></Route> */}
-
-
 
             <Redirect to="/" />
           </Switch>

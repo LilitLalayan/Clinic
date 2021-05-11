@@ -1,2 +1,2 @@
 export const selectLoggedinUser = (state) => state.auth.loggedInUser;
-export const selectAuthError = (state) => state.auth.authError;
+export const selectIsAuthenticating = (state) => state.auth.isAuthenticating;

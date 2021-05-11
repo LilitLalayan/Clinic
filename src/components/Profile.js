@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sidebar: {
     width: "20%",
-    height: "92.3vh",
+    height: "92.4vh",
     backgroundColor: "#60bfe6",
     display: "flex",
     flexDirection: "column",
@@ -113,6 +113,11 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "100px",
     },
   },
+  dialog: {
+    height: "50vh",
+    width: "70vh",
+    margin: "auto",
+  },
 }));
 
 const styles = (theme) => ({
@@ -136,7 +141,6 @@ function Profile() {
   const [newEmail, setNewEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [orders, setOrders] = useState([]);
-  const [services, setServices] = useState([]);
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState("");
 
@@ -178,20 +182,6 @@ function Profile() {
   });
 
   useEffect(() => {
-    const servicesRef = db.collection("services");
-    servicesRef.get().then((querySnapShot) => {
-      const data = [];
-      querySnapShot.forEach((s) => {
-        data.push({
-          ...(s.data() || {}),
-          id: s.id,
-        });
-      });
-      setServices(data);
-    });
-  }, []);
-
-  useEffect(() => {
     const ordersRef = db.collection("orders");
     ordersRef.get().then((querySnapShot) => {
       const data = [];
@@ -200,11 +190,10 @@ function Profile() {
       });
       setOrders(data.filter((o) => o.userId === loggedInUser.uid));
     });
-  }, []);
+  }, [loggedInUser.uid]);
 
   const reauthenticate = (currentPassword) => {
     const user = auth.currentUser;
-
     const cred = firebase.auth.EmailAuthProvider.credential(
       user.email,
       currentPassword
@@ -215,7 +204,6 @@ function Profile() {
     reauthenticate(currentPassword)
       .then(() => {
         const user = auth.currentUser;
-
         user
           .updateEmail(newEmail)
           .then(function () {
@@ -283,6 +271,7 @@ function Profile() {
           </span>
         </div>
         <Dialog
+          className={classes.dialog}
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={open}
@@ -380,37 +369,37 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div
-          className={classes.history}
-          style={{ backgroundImage: `url(${url})` }}
-        >
-          <div className={classes.orders}>
-            <h4
-              style={{
-                marginTop: "10px",
-                color: "purple",
-                textAlign: "center",
-                letterSpacing: "3px",
-                fontFamily: "sans-serif",
-              }}
-            >
-              History of ordered services
-            </h4>
-            <div className={classes.allorders}>
-              {orders
-                ? orders.map((o, index) => {
-                    const s = services.filter((s) => s.id === o.serviceId);
-                    o.name = s[0].name;
-                    return (
-                      <p key={index}>{`${o.date.toDate().toDateString()}, ${
-                        o.name
-                      }`}</p>
-                    );
-                  })
-                : "Nothing to show"}
+        {url && (
+          <div
+            className={classes.history}
+            style={{ backgroundImage: `url(${url})` }}
+          >
+            <div className={classes.orders}>
+              <h4
+                style={{
+                  marginTop: "10px",
+                  color: "purple",
+                  textAlign: "center",
+                  letterSpacing: "3px",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                History of ordered services
+              </h4>
+              <div className={classes.allorders}>
+                {orders
+                  ? orders.map((o, index) => {
+                      return (
+                        <p key={index}>{`${o.date.toDate().toDateString()}, ${
+                          o.serviceName
+                        }, ${o.doctorName}`}</p>
+                      );
+                    })
+                  : "Nothing to show"}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
