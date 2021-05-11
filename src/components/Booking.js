@@ -1,4 +1,3 @@
-
 import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,13 +6,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
 import { useState, useEffect } from "react";
 import { db, storage } from "..";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { AVAILABLE_ORDER_TIMES } from "../constants/appConstants";
@@ -76,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -113,7 +109,6 @@ export default function Booking() {
     doctorsRef.get().then((querySnapShot) => {
       const data = [];
       querySnapShot.forEach((snapShotData) => {
-
         data.push({
           ...(snapShotData.data() || {}),
           id: snapShotData.id,
@@ -122,7 +117,6 @@ export default function Booking() {
       setAllDoctors(data);
     });
   }, []);
-
 
   useEffect(() => {
     const servicesRef = db.collection("services");
@@ -179,11 +173,12 @@ export default function Booking() {
           date: new Date(orderDate),
           doctorId: selectedDoctor.id,
           serviceId: selectedService.id,
+          doctorName: selectedDoctor.name,
+          serviceName: selectedService.name,
           time: orderTime,
         });
     } catch (error) {}
   };
-
 
   const onOrderDateChange = (event) => {
     setOrderDate(event.target.value);
@@ -208,157 +203,175 @@ export default function Booking() {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${url})`,
-        backgroundSize: "cover",
-        height: "92.4vh",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <Container maxWidth="xs" style={{ marginLeft: "80px" }}>
-        <CssBaseline />
-        <Paper elevation={20}>
-          <div className={classes.paper}>
-            <Typography
-              variant="h5"
-              style={{ textAlign: "left", color: "#3f51b5" }}
-            >
-              FILL IN THE FORM
-            </Typography>
-            <br />
-            <form className={classes.form} noValidate>
-              <Grid item xs={12}>
-                <FormControl className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-label">Doctors</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={selectedDoctor}
-                    onChange={handleDoctorChange}
-                  >
-                    <MenuItem key={-1} index={-1} value="">
-                      None
-                    </MenuItem>
-                    {allDoctors
-                      .filter(
-                        (d) =>
-                          !selectedService ||
-                          selectedService.doctors.some((sS) => sS.id === d.id)
-                      )
-                      .map((doctor, index) => {
-                        return (
-                          <MenuItem key={index} index={index} value={doctor}>
-                            {doctor.name}
-                          </MenuItem>
-                        );
-                      })}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-label">
-                    Services
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={selectedService}
-                    onChange={handleServiceChange}
-                  >
-                    <MenuItem key={-1} index={-1} value="">
-                      None
-                    </MenuItem>
-                    {services
-                      .filter(
-                        (s) =>
-                          !selectedDoctor ||
-                          s.doctors.some((sS) => sS.id === selectedDoctor.id)
-                      )
-                      .map((service, index) => {
-                        return (
-                          <MenuItem key={index} index={index} value={service}>
-                            {service.name}
-                          </MenuItem>
-                        );
-                      })}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <br />
-              <Grid item xs={12} className={classes.datePicker}>
-                <TextField
-                  id="date"
-                  label="Choose Date"
-                  type="date"
-                  defaultValue="2017-05-24"
-                  value={orderDate}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={onOrderDateChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-label">
-                    Choose Time
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={orderTime}
-                    disabled={isTimeDisabled}
-                    onChange={(e) => setOrderTime(e.target.value)}
-                  >
-                    {AVAILABLE_ORDER_TIMES.filter(
-                      (time) => !availableTimes.includes(time.value)
-                    ).map((time) => {
-                      return (
-                        <MenuItem key={time.value} value={time.value}>
-                          {time.label}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </Grid>
-              <br />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                disabled={
-                  !selectedDoctor ||
-                  !selectedService ||
-                  !orderDate ||
-                  !orderTime
-                }
-                onClick={onSubmitOrder}
-              >
-                SUBMIT
-              </Button>
-              <Link to="/Home">
-                <Snackbar
-                  className={classes.forSnackbar}
-                  open={open}
-                  // autoHideDuration={2800}
-                  onClose={handleClose}
+    <>
+      {url && (
+        <div
+          style={{
+            backgroundImage: `url(${url})`,
+            backgroundSize: "cover",
+            height: "92.4vh",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Container maxWidth="xs" style={{ marginLeft: "80px" }}>
+            <CssBaseline />
+            <Paper elevation={20}>
+              <div className={classes.paper}>
+                <Typography
+                  variant="h5"
+                  style={{ textAlign: "left", color: "#3f51b5" }}
                 >
-                  <Alert onClose={handleClose} severity="success">
-                    You successfully scheduled an appointment !
-                  </Alert>
-                </Snackbar>
-              </Link>
-            </form>
-          </div>
-        </Paper>
-      </Container>
-    </div>
+                  FILL IN THE FORM
+                </Typography>
+                <br />
+                <form className={classes.form} noValidate>
+                  <Grid item xs={12}>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-label">
+                        Doctors
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={selectedDoctor}
+                        onChange={handleDoctorChange}
+                      >
+                        <MenuItem key={-1} index={-1} value="">
+                          None
+                        </MenuItem>
+                        {allDoctors
+                          .filter(
+                            (d) =>
+                              !selectedService ||
+                              selectedService.doctors.some(
+                                (sS) => sS.id === d.id
+                              )
+                          )
+                          .map((doctor, index) => {
+                            return (
+                              <MenuItem
+                                key={index}
+                                index={index}
+                                value={doctor}
+                              >
+                                {doctor.name}
+                              </MenuItem>
+                            );
+                          })}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-label">
+                        Services
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={selectedService}
+                        onChange={handleServiceChange}
+                      >
+                        <MenuItem key={-1} index={-1} value="">
+                          None
+                        </MenuItem>
+                        {services
+                          .filter(
+                            (s) =>
+                              !selectedDoctor ||
+                              s.doctors.some(
+                                (sS) => sS.id === selectedDoctor.id
+                              )
+                          )
+                          .map((service, index) => {
+                            return (
+                              <MenuItem
+                                key={index}
+                                index={index}
+                                value={service}
+                              >
+                                {service.name}
+                              </MenuItem>
+                            );
+                          })}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <br />
+                  <Grid item xs={12} className={classes.datePicker}>
+                    <TextField
+                      id="date"
+                      label="Choose Date"
+                      type="date"
+                      defaultValue="2017-05-24"
+                      value={orderDate}
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={onOrderDateChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-label">
+                        Choose Time
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={orderTime}
+                        disabled={isTimeDisabled}
+                        onChange={(e) => setOrderTime(e.target.value)}
+                      >
+                        {AVAILABLE_ORDER_TIMES.filter(
+                          (time) => !availableTimes.includes(time.value)
+                        ).map((time) => {
+                          return (
+                            <MenuItem key={time.value} value={time.value}>
+                              {time.label}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <br />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    disabled={
+                      !selectedDoctor ||
+                      !selectedService ||
+                      !orderDate ||
+                      !orderTime
+                    }
+                    onClick={onSubmitOrder}
+                  >
+                    SUBMIT
+                  </Button>
+                  <Link to="/Home">
+                    <Snackbar
+                      className={classes.forSnackbar}
+                      open={open}
+                      // autoHideDuration={2800}
+                      onClose={handleClose}
+                    >
+                      <Alert onClose={handleClose} severity="success">
+                        You successfully scheduled an appointment !
+                      </Alert>
+                    </Snackbar>
+                  </Link>
+                </form>
+              </div>
+            </Paper>
+          </Container>
+        </div>
+      )}
+    </>
   );
 }
