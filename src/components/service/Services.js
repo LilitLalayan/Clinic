@@ -112,17 +112,6 @@ export default function Services() {
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
-
-              <Grid item>
-
-            <Link to="/booking" style={{ textDecoration: "none" }}>
-             <Button variant="contained" color="primary">
-                 Book now
-             </Button>
-            </Link>
-
-                </Grid>
-
                 <Grid item>
                   <Link to="/booking" style={{ textDecoration: "none" }}>
                     <Button variant="contained" color="primary" onClick={book}>

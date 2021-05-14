@@ -112,88 +112,93 @@ function SignIn() {
   };
 
   return (
-    <div
-      className={classes.signinForm}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          signIn();
-          console.log("hi");
-        }
-      }}
-    >
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <img src={url} alt="logo" width="100" />
-      </div>
-      <Card className={classes.card}>
-        <form className="formControl" noValidate autoComplete="off">
-          <h1 style={{ color: "gray" }}>Sign in</h1>
-          <TextField
-            autoComplete="email"
-            className={classes.firstInput}
-            name="email"
-            label="Email"
-            size="small"
-            value={email}
-            helperText={emailError}
-            error={emailError ? true : false}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <br />
-
-          <TextField
-            className={classes.input}
-            autoComplete="off"
-            type="password"
-            label="Password"
-            size="small"
-            value={password}
-            helperText={passwordError}
-            error={passwordError ? true : false}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <br />
-
-          <div className="Btn">
-            <Button
-              className={classes.Button}
-              variant="outlined"
-              onClick={signIn}
-            >
-              Sign In
-            </Button>
+    <>
+      {url && (
+        <div
+          className={classes.signinForm}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              signIn();
+              console.log("hi");
+            }
+          }}
+        >
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <img src={url} alt="logo" width="100" />
           </div>
+
+          <Card className={classes.card}>
+            <form className="formControl" noValidate autoComplete="off">
+              <h1 style={{ color: "gray" }}>Sign in</h1>
+              <TextField
+                autoComplete="email"
+                className={classes.firstInput}
+                name="email"
+                label="Email"
+                size="small"
+                value={email}
+                helperText={emailError}
+                error={emailError ? true : false}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <br />
+
+              <TextField
+                className={classes.input}
+                autoComplete="off"
+                type="password"
+                label="Password"
+                size="small"
+                value={password}
+                helperText={passwordError}
+                error={passwordError ? true : false}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <br />
+
+              <div className="Btn">
+                <Button
+                  className={classes.Button}
+                  variant="outlined"
+                  onClick={signIn}
+                >
+                  Sign In
+                </Button>
+              </div>
+              <div
+                style={{
+                  width: "45vh",
+                  marginBottom: 20,
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                <span className={classes.span}> Not registered?</span>
+                <span>
+                  <Link to="/signup" className={classes.signUp}>
+                    Sign up
+                  </Link>
+                </span>
+              </div>
+            </form>
+          </Card>
           <div
             style={{
-              width: "45vh",
-              marginBottom: 20,
               display: "flex",
-              justifyContent: "space-around",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <span className={classes.span}> Not registered?</span>
-            <span>
-              <Link to="/signup" className={classes.signUp}>
-                Sign up
-              </Link>
-            </span>
+            <CopyrightIcon fontSize="small" />
+            <span>{new Date().getFullYear()}</span>
           </div>
-        </form>
-      </Card>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <CopyrightIcon fontSize="small" />
-        <span>{new Date().getFullYear()}</span>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }
 

@@ -72,6 +72,7 @@ const Service = ({ service, index }) => {
 
   return (
     <>
+    {url &&
       <Grid item key={service.id} xs={16} sm={9} md={4}>
         <Card className={classes.card}>
           <CardMedia
@@ -108,6 +109,7 @@ const Service = ({ service, index }) => {
           </CardActions>
         </Card>
       </Grid>
+     }
     </>
   );
 };
