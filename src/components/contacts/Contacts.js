@@ -361,7 +361,7 @@ function Contacts() {
                   
 
                   <Grid container>
-                    <Grid item="" xs={12} display="flex" flexDirection="column">
+                    <Grid item xs={12} display="flex" >
                       <label className={classes.label} htmlFor="firstName">
                         First Name
                       </label>
@@ -379,9 +379,9 @@ function Contacts() {
                       />
                     </Grid>
                     <Grid
-                      item=""
+                      item
                       xs={12}
-                      flexDirection="column"
+                      
                       className={classes.inputWrapper}
                     >
                       <label
@@ -407,7 +407,7 @@ function Contacts() {
                     <Grid
                       item
                       xs={12}
-                      flexDirection="column"
+                      
                       className={classes.inputWrapper}
                     >
                       <label className={classes.label} htmlFor="email">
@@ -426,7 +426,7 @@ function Contacts() {
                         onBlur={handleFocusOut}
                       />
                     </Grid>
-                    <Grid item xs={12} flexDirection="column">
+                    <Grid item xs={12} >
                       <label className={classes.label} htmlFor="message">
                         Message
                       </label>
@@ -446,7 +446,7 @@ function Contacts() {
                     <Grid
                       item
                       xs={12}
-                      flexDirection="column"
+                      
                       className={classes.inputWrapper}
                     >
                       <label
@@ -471,7 +471,7 @@ function Contacts() {
                     <Button
                       type="submit"
                       fullWidth
-                      variant="outline"
+                      
                       color="primary"
                       style={{ background: "#D09683" }}
                       className={classes.submit}
