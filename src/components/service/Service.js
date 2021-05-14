@@ -91,21 +91,27 @@ const Service = ({ service, index }) => {
                 {service.name}
               </Typography>
               <Typography>{service.description}</Typography>
-              <div style={{ textAlign: "center", backgroundColor: "#F5F5F5" }}>
-                {doctors.map((d) => (
-                  <div>{d.name}</div>
-                ))}
-              </div>
+              
             </CardActionArea>
           </CardContent>
           <CardActions
             style={{
-              textAlign: "center",
-              backgroundColor: "#3f51b5",
-              color: "white",
+              backgroundColor: "#DCDCDC",
+              color: "#222754",
             }}
           >
-            <div>PRICE: {service.price} dram</div>
+            <div style={{textAlign:"left"}}>
+            <div style={{textDecoration: "underline"}}>
+            Doctors providing this service:</div>
+          <div >
+                {doctors.map((d) => (
+                  <div>{d.name}</div>
+                ))}
+            </div >
+         <div style={ {margin: 10, textDecoration: "underline"}}> 
+         PRICE:  {service.price} dram
+          </div>
+           </div>
           </CardActions>
         </Card>
       </Grid>
