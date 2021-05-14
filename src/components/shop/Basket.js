@@ -1,4 +1,8 @@
+// react imports
 import React from "react";
+import { useState, useEffect } from "react";
+
+// material ui imports
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,22 +13,20 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Checkbox from "@material-ui/core/Checkbox";
+// import List from "@material-ui/core/List";
+// import ListItem from "@material-ui/core/ListItem";
+// import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+// import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
-import { Link } from "react-router-dom";
-import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
-import AddSharpIcon from "@material-ui/icons/AddSharp";
+// import { Link } from "react-router-dom";
+// import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
+// import AddSharpIcon from "@material-ui/icons/AddSharp";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
-import { useState, useRef } from "react";
 import { Height } from "@material-ui/icons";
 import { StylesProvider } from "@material-ui/core/styles";
-import "./ShopStyles.css"
 import Slide from '@material-ui/core/Slide';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -33,12 +35,21 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from "@material-ui/core/Paper"
+
+// firebase imports
 import {db} from "../.."
+// css imports
+// hint to overryde material ui styles with styleProvider
+import "./ShopStyles.css"
+
+
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} timeout={4,4, 4, 4} {...props} />;
 });
 
+// material ui styles
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -127,15 +138,20 @@ export default function Basket({
   handleBasketDialogClose,
 }) {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([1]);
-  const allTotalPrice = useRef({
-    total: 0
-  })
+  const [checked, setChecked] = useState([1]);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
   const [alrt, setAlrt] = useState({
     msg: "",
     severity: "",
   });
+  useEffect(() => {
+    const total = Object.keys(basket).reduce((total,item) => {
+      return total + (Number.parseInt(basket[item].price) * basket[item].quantity)
+    },0)
+    setTotalPrice(total);
+  },)
+  
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -149,6 +165,7 @@ export default function Basket({
     setChecked(newChecked);
   };
 
+  // painting basket items
   const showBasketItems = () => {
     const ShopListItems = [];
     const allTotal = 0;
@@ -176,7 +193,6 @@ export default function Basket({
         
       
     
-    allTotalPrice.current.total = allTotal;
     return ShopListItems
   };
 
@@ -246,7 +262,7 @@ export default function Basket({
     </TableContainer>
         </DialogContent>
         <DialogActions>
-          <Typography variant="h6">All Total {allTotalPrice.current.total}</Typography>
+          <Typography variant="h6">All Total {totalPrice}</Typography>
           <Button autoFocus onClick={handleBasketDialogClose} color="primary">
             <Button onClick={handleCheckoutClick} className="">
               Checkout
