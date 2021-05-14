@@ -8,31 +8,28 @@ import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
 import ImageSlider from "./slider/ImageSlider";
-// import smileIcon from '@material-ui/icons/EmojiEmotionsSharp';
-import { MainSliderImages } from "./slider/MainSliderImages";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import "./contacts/Contacts.css";
 import ContactsSimpleMap from "./contacts/ContactsSimpleMap";
 import CheckIcon from "@material-ui/icons/CheckCircle";
-// import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
-import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import SliderTransform from "./slider/SliderTransform";
 import { reviewsSliderData } from "./slider/reviewsSliderData";
-import Avatar from "@material-ui/core/Avatar";
 import StarIcon from "@material-ui/icons/Star";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import { Link } from "react-router-dom";
+import { Link } from "@material-ui/core/";
 import { useSelector } from "react-redux";
 import { selectLoggedinUser } from "../reducers/selectors";
+import AIIcon from '@material-ui/icons/RecordVoiceOver';
+
+// import Valeri Ai
+import ValeriAI from "./Ai"
 
 const useStyles = makeStyles({
   root: {
@@ -122,9 +119,14 @@ const useStyles = makeStyles({
     color: "#00239c",
   },
 
-  // asdd: {
-  //   // backgroundImage: `url("https://image.freepik.com/free-vector/dentist-medical-background-with-3d-tooth-design_1017-26095.jpg")`,
-  // },
+  aiIcon: {
+    color: "red",
+    fontSize: "50px",
+    cursor: "pointer",
+    position: "fixed",
+    bottom: "5%",
+    right: "3%"
+  },
 });
 
 function Home() {
@@ -137,6 +139,8 @@ function Home() {
       alert("Please sign in!");
     }
   };
+
+  
 
   return (
     <div className="home">
@@ -529,6 +533,7 @@ function Home() {
           <ContactsSimpleMap />
         </div>
       </Container>
+     
     </div>
   );
 }
