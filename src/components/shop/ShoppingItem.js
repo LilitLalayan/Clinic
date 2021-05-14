@@ -100,7 +100,7 @@ export default function ShoppingItem({
   return (
     <StylesProvider>
       <Grid item md={3} className={classes.center}>
-      <Card className={classes.root} elevation="3">
+      <Card className={classes.root} elevation={3}>
       <CardHeader
         action={
           <IconButton aria-label="settings">

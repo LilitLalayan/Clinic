@@ -10,7 +10,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 
 import Shop from "./components/shop/ShoppingItem"
-import Ai from "./components/Ai"
+// import Ai from "./components/Ai"
 
 //import StomCard from "./components/shop/StomCard";
 import Profile from "./components/Profile";
@@ -45,108 +45,108 @@ import Booking from "./components/Booking";
 import Basket from "./components/shop/Basket";
 import Payment from "./components/shop/Payment";
 
-const useStyles = makeStyles({
-  root: {
-    boxShadow: "2px 2px 20px	paleturquoise	",
-  },
+// const useStyles = makeStyles({
+//   root: {
+//     boxShadow: "2px 2px 20px	paleturquoise	",
+//   },
 
-  textWhite: {
-    color: "#fff",
-  },
+//   textWhite: {
+//     color: "#fff",
+//   },
 
-  textSecondary: {
-    color: "deepskyblue",
-  },
+//   textSecondary: {
+//     color: "deepskyblue",
+//   },
 
-  grid: {
-    display: "flex",
-    justifyContent: "center",
-  },
+//   grid: {
+//     display: "flex",
+//     justifyContent: "center",
+//   },
 
-  center: {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-  },
+//   center: {
+//     display: "flex",
+//     justifyContent: "center",
+//     flexDirection: "column",
+//     alignItems: "center",
+//   },
 
-  Paper: {
-    padding: "40px 10px",
-    marginTop: "80px",
-  },
-  typography: {
-    marginBottom: "40px",
-  },
-  trustIcon: {
-    color: "$60BFE6 !important",
-    fontSize: "80px",
-    display: "block",
-    marginBottom: "10px",
-  },
+//   Paper: {
+//     padding: "40px 10px",
+//     marginTop: "80px",
+//   },
+//   typography: {
+//     marginBottom: "40px",
+//   },
+//   trustIcon: {
+//     color: "$60BFE6 !important",
+//     fontSize: "80px",
+//     display: "block",
+//     marginBottom: "10px",
+//   },
 
-  advantages: {
-    marginTop: "100px",
-    color: "#fff",
-    backgroundColor: "#60BFE6",
-    color: "#fff",
-    display: "block",
-    padding: "40px",
-  },
+//   advantages: {
+//     marginTop: "100px",
+//     color: "#fff",
+//     backgroundColor: "#60BFE6",
+//     color: "#fff",
+//     display: "block",
+//     padding: "40px",
+//   },
 
-  advantagesIcon: {
-    color: "#fff",
-    fontSize: "60px",
-    display: "block",
-    marginBottom: "10px",
-  },
+//   advantagesIcon: {
+//     color: "#fff",
+//     fontSize: "60px",
+//     display: "block",
+//     marginBottom: "10px",
+//   },
 
-  title: {
-    marginBottom: "40px",
-    color: "white",
-  },
+//   title: {
+//     marginBottom: "40px",
+//     color: "white",
+//   },
 
-  dentalInnerGrid: {
-    height: "auto",
-  },
+//   dentalInnerGrid: {
+//     height: "auto",
+//   },
 
-  card: {
-    height: "100%",
-    boxShadow:
-      "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;",
-  },
+//   card: {
+//     height: "100%",
+//     boxShadow:
+//       "rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;",
+//   },
 
-  reviewSlideAvatar: {
-    marginBottom: "40px",
-    height: "200px",
-  },
+//   reviewSlideAvatar: {
+//     marginBottom: "40px",
+//     height: "200px",
+//   },
 
-  reviewsSlideRate: {
-    marginBottom: "40px",
-  },
-  reviewsSlideName: {
-    marginBottom: "40px",
-  },
+//   reviewsSlideRate: {
+//     marginBottom: "40px",
+//   },
+//   reviewsSlideName: {
+//     marginBottom: "40px",
+//   },
 
-  reviewsSlideText: {},
+//   reviewsSlideText: {},
 
-  starIcon: {
-    color: "#00239c",
-  },
+//   starIcon: {
+//     color: "#00239c",
+//   },
 
-  aiIcon: {
-    color: "red",
-    fontSize: "50px",
-    cursor: "pointer",
-    position: "fixed",
-    bottom: "5%",
-    right: "3%"
-  },
-});
+//   aiIcon: {
+//     color: "red",
+//     fontSize: "50px",
+//     cursor: "pointer",
+//     position: "fixed",
+//     bottom: "5%",
+//     right: "3%"
+//   },
+// });
 
 
 function App({ dispatch }) {
-  const classes = useStyles();
-  const { speak } = useSpeechSynthesis();
+  // const classes = useStyles();
+  // const { speak } = useSpeechSynthesis();
 
   const loggedInUser = useSelector(selectLoggedinUser);
   const isAuthenticating = useSelector(selectIsAuthenticating);
@@ -167,18 +167,18 @@ function App({ dispatch }) {
     auth.onAuthStateChanged(onAuthStateChanged);
   }, []);
 
-  const [openAi, setOpenAi] = React.useState(false);
+  // const [openAi, setOpenAi] = React.useState(false);
   
-    const handleOpenAi = () => {
-      // speak({text: "Hi i am Susan, smartest chat bot ever"})
-      setOpenAi(true);
-    };
+    // const handleOpenAi = () => {
+    //   // speak({text: "Hi i am Susan, smartest chat bot ever"})
+    //   setOpenAi(true);
+    // };
   
-    const handleCloseAi = () => {
-      // speak({text: "i hope i could help you sir"})
-      setOpenAi(false);
+    // const handleCloseAi = () => {
+    //   // speak({text: "i hope i could help you sir"})
+    //   setOpenAi(false);
       
-    };
+    // };
 
   return (
     <Router>

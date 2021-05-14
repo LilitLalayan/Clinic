@@ -168,7 +168,7 @@ function Home() {
 
               <Typography
                 className={classes.typography}
-                varint="body"
+                varint="body2"
                 align="center"
               >
                 The importance of every patient journey underlines our
@@ -184,14 +184,14 @@ function Home() {
                   item
                   xs={4}
                   className={classNames(classes.grid)}
-                  justify="center"
+                  
                 >
                   <Link>
                     <CheckIcon color="disabled" className={classes.trustIcon} />
                     <Typography
                       align="center"
                       className={classes.typography}
-                      variant="body"
+                      variant="body2"
                     >
                       Friendy Stuff
                     </Typography>
@@ -202,11 +202,11 @@ function Home() {
                   item
                   xs={4}
                   className={classNames(classes.grid)}
-                  justify="center"
+                  
                 >
                   <Link>
                     <CheckIcon color="disabled" className={classes.trustIcon} />
-                    <Typography align="center" variant="body">
+                    <Typography align="center" variant="body2">
                       High Skilled
                     </Typography>
                   </Link>
@@ -215,7 +215,7 @@ function Home() {
                 <Grid item xs={4} className={classNames(classes.grid)}>
                   <Link>
                     <CheckIcon color="disabled" className={classes.trustIcon} />
-                    <Typography align="center" variant="body">
+                    <Typography align="center" variant="body2">
                       Relax & Comfort
                     </Typography>
                   </Link>
@@ -227,9 +227,10 @@ function Home() {
       </Container>
 
       <SliderTransform width={30} margin="">
-        {reviewsSliderData.map((review) => {
+        {reviewsSliderData.map((review, index) => {
           return (
             <div
+            key={index}
               className="reviewsSlideItem"
               style={{
                 display: "flex",
