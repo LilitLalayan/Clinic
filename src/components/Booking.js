@@ -64,13 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paddingBottom: "10px",
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
+ 
 }));
 
 function Alert(props) {
@@ -304,7 +298,6 @@ export default function Booking() {
                       id="date"
                       label="Choose Date"
                       type="date"
-                      defaultValue="2017-05-24"
                       value={orderDate}
                       className={classes.textField}
                       InputLabelProps={{
