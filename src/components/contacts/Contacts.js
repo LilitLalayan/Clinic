@@ -22,7 +22,7 @@ import {
   fade,
   ThemeProvider,
   withStyles,
-  createMuiTheme,
+ 
 } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -38,6 +38,25 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { Icon } from "@material-ui/core";
 import classNames from "classnames";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiInputLabel: {
+      filled: {
+        transform: "translate(12px, 10px) scale(0.75)",
+        "&$marginDense": {
+          transform: "translate(12px, 7px) scale(0.75)"
+        }
+      },
+      outline: {
+        transform: "translate(14px, -6px) scale(0.75)",
+        color: "red"
+      }
+    }
+  }
+});
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -342,6 +361,9 @@ function Contacts() {
 
   return (
     <div className="contacts">
+      <MuiThemeProvider theme={theme}>
+
+      </MuiThemeProvider>
       <Container fixed>
         <CssBaseline />
         <h2
@@ -361,12 +383,12 @@ function Contacts() {
                   
 
                   <Grid container>
-                    <Grid item="" xs={12} display="flex" flexDirection="column">
+                    <Grid item xs={12} display="flex" >
                       <label className={classes.label} htmlFor="firstName">
                         First Name
                       </label>
 
-                      <input
+                      {/* <input
                         className={
                           classes[validationState.firstName] +
                           " " +
@@ -376,12 +398,19 @@ function Contacts() {
                         id="firstName"
                         onChange={onChange}
                         onBlur={handleFocusOut}
-                      />
+                      /> */}
+                      <TextField
+                      className={classes}
+                      id="firstName"
+                      onChange={onChange}
+                      onBlur={handleFocusOut}>
+
+                      </TextField>
                     </Grid>
                     <Grid
-                      item=""
+                      item
                       xs={12}
-                      flexDirection="column"
+                      
                       className={classes.inputWrapper}
                     >
                       <label
@@ -407,7 +436,7 @@ function Contacts() {
                     <Grid
                       item
                       xs={12}
-                      flexDirection="column"
+                      
                       className={classes.inputWrapper}
                     >
                       <label className={classes.label} htmlFor="email">
@@ -426,7 +455,7 @@ function Contacts() {
                         onBlur={handleFocusOut}
                       />
                     </Grid>
-                    <Grid item xs={12} flexDirection="column">
+                    <Grid item xs={12} >
                       <label className={classes.label} htmlFor="message">
                         Message
                       </label>
@@ -446,7 +475,7 @@ function Contacts() {
                     <Grid
                       item
                       xs={12}
-                      flexDirection="column"
+                      
                       className={classes.inputWrapper}
                     >
                       <label
@@ -471,7 +500,7 @@ function Contacts() {
                     <Button
                       type="submit"
                       fullWidth
-                      variant="outline"
+                      
                       color="primary"
                       style={{ background: "#D09683" }}
                       className={classes.submit}
