@@ -1,6 +1,8 @@
+// ract imports
 import React from "react";
+
+// material ui imports
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -20,12 +22,15 @@ import AddIcon from "@material-ui/icons/Add";
 import StarIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
 import { StylesProvider } from "@material-ui/core/styles";
+
+// css imports 
+// hint just for changing material ui styles
 import "./ShopStyles.css"
 
 import { useSelector, useDispatch } from "react-redux";
 
 
-
+// material ui styles
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 250,
@@ -95,7 +100,7 @@ export default function ShoppingItem({
   return (
     <StylesProvider>
       <Grid item md={3} className={classes.center}>
-      <Card className={classes.root} elevation="3">
+      <Card className={classes.root} elevation={3}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -114,8 +119,8 @@ export default function ShoppingItem({
         Price {`${price}`}
         </Typography>
         <Grid container className={classes.grid}>
-          {new Array( popularity).fill(0).map((star) => {
-            return (<StarIcon />);
+          {new Array( popularity).fill(0).map((star,index) => {
+            return (<StarIcon key={index} />);
           })}
         </Grid>
         <Typography variant="body2" className={classes.typography}> Added {`${date.toString()}`}</Typography>

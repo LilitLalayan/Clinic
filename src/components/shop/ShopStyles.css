@@ -2,8 +2,8 @@
   margin-bottom: 20px;
 }
 
-.MuiCardMedia-root {
-  background-size: 80% !important;
+/* .MuiCardMedia-root {
+  background-size: 80% ;
 }
 
 .MuiTextField-root {
@@ -21,7 +21,7 @@
 .makeStyles-formControl-47 {
   margin-bottom: 0 !important;
   margin-left: 50px !important;
-}
+} */
 
 .carousel-inner {
   /* display: flex;
