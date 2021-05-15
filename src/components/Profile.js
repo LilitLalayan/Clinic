@@ -208,6 +208,7 @@ function Profile() {
           .updateEmail(newEmail)
           .then(function () {
             alert("You have successfully changed your email");
+            console.log(777);
             dispatch({
               type: SET_LOGGEDIN_USER,
               user: {
