@@ -95,6 +95,7 @@ function SignUp() {
       })
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
+        console.log(777);
       })
       .catch((err) => {
         dispatch({ type: SIGNUP_ERROR, payload: err.message });
