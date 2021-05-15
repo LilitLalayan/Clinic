@@ -130,7 +130,7 @@ function Nav() {
                   setIsVisible(false);
                 }}
               >
-                Sign out asd
+                Sign out
               </span>
             </div>
           </div>
