@@ -48,6 +48,7 @@ function App({ dispatch }) {
   useEffect(() => {
     auth.onAuthStateChanged(onAuthStateChanged);
   }, []);
+
   if (isAuthenticating) {
     return <LinearProgress />;
     console.log(777);
@@ -88,6 +89,7 @@ function App({ dispatch }) {
           </Switch>
         )}
       </div>
+     
     </Router>
   );
 }

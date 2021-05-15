@@ -1,46 +1,36 @@
+// react imports
 import React from "react";
+import { useState, useEffect, useRef } from "react";
+
+// components import
+import Basket from "./Basket";
+import ShoppingItem from "./ShoppingItem";
+import CategoryItem from "./categories/CategoryItem";
+
+// material ui imports
 import Link from "@material-ui/core/Link";
 import { StylesProvider } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState, useEffect, useRef } from "react";
-import "./ShopStyles.css";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import BasketIcon from "@material-ui/icons/ShoppingCart";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
-import { useSelector, useDispatch } from "react-redux";
-import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
-import Basket from "./Basket";
-import ShoppingItem from "./ShoppingItem";
-import CategoryItem from "./categories/CategoryItem";
-import { storage } from "../..";
-import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
-import { db } from "../..";
-import { ContactsOutlined } from "@material-ui/icons";
-import formHelperText from "@material-ui/core/FormHelperText";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Container from "@material-ui/core/Container";
-//  states for  categories for pacients
+import TextField from "@material-ui/core/TextField";
 
-// state for sub category set
+// firebase imports
+import { db } from "../..";
 
+// css imports
+// hint just to ovverride material styles with styleProvider
+import "./ShopStyles.css";
+
+
+//material ui components styling
 const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: "30px",
@@ -95,15 +85,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// main component of shop
 function ShopHome() {
+  // to give spacing between material ui grid items
   const [spacing, setSpacing] = React.useState(5);
   const classes = useStyles();
+
+  // react useStates
   const [currentCategory, setCurrentCategory] = useState(null);
   const [currentSubCategory, setCurrentSubCategory] = useState(null);
   const [allCategories, setAllCategories] = useState([]);
   const [allShoppingItems, setAllShoppingItems] = useState([]);
   const [allSubCategories, setAllSubCategories] = useState([]);
-  const [categoriesData, setCategoriesData] = useState({});
+  // const [categoriesData, setCategoriesData] = useState({});
   const [searchValue, setSearchValue] = useState("");
   const [temporaryBasket, setTemporaryBasket] = useState({});
   const [searchResult, setSearchResult] = useState([]);
@@ -112,13 +106,10 @@ function ShopHome() {
   const [basket, setBasket] = useState({});
   const [basketOpen, setBasketOpen] = useState(false);
 
-  const isSearchCld = useRef({
-    i: false,
-  });
-  const [filter, setFilter] = useState({
-    age: "",
-    name: "hai",
-  });
+  // const [filter, setFilter] = useState({
+  //   age: "",
+  //   name: "hai",
+  // });
 
   // const handleChange = (event) => {
   //   const name = event.target.name;
@@ -127,9 +118,8 @@ function ShopHome() {
   //     [name]: event.target.value,
   //   });
   // };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   useEffect(() => {
-    // adding data from firestore instead of empty arrays
     
 
     // get all catgeroies data from firestore
@@ -139,11 +129,12 @@ function ShopHome() {
       .then((querySnapshot) => {
         const data = [];
         querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
+          // getting data from collection document
           data.push(doc.data());
         });
         setAllCategories(data);
       });
+
     // get all subCategories data from firestore`
     const subCategories = db
       .collection("subCategories")
@@ -157,6 +148,7 @@ function ShopHome() {
 
         setAllSubCategories(data);
       });
+
     // get all shopping items data from firestore
     const shoppingItems = db
       .collection("shopItems")
@@ -171,14 +163,15 @@ function ShopHome() {
       });
   }, []);
 
+  //attributes groupId = just to minimize clickHandlers count to one using switch
   const handleClick = (event, id, groupId) => {
     switch (groupId) {
+      // category groupId === 0
       case "0": {
-       
         setCurrentCategory(id);
         break;
       }
-
+      // subCategory groupId === 1
       case "1": {
         setCurrentSubCategory(id);
         setIsSearchClicked(false);
@@ -190,37 +183,44 @@ function ShopHome() {
     }
   };
 
+  // items search algorithm using tags that every item has predefined in firebase data as property
   const handleSearchClick = (e) => {
-    const arr = [];
+    const res = [];
+    // splitting search value entered in search input
     const splittedSearchValue = searchValue.toLowerCase().split(" ");
+    //pushing all items which has search value
     splittedSearchValue.forEach((value) => {
       allShoppingItems.forEach((item) =>
-        item.tags.includes(value) ? arr.push(item) : null
+        item.tags.includes(value) ? res.push(item) : null
       );
     });
-    // const set(...result)
-
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = i + 1; j < arr.length; j++) {
-        if (arr[i].title === arr[j].title) {
-          arr[i].searchPriority++;
+    // if we have more than one item with same title than we increase priority of item
+    // to show first in search results
+    for (let i = 0; i < res.length; i++) {
+      for (let j = i + 1; j < res.length; j++) {
+        if (res[i].title === res[j].title) {
+          res[i].searchPriority++;
         }
       }
     }
     setIsSearchClicked(true);
     // isSearchCld.current.i = true;
+    //using set to remove same items from array
     setSearchResult(
-      Array.from(new Set(arr))
+      //sorting by priority
+      Array.from(new Set(res))
         .slice()
         .sort((a, b) => b.searchPriority - a.searchPriority)
     );
-    arr.forEach((item) => (item.searchPriority = 0));
+    // clearing priority
+    res.forEach((item) => (item.searchPriority = 0));
   };
 
+  // filter algorithms
   const handleFilterChange = (e) => {
     switch (e.target.value) {
       case "priceAcc": {
-
+        // sorting itmes by price
         setAllShoppingItems(
           allShoppingItems
             .slice()
@@ -248,7 +248,7 @@ function ShopHome() {
         );
         break;
       }
-
+      // sorting items by popularity
       case "popularityAcc": {
         setSearchResult(
           searchResult
@@ -292,6 +292,7 @@ function ShopHome() {
     }
   };
 
+  // handling incrementing and decrementing items to basket
   const handleItemAddRemove = (
     e,
     name,
@@ -301,6 +302,7 @@ function ShopHome() {
     itemPrice,
     quantity
   ) => {
+    // storing items in temporary basket
     switch (name) {
       case "increment": {
         setTemporaryBasket((oldState) => ({
@@ -325,10 +327,10 @@ function ShopHome() {
             imageUrl: itemImageUrl,
             title: itemTitle,
             quantity: oldState[itemId]
-              ? oldState[itemId].quantity === 0
+              ? oldState[itemId].quantity <= 0
                 ? 0
                 : oldState[itemId].quantity - 1
-              : 1,
+              : 0,
           },
         }));
         break;
@@ -336,12 +338,12 @@ function ShopHome() {
     }
   };
 
-  const handleAddToBasket = (e, id) => {
-    setBasket((oldState) => ({
-      ...oldState,
-      [id]: temporaryBasket[id],
-    }));
-  };
+  // const handleAddToBasket = (e, id) => {
+  //   setBasket((oldState) => ({
+  //     ...oldState,
+  //     [id]: temporaryBasket[id],
+  //   }));
+  // };
 
   const handleBasketDialogOpen = () => {
     setBasketOpen(true);
@@ -354,16 +356,14 @@ function ShopHome() {
     setSearchValue(e.target.value);
   };
 
- 
-
-  const a = () => {
+  const showShoppingItems = () => {
     if (isSearchClicked) {
-      
-      // setIsSearchClicked(false);
-      // isSearchCld.current.i = false;
-      return searchResult.map((shoppingItem) => {
+      // if search button clicked than painting search result items
+      // othervise items from subCategory
+      return searchResult.map((shoppingItem,index) => {
         return (
           <ShoppingItem
+          key={index}
             id={shoppingItem.id}
             title={shoppingItem.title}
             price={shoppingItem.price}
@@ -376,7 +376,7 @@ function ShopHome() {
                 : temporaryBasket[shoppingItem.id].quantity
             }
             handleItemAddRemove={handleItemAddRemove}
-            handleAddToBasket={handleAddToBasket}
+            // handleAddToBasket={handleAddToBasket}
             onClick={(event) =>
               handleClick(event, shoppingItem.id, shoppingItem.groupId)
             }
@@ -389,9 +389,10 @@ function ShopHome() {
         .filter(
           (shoppingItem) => shoppingItem.subCategoryId === currentSubCategory
         )
-        .map((shoppingItem) => {
+        .map((shoppingItem,index) => {
           return (
             <ShoppingItem
+            key={index}
               id={shoppingItem.id}
               title={shoppingItem.title}
               price={shoppingItem.price}
@@ -402,10 +403,10 @@ function ShopHome() {
                   ? 0
                   : temporaryBasket[shoppingItem.id].quantity
               }
-              handleSearchClick={handleAddToBasket}
+              handleSearchClick={handleItemAddRemove}
               popularity={shoppingItem.popularity}
               handleItemAddRemove={handleItemAddRemove}
-              handleAddToBasket={(e) => handleAddToBasket(e)}
+               
               onClick={(event) =>
                 handleClick(event, shoppingItem.id, shoppingItem.groupId)
               }
@@ -415,6 +416,7 @@ function ShopHome() {
     }
   };
   return (
+    // using styprovider to change default styles of material ui components
     <StylesProvider>
       <Container fixed>
         <div className="categories">
@@ -422,6 +424,7 @@ function ShopHome() {
             <BasketIcon className={classes.basketIcon} />
           </Link>
           <Basket
+          // sending handlers as props to basket to use them both from basket and shop home
             allShoppingItems={allShoppingItems}
             basket={temporaryBasket}
             basketOpen={basketOpen}
@@ -487,9 +490,10 @@ function ShopHome() {
             className={classes.container}
           >
             {/* painting categories */}
-            {allCategories.map((category) => {
+            {allCategories.map((category,index) => {
               return (
                 <CategoryItem
+                key={index}
                   xs
                   id={category.id}
                   title={category.title}
@@ -507,14 +511,15 @@ function ShopHome() {
             spacing={spacing}
             className={classes.container}
           >
-            {/* filtering categories and painting */}
+            {/* filtering subCategories and painting */}
             {allSubCategories
               .filter(
                 (subCategory) => subCategory.categoryId === currentCategory
               )
-              .map((subCategory) => {
+              .map((subCategory,index) => {
                 return (
                   <CategoryItem
+                  key={index}
                     id={subCategory.id}
                     title={subCategory.title}
                     handleClick={(event) =>
@@ -531,40 +536,8 @@ function ShopHome() {
             spacing={spacing}
             className={classes.container}
           >
-            {a()}
-            {/* filtering categories and painting */}
-            {/* { (isSearchClicked)  ?  searchResult.map(shoppingItem => {
-            return (<ShoppingItem
-            id={shoppingItem.id}
-            title={shoppingItem.title}
-            price={shoppingItem.price}
-            imageUrl={shoppingItem.imageUrl}
-            date={shoppingItem.date}
-            popularity={shoppingItem.popularity}
-            onClick={(event) =>
-              handleClick(event, shoppingItem.id, shoppingItem.groupId)
-            }
-          />)
-          }) :  allShoppingItems
-            .filter(
-              (shoppingItem) =>
-                shoppingItem.subCategoryId === currentSubCategory
-            )
-            .map((shoppingItem) => {
-              return (
-                <ShoppingItem
-                  id={shoppingItem.id}
-                  title={shoppingItem.title}
-                  price={shoppingItem.price}
-                  imageUrl={shoppingItem.imageUrl}
-                  date={shoppingItem.date}
-                  popularity={shoppingItem.popularity}
-                  onClick={(event) =>
-                    handleClick(event, shoppingItem.id, shoppingItem.groupId)
-                  }
-                />
-              );
-            })} */}
+            {showShoppingItems()}
+            
           </Grid>
         </div>
       </Container>
