@@ -51,8 +51,7 @@ function App({ dispatch }) {
 
   if (isAuthenticating) {
     return <LinearProgress />;
-    console.log(777);
-  }
+      }
   return (
     <Router>
       <div className="App">
