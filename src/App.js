@@ -9,19 +9,8 @@ import Contacts from "./components/contacts/Contacts";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Shop from "./components/shop/ShoppingItem";
-
-//import StomCard from "./components/shop/StomCard";
 import Profile from "./components/Profile";
-
-// import Implants from "./components/shop/Implants"
-// import Prostheses from "./components/shop/Prostheses"
-// import Inhalers from "./components/shop/Inhalers"
-// import Brushes from "./components/shop/Brushes"
-// import Braces from "./components/shop/Braces"
-// import ToothPaste from "./components/shop/ToothPaste"
-
 import ShopHome from "./components/shop/ShopHome";
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -66,13 +55,6 @@ function App({ dispatch }) {
     <Router>
       <div className="App">
         <Nav />
-
-        {/* <Snackbar
-         open={RedaxStore.snackbar.message}
-         style={edaxStore.snackbar.severety} 
-         onClose={dispatch(resetSnackbarMessage)}
-         message="RedaxStore.snackbar.message"/> */}
-
         {loggedInUser ? (
           <Switch>
             <Route path="/" exact component={Home} />
@@ -101,16 +83,6 @@ function App({ dispatch }) {
             <Route path="/signin" component={SignIn} />
             <Route path="/basket" component={Basket} />
             <Route path="/payment" component={Payment} />
-
-            {/* <Route path="/implants" component={Implants}></Route>
-            <Route path="/toothbrushes" exact component={Brushes}></Route>
-            <Route path="/toothpaste" exact component={ToothPaste}></Route>
-            <Route path="/prostheses" component={Prostheses}></Route>
-            <Route path="/braces" component={Braces}></Route>
-
-            <Route path="/inhalers" component={Inhalers}></Route>
-            <Route path="/shophome" component={ShopHome}></Route> */}
-
             <Redirect to="/" />
           </Switch>
         )}

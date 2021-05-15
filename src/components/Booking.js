@@ -209,7 +209,7 @@ export default function Booking() {
           style={{
             backgroundImage: `url(${url})`,
             backgroundSize: "cover",
-            height: "92.4vh",
+            height: "93.4vh",
             display: "flex",
             alignItems: "center",
           }}

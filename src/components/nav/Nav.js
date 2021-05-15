@@ -81,7 +81,7 @@ function Nav() {
         to="/home"
         className={classNames("nav__brand", brandFlexOrder, marginBottom)}
       >
-        Smile Clinics
+        Smile Clinic
       </Link>
 
       <Navbar displayFlex={displayFlex} />
