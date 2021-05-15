@@ -37,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(2),
     height: "80vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   submit: {
     margin: theme.spacing(3, 0, 1),
@@ -64,7 +68,6 @@ const useStyles = makeStyles((theme) => ({
     },
     paddingBottom: "10px",
   },
- 
 }));
 
 function Alert(props) {
@@ -304,6 +307,7 @@ export default function Booking() {
                         shrink: true,
                       }}
                       onChange={onOrderDateChange}
+                      style={{ minWidth: 300 }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -351,7 +355,6 @@ export default function Booking() {
                     <Snackbar
                       className={classes.forSnackbar}
                       open={open}
-                      // autoHideDuration={2800}
                       onClose={handleClose}
                     >
                       <Alert onClose={handleClose} severity="success">
