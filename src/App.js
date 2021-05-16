@@ -17,7 +17,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { LinearProgress, Snackbar } from "@material-ui/core";
+import { LinearProgress } from "@material-ui/core";
 import { auth, db } from ".";
 import { SET_LOGGEDIN_USER } from "./actions/actions";
 import { connect, useSelector } from "react-redux";
