@@ -26,10 +26,12 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "@material-ui/core/";
 import { useSelector } from "react-redux";
 import { selectLoggedinUser } from "../reducers/selectors";
-import AIIcon from '@material-ui/icons/RecordVoiceOver';
+import AIIcon from "@material-ui/icons/RecordVoiceOver";
+import dentalcabinet2 from ".././images/dental-cabinet2.jfif";
+import dentalcabinet from ".././images/dental-cabinet.jpg";
 
 // import Valeri Ai
-import ValeriAI from "./Ai"
+import ValeriAI from "./Ai";
 
 const useStyles = makeStyles({
   root: {
@@ -125,7 +127,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
     position: "fixed",
     bottom: "5%",
-    right: "3%"
+    right: "3%",
   },
 });
 
@@ -139,8 +141,6 @@ function Home() {
       alert("Please sign in!");
     }
   };
-
-  
 
   return (
     <div className="home">
@@ -180,12 +180,7 @@ function Home() {
               </Typography>
 
               <Grid container justify="center">
-                <Grid
-                  item
-                  xs={4}
-                  className={classNames(classes.grid)}
-                  
-                >
+                <Grid item xs={4} className={classNames(classes.grid)}>
                   <Link>
                     <CheckIcon color="disabled" className={classes.trustIcon} />
                     <Typography
@@ -198,12 +193,7 @@ function Home() {
                   </Link>
                 </Grid>
 
-                <Grid
-                  item
-                  xs={4}
-                  className={classNames(classes.grid)}
-                  
-                >
+                <Grid item xs={4} className={classNames(classes.grid)}>
                   <Link>
                     <CheckIcon color="disabled" className={classes.trustIcon} />
                     <Typography align="center" variant="body2">
@@ -230,7 +220,7 @@ function Home() {
         {reviewsSliderData.map((review, index) => {
           return (
             <div
-            key={index}
+              key={index}
               className="reviewsSlideItem"
               style={{
                 display: "flex",
@@ -327,7 +317,7 @@ function Home() {
                 borderRadius: "50%",
               }}
               className="home__clinic-img"
-              src="http://localhost:3000/images/dental-cabinet.jpg"
+              src={dentalcabinet}
               width="100%"
             />
           </Grid>
@@ -463,7 +453,7 @@ function Home() {
                 borderRadius: "50%",
               }}
               className="home__clinic-img"
-              src="http://localhost:3000/images/dental-cabinet2.jfif"
+              src={dentalcabinet2}
               width="100%"
             />
           </Grid>
@@ -518,12 +508,14 @@ function Home() {
         </Grid>
       </Container>
 
-      
-
       <Container fixed>
         <Typography
           variant="h3"
-          style={{ textAlign: "center", marginBottom: "80px" }}
+          style={{
+            textAlign: "center",
+            marginBottom: "80px",
+            marginTop: "80px",
+          }}
         >
           Find Us
         </Typography>
@@ -534,7 +526,6 @@ function Home() {
           <ContactsSimpleMap />
         </div>
       </Container>
-     
     </div>
   );
 }
