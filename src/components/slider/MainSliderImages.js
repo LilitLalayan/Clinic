@@ -1,17 +1,21 @@
+import img4 from "../.././images/img4.jpg";
+import img5 from "../.././images/img5.jpg";
+import img6 from "../.././images/img6.jpg";
+import img7 from "../.././images/img7.png";
 export const MainSliderImages = [
-        {
-            photo: "http://localhost:3000/images/main-slider-images/img4.jpg",
-        },
+  {
+    photo: `${img4}`,
+  },
 
-        {
-            photo: "http://localhost:3000/images/main-slider-images/img5.jpg",
-        },
+  {
+    photo: `${img5}`,
+  },
 
-        {
-            photo: "http://localhost:3000/images/main-slider-images/img6.jpg",
-        },
+  {
+    photo: `${img6}`,
+  },
 
-        {
-            photo: "http://localhost:3000/images/main-slider-images/img7.png",
-        },  
-    ]
+  {
+    photo: `${img7}`,
+  },
+];
